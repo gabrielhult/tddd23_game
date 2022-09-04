@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerBehaviour : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour
 {
 
     [SerializeField] private float _moveSpeed = 1000f;
     [SerializeField] private float _jumpMultiplier = 1000f;    
 
-    private Rigidbody _rigidbody;
+    public Rigidbody _rigidbody;
     private Vector3 _movementForce;
     private bool _jump;
     
@@ -26,6 +26,7 @@ public class playerBehaviour : MonoBehaviour
 
     void FixedUpdate() {
         Move();
+        //Rotate();
         Jump();
     }
 
@@ -41,7 +42,14 @@ public class playerBehaviour : MonoBehaviour
     }
 
     private void Move(){
-        _rigidbody.AddForce(_movementForce * _moveSpeed);
+        //_rigidbody.AddForce(_movementForce * _moveSpeed);
+        CorrectPlayerAngle();
+
+        _rigidbody.velocity = _movementForce * _moveSpeed;
+    }
+
+    private void CorrectPlayerAngle(){
+
     }
 
     private void Jump(){
