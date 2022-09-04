@@ -4,20 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance; //Borde göra att jag kan ta den varifrån somhelst
 
-    PlayerCollision playerCollision;
-    [SerializeField] GameObject player;
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerCollision = player.GetComponent<PlayerCollision>();
+    private void Awake() {
+        Instance = this;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if(playerCollision.collidedObjectTag == "Goal"){
-            Debug.Log("Next Level!");
-        }
+    
+
+    public void NextLevel(){
+        Debug.Log("Next Level!"); //funkar ej atm
     }
 }
