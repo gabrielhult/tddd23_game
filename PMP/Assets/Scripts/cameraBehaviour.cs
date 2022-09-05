@@ -8,16 +8,29 @@ public class CameraBehaviour : MonoBehaviour
     public Transform target;
 
     public Vector3 offset;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float oldOffsetX;
+    private float offsetZ;
+    private float offsetX;
+    public float speed;
+    public bool rotateCamera;
 
     // Update is called once per frame
     void LateUpdate()
     {
         transform.position = target.position + offset;
+        if(GameManager.Instance.levelCount % 2 == 1 && rotateCamera == true){
+            oldOffsetX = offset.x;
+            offsetX = offset.z * -1;
+            offsetZ = oldOffsetX;
+            offset = new Vector3(offsetX, 0, offsetZ);
+            rotateCamera = false;
+        }else if(GameManager.Instance.levelCount % 2 == 0 && rotateCamera == true){
+            oldOffsetX = offset.x;
+            offsetX = offset.z;
+            offsetZ = oldOffsetX * -1;
+            offset = new Vector3(offsetX, 0, offsetZ);
+            rotateCamera = false;
+        }
+        transform.Rotate(0, speed * Time.deltaTime, 0);
     }
 }

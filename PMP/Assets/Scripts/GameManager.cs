@@ -5,15 +5,25 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; //Borde göra att jag kan ta den varifrån somhelst
+    
+    public GameObject goalLine;
+    public int levelCount;
+    public bool changePlayerAngleAndDir;
+    public CameraBehaviour cameraBehaviour;
 
     private void Awake() {
         Instance = this;
     }
 
-    // Update is called once per frame
+    void Start(){
+        cameraBehaviour = cameraBehaviour.GetComponent<CameraBehaviour>();
+    }
+
     
 
     public void NextLevel(){
-        Debug.Log("Next Level!"); //funkar ej atm
+        changePlayerAngleAndDir = true;
+        levelCount++;
+        cameraBehaviour.rotateCamera = true;
     }
 }
