@@ -8,9 +8,9 @@ public class PlayerCollision : MonoBehaviour
     //gives tag of object collided with, return this value to GameManager to decide what happens then
 
     void OnTriggerEnter(Collider other) {
-        Debug.Log("Trigger");
+        //Debug.Log("Trigger");
         if(other.tag == "Goal"){
-            Debug.Log("Wait!");
+            //Debug.Log("Wait!");
             GameManager.Instance.NextLevel(); //Inför nån form av Invoke så det blir liite delayed?
         }
     }

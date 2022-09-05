@@ -20,8 +20,8 @@ public class CameraBehaviour : MonoBehaviour
         transform.position = target.position + offset;
         if(GameManager.Instance.levelCount % 4 == 0 && rotateCamera == true){
             oldOffsetX = offset.x;
-            offsetX = offset.z;
-            offsetZ = oldOffsetX * -1;
+            offsetX = offset.z * -1;
+            offsetZ = oldOffsetX;
             offset = new Vector3(offsetX, 0, offsetZ);
             rotateCamera = false;
         }else if(GameManager.Instance.levelCount % 4 == 1 && rotateCamera == true){
@@ -32,17 +32,18 @@ public class CameraBehaviour : MonoBehaviour
             rotateCamera = false;
         }else if(GameManager.Instance.levelCount % 4 == 2 && rotateCamera == true){
             oldOffsetX = offset.x;
-            offsetX = offset.z;
+            offsetX = offset.z * -1;
             offsetZ = oldOffsetX;
             offset = new Vector3(offsetX, 0, offsetZ);
             rotateCamera = false;
         }else if(GameManager.Instance.levelCount % 4 == 3 && rotateCamera == true){
             oldOffsetX = offset.x;
             offsetX = offset.z * -1;
-            offsetZ = oldOffsetX * -1;
+            offsetZ = oldOffsetX;
             offset = new Vector3(offsetX, 0, offsetZ);
             rotateCamera = false;
         }
-        transform.Rotate(0, speed * Time.deltaTime, 0);
+        Debug.Log("OffsetX: " +  offsetX);
+        Debug.Log("OffsetZ: " +  offsetZ);
     }
 }
