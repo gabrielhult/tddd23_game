@@ -19,6 +19,9 @@ public class PlayerBehaviour : MonoBehaviour
     private bool _jump;
     
 
+    void Awake(){
+        targetRotation = new Quaternion(0, transform.localRotation.eulerAngles.y + 90, 0, 0);
+    }
 
     // Start is called before the first frame update
     void Start() {
@@ -50,32 +53,10 @@ public class PlayerBehaviour : MonoBehaviour
     private void ReadInput(){
         float horizontal = Input.GetAxis("Horizontal");
         //float vertical = Input.GetAxis("Vertical");
-        targetRotation = new Quaternion(0, transform.localRotation.eulerAngles.y + 90, 0, 0);
+        
         Debug.Log(targetRotation);
 
-        //Byt ut dessa cases mot en switch-statement och refactor till annan funktion, rotation funkar inte helt rätt atm
-        if(GameManager.Instance.levelCount % 4 == 0){
-            //Gör till egen funktion
-            horizontalEven = horizontal;
-            horizontalOdd = 0f;
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-        }else if(GameManager.Instance.levelCount % 4 == 1){
-            //Gör till egen funktion
-            horizontalEven = 0f;
-            horizontalOdd = horizontal;
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
-        }else if(GameManager.Instance.levelCount % 4 == 2){
-            //Gör till egen funktion
-            horizontalEven = horizontal* -1;
-            horizontalOdd = 0f;
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
-        }else if(GameManager.Instance.levelCount % 4 == 3){
-            //Gör till egen funktion
-            horizontalEven = 0f;
-            horizontalOdd = horizontal * -1;
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
-        }
-        
+        CorrectAngleAndDirection(horizontal);
 
         _movementForce = new Vector3(horizontalEven, 0f, horizontalOdd); //Odd levels moves in x-direction and Even levels in z-direction.
 
@@ -85,28 +66,52 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     void CorrectAngleAndDirection(float horizontal){
+        //Byt ut dessa cases mot en switch-statement och refactor till annan funktion, rotation funkar inte helt rätt atm
+        //switch(GameManager.Instance.levelCount % 4){
+         //   case 1:
+
+        //}
         if(GameManager.Instance.levelCount % 4 == 0){
             //Gör till egen funktion
             horizontalEven = horizontal;
             horizontalOdd = 0f;
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            if(GameManager.Instance.changePlayerAngleAndDir){
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
+                targetRotation = new Quaternion(0, transform.localRotation.eulerAngles.y + 90, 0, 0);
+                Debug.Log(targetRotation);
+                GameManager.Instance.changePlayerAngleAndDir = false;
+            }
         }else if(GameManager.Instance.levelCount % 4 == 1){
             //Gör till egen funktion
             horizontalEven = 0f;
             horizontalOdd = horizontal;
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
+            if(GameManager.Instance.changePlayerAngleAndDir){
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
+                targetRotation = new Quaternion(0, transform.localRotation.eulerAngles.y + 90, 0, 0);
+                Debug.Log(targetRotation);
+                GameManager.Instance.changePlayerAngleAndDir = false;
+            }
         }else if(GameManager.Instance.levelCount % 4 == 2){
             //Gör till egen funktion
             horizontalEven = horizontal* -1;
             horizontalOdd = 0f;
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
+            if(GameManager.Instance.changePlayerAngleAndDir){
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
+                targetRotation = new Quaternion(0, transform.localRotation.eulerAngles.y + 90, 0, 0);
+                Debug.Log(targetRotation);
+                GameManager.Instance.changePlayerAngleAndDir = false;
+            }
         }else if(GameManager.Instance.levelCount % 4 == 3){
             //Gör till egen funktion
             horizontalEven = 0f;
             horizontalOdd = horizontal * -1;
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
-        }
-        GameManager.Instance.changePlayerAngleAndDir = false;
+            if(GameManager.Instance.changePlayerAngleAndDir){
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed); //roterar spelaren korrekt och mjukt
+                targetRotation = new Quaternion(0, transform.localRotation.eulerAngles.y + 90, 0, 0);
+                Debug.Log(targetRotation);
+                GameManager.Instance.changePlayerAngleAndDir = false;
+            }
+        }       
     }
     
 }

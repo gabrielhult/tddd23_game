@@ -18,15 +18,27 @@ public class CameraBehaviour : MonoBehaviour
     void LateUpdate()
     {
         transform.position = target.position + offset;
-        if(GameManager.Instance.levelCount % 2 == 1 && rotateCamera == true){
+        if(GameManager.Instance.levelCount % 4 == 0 && rotateCamera == true){
+            oldOffsetX = offset.x;
+            offsetX = offset.z;
+            offsetZ = oldOffsetX * -1;
+            offset = new Vector3(offsetX, 0, offsetZ);
+            rotateCamera = false;
+        }else if(GameManager.Instance.levelCount % 4 == 1 && rotateCamera == true){
             oldOffsetX = offset.x;
             offsetX = offset.z * -1;
             offsetZ = oldOffsetX;
             offset = new Vector3(offsetX, 0, offsetZ);
             rotateCamera = false;
-        }else if(GameManager.Instance.levelCount % 2 == 0 && rotateCamera == true){
+        }else if(GameManager.Instance.levelCount % 4 == 2 && rotateCamera == true){
             oldOffsetX = offset.x;
             offsetX = offset.z;
+            offsetZ = oldOffsetX;
+            offset = new Vector3(offsetX, 0, offsetZ);
+            rotateCamera = false;
+        }else if(GameManager.Instance.levelCount % 4 == 3 && rotateCamera == true){
+            oldOffsetX = offset.x;
+            offsetX = offset.z * -1;
             offsetZ = oldOffsetX * -1;
             offset = new Vector3(offsetX, 0, offsetZ);
             rotateCamera = false;
