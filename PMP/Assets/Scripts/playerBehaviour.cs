@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
 
-    [SerializeField] private float _moveSpeed = 1000f;
-    [SerializeField] private float _jumpMultiplier = 1000f;    
+    public float _moveSpeed;
+    public float _jumpSpeed;   
 
-    public Rigidbody _rigidbody;
+    //public Rigidbody _rigidbody;
 
     private Quaternion targetRotation;
     public int rotationSpeed;
@@ -16,7 +16,11 @@ public class PlayerBehaviour : MonoBehaviour
     private float horizontalOdd;
     private float horizontalEven;
     private Vector3 _movementForce;
+    private Vector3 playerVelocity;
+    private float ySpeed;
     private bool _jump;
+
+    private CharacterController characterController;
     
 
     void Awake(){
@@ -27,7 +31,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        _rigidbody = GetComponent<Rigidbody>();
+        //_rigidbody = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -36,18 +41,21 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     void FixedUpdate() {
-        Move();
-        //Rotate();
-        Jump();
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+        PlayerMove();
+        PlayerJump();
     }
 
-    private void Move(){
-        _rigidbody.velocity = _movementForce * _moveSpeed;
+    private void PlayerMove(){
+        playerVelocity = _movementForce * _moveSpeed;
+        playerVelocity.y = ySpeed;
+        characterController.Move(playerVelocity * Time.deltaTime);
     }
 
-    private void Jump(){
+    private void PlayerJump(){
         if(_jump){
-            _rigidbody.AddForce(Vector3.up * _jumpMultiplier);
+            ySpeed = _jumpSpeed;
+            //_rigidbody.AddForce(Vector3.up * _jumpMultiplier);
             _jump = false; //Ska göras om så dubbelhop enbart tillåts.
         }
     }
@@ -61,14 +69,15 @@ public class PlayerBehaviour : MonoBehaviour
         CorrectAngleAndDirection(horizontal);
 
         _movementForce = new Vector3(horizontalEven, 0f, horizontalOdd); //Odd levels moves in x-direction and Even levels in z-direction.
+        _movementForce.Normalize();
 
         if(Input.GetButtonDown("Jump")){
             _jump = true;
+            Debug.Log("JUMP!");
         }
     }
 
     void CorrectAngleAndDirection(float horizontal){
-        //Byt ut dessa cases mot en switch-statement och refactor till annan funktion, rotation funkar inte helt rätt atm
         switch(GameManager.Instance.levelCount % 4){
             case 0:
                 horizontalEven = horizontal;
@@ -92,7 +101,9 @@ public class PlayerBehaviour : MonoBehaviour
         if(GameManager.Instance.changePlayerAngleAndDir){
                 //targetRotation = Quaternion.AngleAxis(currentAngle, transform.forward);
                 transform.Rotate(0f, currentAngle, 0f); 
-
+                //targetRotation = Quaternion.Euler(0f, currentAngle-90, 0f);
+                //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                //currentAngle = currentAngle - 90;
                 //Debug.Log("Desired angle:" + currentAngle);
                 GameManager.Instance.changePlayerAngleAndDir = false;
             }    

@@ -10,8 +10,15 @@ public class PlayerCollision : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         //Debug.Log("Trigger");
         if(other.tag == "Goal"){
-            //Debug.Log("Wait!");
+            //Debug.Log("Goal!");
             GameManager.Instance.NextLevel(); //Inför nån form av Invoke så det blir liite delayed?
+        }
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        //Debug.Log(other.collider.name);
+        if(other.collider.tag == "Ground"){
+            //Debug.Log("Ground!");
         }
     }
 }
