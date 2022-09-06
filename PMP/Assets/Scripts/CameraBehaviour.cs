@@ -6,17 +6,19 @@ public class CameraBehaviour : MonoBehaviour
 {
 
     public Transform target;
-
     public Vector3 offset;
+    public float offsetYInit;
+    public float rotationSpeed;
+
+
     private float oldOffsetX;
     private float offsetZ;
     private float offsetX;
-    public float speed;
     public bool rotateCamera;
 
     void Start(){
         transform.position = target.position + offset;
-        transform.Rotate(0, target.rotation.y + 180, 0);
+        //transform.Rotate(0, offsetYInit, 0);
     }
 
     // Update is called once per frame
@@ -27,7 +29,11 @@ public class CameraBehaviour : MonoBehaviour
             oldOffsetX = offset.x;
             offsetX = offset.z * -1;
             offsetZ = oldOffsetX;
-            offset = new Vector3(offsetX, 0, offsetZ);
+            offset = new Vector3(offsetX, offset.y, offsetZ);
+            //Smooth rotation dream..=? <3
+            //Quaternion toRotation = Quaternion.LookRotation(offset, Vector3.up);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            transform.Rotate(0, -90, 0);
             rotateCamera = false;
         
         }

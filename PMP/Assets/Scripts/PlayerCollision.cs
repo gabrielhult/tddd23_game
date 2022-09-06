@@ -12,6 +12,8 @@ public class PlayerCollision : MonoBehaviour
         if(other.tag == "Goal"){
             //Debug.Log("Goal!");
             GameManager.Instance.NextLevel(); //Inför nån form av Invoke så det blir liite delayed?
+        }else if(other.tag == "Banana"){
+            Debug.Log("Banana");
         }
     }
 
