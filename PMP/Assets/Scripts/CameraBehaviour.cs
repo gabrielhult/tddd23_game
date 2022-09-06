@@ -14,6 +14,11 @@ public class CameraBehaviour : MonoBehaviour
     public float speed;
     public bool rotateCamera;
 
+    void Start(){
+        transform.position = target.position + offset;
+        transform.Rotate(0, target.rotation.y + 180, 0);
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {

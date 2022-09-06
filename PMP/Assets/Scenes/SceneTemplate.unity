@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &82127222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3394875840829000842, guid: 8439d36f3cf3cee48b49bc14821b408c, type: 3}
+  m_PrefabInstance: {fileID: 922398269}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e1b88842388c14ab4f59778b017aa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &764016422
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3394875841595546106, guid: 8439d36f3cf3cee48b49bc14821b408c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3394875841595546106, guid: 8439d36f3cf3cee48b49bc14821b408c, type: 3}
       propertyPath: m_LocalRotation.x
@@ -290,7 +301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3394875841595546106, guid: 8439d36f3cf3cee48b49bc14821b408c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 3394875841595546106, guid: 8439d36f3cf3cee48b49bc14821b408c, type: 3}
       propertyPath: m_LocalRotation.z
@@ -302,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3394875841595546106, guid: 8439d36f3cf3cee48b49bc14821b408c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 3394875841595546106, guid: 8439d36f3cf3cee48b49bc14821b408c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -361,7 +372,7 @@ MonoBehaviour:
   goalLine: {fileID: 5843369957943534288, guid: 4d70e5ea1164cf54b97f564fb1d75b64, type: 3}
   levelCount: 0
   changePlayerAngleAndDir: 0
-  cameraBehaviour: {fileID: 0}
+  cameraBehaviour: {fileID: 82127222}
 --- !u!1 &1247705440
 GameObject:
   m_ObjectHideFlags: 0
