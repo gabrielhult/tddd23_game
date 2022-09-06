@@ -7,11 +7,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     public float _moveSpeed;
     public float _jumpSpeed;   
+    public int rotationSpeed;
+    public float gravityMagnitude;
 
     //public Rigidbody _rigidbody;
 
     private Quaternion targetRotation;
-    public int rotationSpeed;
     private int currentAngle;
     private float horizontalOdd;
     private float horizontalEven;
@@ -46,7 +47,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     void FixedUpdate() {
-        ySpeed += Physics.gravity.y * Time.deltaTime;
+        ySpeed += Physics.gravity.y * gravityMagnitude * Time.deltaTime; //Fixa bugg att den adderar när man står på Obstacle, se bra video
         PlayerMove();
         PlayerJump();
     }
