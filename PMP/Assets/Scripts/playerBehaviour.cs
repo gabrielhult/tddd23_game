@@ -12,13 +12,17 @@ public class PlayerBehaviour : MonoBehaviour
 
     private Quaternion targetRotation;
     public int rotationSpeed;
-    private int currentAngle = 0;
+    private int currentAngle;
     private float horizontalOdd;
     private float horizontalEven;
     private Vector3 _movementForce;
     private Vector3 playerVelocity;
     private float ySpeed;
     private bool _jump;
+    private float originalOffset;
+
+    //private int jumpCounter;
+    //public int maxJumpAllowed;
 
     private CharacterController characterController;
     
@@ -33,6 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Start() {
         //_rigidbody = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
+        originalOffset = characterController.stepOffset;
     }
 
     // Update is called once per frame
@@ -53,29 +58,32 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void PlayerJump(){
+        //Lägg till dubbelhopp och isGrounded
         if(_jump){
             ySpeed = _jumpSpeed;
-            //_rigidbody.AddForce(Vector3.up * _jumpMultiplier);
-            _jump = false; //Ska göras om så dubbelhop enbart tillåts.
+            _jump = false; 
         }
     }
 
     private void ReadInput(){
-        float horizontal = Input.GetAxis("Horizontal");
-        //float vertical = Input.GetAxis("Vertical");
-        
-        //Debug.Log(targetRotation);
+        float horizontal = Input.GetAxisRaw("Horizontal");
 
         CorrectAngleAndDirection(horizontal);
 
         _movementForce = new Vector3(horizontalEven, 0f, horizontalOdd); //Odd levels moves in x-direction and Even levels in z-direction.
         _movementForce.Normalize();
 
-        if(Input.GetButtonDown("Jump")){
-            _jump = true;
-            Debug.Log("JUMP!");
+        if(Input.GetButtonDown("Jump")){ //Ser till så vi bara kan hoppa när vi är på marken
+            if(characterController.isGrounded){
+                ySpeed = -0.5f;
+                characterController.stepOffset = originalOffset;
+                _jump = true;
+            }else{
+                characterController.stepOffset = 0;
+            }
         }
     }
+        
 
     void CorrectAngleAndDirection(float horizontal){
         switch(GameManager.Instance.levelCount % 4){

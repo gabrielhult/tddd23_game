@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6e1b88842388c14ab4f59778b017aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1776162544980403501}
   offset: {x: 4, y: 0, z: -11}
   speed: 0
   rotateCamera: 0
@@ -113,7 +113,6 @@ GameObject:
   - component: {fileID: 7904634948328358391}
   - component: {fileID: 8636915631503048346}
   - component: {fileID: 5779616333740424743}
-  - component: {fileID: 1874903201733736051}
   - component: {fileID: 4992378469556332236}
   - component: {fileID: 6015574674002726457}
   - component: {fileID: 5576649139531281278}
@@ -200,26 +199,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.49822667
+  m_Height: 2.0000005
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!54 &1874903201733736051
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6391789676626588385}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Center: {x: -0.0017733872, y: 0, z: -0.00000011920929}
 --- !u!114 &4992378469556332236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,8 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
-  _jumpSpeed: 10
-  _rigidbody: {fileID: 1874903201733736051}
+  _jumpSpeed: 5
   rotationSpeed: 10
 --- !u!143 &5576649139531281278
 CharacterController:
@@ -259,8 +241,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5000001
+  m_Height: 3
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
