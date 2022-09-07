@@ -37,7 +37,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        //_rigidbody = GetComponent<Rigidbody>();
         characterController = GetComponent<CharacterController>();
         originalOffset = characterController.stepOffset;
         animator = GetComponent<Animator>();
@@ -46,14 +45,19 @@ public class PlayerBehaviour : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        ReadInput();
+        if(!GameManager.Instance.isGameOver){
+            animator.SetBool("isDead", false);
+            ReadInput();
+        }else animator.SetBool("isDead", true);
     }
 
     void FixedUpdate() {
         ySpeed += Physics.gravity.y * gravityMagnitude * Time.deltaTime; //Fixa bugg att den adderar när man står på Obstacle, se bra video
-        //if not game over
-        PlayerMove();
-        PlayerJump();
+        if(!GameManager.Instance.isGameOver){
+            animator.SetBool("isDead", false);
+            PlayerMove();
+            PlayerJump();
+        }else animator.SetBool("isDead", true);
     }
 
     private void PlayerMove(){

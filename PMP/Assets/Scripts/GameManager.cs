@@ -10,9 +10,11 @@ public class GameManager : MonoBehaviour
     public int levelCount;
     public bool changePlayerAngleAndDir;
     public CameraBehaviour cameraBehaviour;
+    public bool isGameOver;
 
     private void Awake() {
         Instance = this;
+        isGameOver = false;
     }
 
     void Start(){
@@ -25,5 +27,9 @@ public class GameManager : MonoBehaviour
         changePlayerAngleAndDir = true;
         levelCount++;
         cameraBehaviour.rotateCamera = true;
+    }
+
+    public void GameOver(){
+        isGameOver = true;
     }
 }

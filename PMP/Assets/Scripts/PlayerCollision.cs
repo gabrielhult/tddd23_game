@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+
     private string collidedObjectTag;
     //gives tag of object collided with, return this value to GameManager to decide what happens then
 
@@ -14,6 +15,9 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.NextLevel(); //Inför nån form av Invoke så det blir liite delayed?
         }else if(other.tag == "Banana"){
             Debug.Log("Banana");
+        }else if(other.tag == "Hazard"){
+            Debug.Log("DIE");
+            GameManager.Instance.isGameOver = true;
         }
     }
 
