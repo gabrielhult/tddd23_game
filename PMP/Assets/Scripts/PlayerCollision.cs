@@ -14,16 +14,16 @@ public class PlayerCollision : MonoBehaviour
             //Debug.Log("Goal!");
             GameManager.Instance.NextLevel(); //Inför nån form av Invoke så det blir liite delayed?
         }else if(other.tag == "Banana"){
-            Debug.Log("Banana");
+            GameManager.Instance.CollectBanana();
         }else if(other.tag == "Hazard"){
             Debug.Log("DIE");
             GameManager.Instance.isGameOver = true;
         }
     }
 
-    private void OnCollisionEnter(Collision other) {
+    void OnCollisionEnter(Collider other) {
         //Debug.Log(other.collider.name);
-        if(other.collider.tag == "Ground"){
+        if(other.tag == "Ground"){
             //Debug.Log("Ground!");
         }
     }

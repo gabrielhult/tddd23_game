@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public bool changePlayerAngleAndDir;
     public CameraBehaviour cameraBehaviour;
     public bool isGameOver;
+    
 
     private void Awake() {
         Instance = this;
@@ -27,6 +28,10 @@ public class GameManager : MonoBehaviour
         changePlayerAngleAndDir = true;
         levelCount++;
         cameraBehaviour.rotateCamera = true;
+    }
+
+    public void CollectBanana(){
+        Debug.Log("Banana");
     }
 
     public void GameOver(){

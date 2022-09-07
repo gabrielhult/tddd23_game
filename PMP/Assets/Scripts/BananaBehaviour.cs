@@ -11,6 +11,10 @@ public class BananaBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Update(){
+        
+    }
+
     void FixedUpdate()
     {
         //Performance issues with this in use.

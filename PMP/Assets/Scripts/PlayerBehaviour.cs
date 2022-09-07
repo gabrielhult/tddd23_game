@@ -46,9 +46,8 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update() {
         if(!GameManager.Instance.isGameOver){
-            animator.SetBool("isDead", false);
             ReadInput();
-        }else animator.SetBool("isDead", true);
+        }
     }
 
     void FixedUpdate() {
