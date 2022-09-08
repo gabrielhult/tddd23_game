@@ -1,0 +1,17 @@
+This version includes features such as:
+
+- Player with a complete model
+
+- Movement
+
+- Jumping
+
+- Climbing
+
+- Collectable bananas
+
+- Animations for the previously named features
+
+- Hazard that kills the player
+
+- Goalpoints that will initiate level switch.
