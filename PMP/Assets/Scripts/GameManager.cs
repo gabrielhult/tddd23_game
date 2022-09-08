@@ -27,16 +27,17 @@ public class GameManager : MonoBehaviour
     }
 
     
-    public void NextLevel(){
+    public void NextLevel(GameObject gameObject){
         changePlayerAngleAndDir = true;
         levelCount++;
         cameraBehaviour.rotateCamera = true;
+        gameObject.SetActive(false);
     }
 
-    public void CollectScore(Collider other){
+    public void CollectScore(GameObject gameObject){
         if(playerInventory != null){
             playerInventory.ScoreCollected();
-            other.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
         Debug.Log(playerInventory.ScoreCounter);
     }

@@ -761,6 +761,7 @@ MonoBehaviour:
   _moveSpeed: 10
   _climbSpeed: 3
   _jumpSpeed: 10
+  _crawlSpeed: 5
   rotationSpeed: 650
   gravityMagnitude: 3
   _climb: 0

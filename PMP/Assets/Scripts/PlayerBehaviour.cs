@@ -7,7 +7,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public float _moveSpeed;
     public float _climbSpeed;
-    public float _jumpSpeed;   
+    public float _jumpSpeed;  
+    public float _crawlSpeed; 
     public int rotationSpeed;
     public float gravityMagnitude;
     public bool _climb;
@@ -25,6 +26,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float ySpeed;
     private bool _jump;
     private bool climbing;
+    private bool crawling;
     private float originalOffset;
     private Animator animator;
 
@@ -56,34 +58,60 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     void FixedUpdate() {
-        ySpeed += Physics.gravity.y * gravityMagnitude * Time.deltaTime; //Fixa bugg att den adderar när man står på Obstacle, se bra video
+        ySpeed += Physics.gravity.y * gravityMagnitude * Time.deltaTime;
         if(!GameManager.Instance.isGameOver){
             animator.SetBool("isDead", false);
             PlayerMove();
             PlayerJump();
             PlayerClimb();
-        }else animator.SetBool("isDead", true);
+        }else animator.SetBool("isDead", true); //Fixa så kropp alltid ligger ner på marken vid GameOver
     }
 
     private void PlayerMove(){
         if(climbing){
-            playerVelocity = _movementForce * _climbSpeed;
-            characterController.Move(playerVelocity * Time.deltaTime);
+            applyMovement(_climbSpeed);
+        }else if(crawling){
+            applyMovement(_crawlSpeed);
+            animateMovement();
         }else{
-            playerVelocity = _movementForce * _moveSpeed;
-            playerVelocity.y = ySpeed;
-            characterController.Move(playerVelocity * Time.deltaTime);
+            applyMovement(_moveSpeed);
+            animateMovement();
+            /* Sparad ifall revert av crawl sker
             if(_movementForce != Vector3.zero){ 
                 animator.SetBool("isMoving", true);
                 Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-            }else animator.SetBool("isMoving", false);
+            }else animator.SetBool("isMoving", false); */
         }
+    }
+
+    private void applyMovement(float movementMultiplier){
+        playerVelocity = _movementForce * movementMultiplier;
+        if(!climbing){ //&&!crawling?
+            playerVelocity.y = ySpeed;
+        } 
+        characterController.Move(playerVelocity * Time.deltaTime);
+    }
+
+    //Funkar inte riktigt, kolla här och i hur animationerna är kopplade.
+    private void animateMovement(){
+        if(_movementForce != Vector3.zero){ 
+            if(!crawling){
+                animator.SetBool("isMoving", true);
+            }//else animator.SetBool("isCrawling", true);
+                
+                Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            }else {
+                if(!crawling){
+                    animator.SetBool("isMoving", false);
+                }//else animator.SetBool("isCrawling", false);
+            }
     }
 
     private void PlayerJump(){
         //Lägg KANSKE till dubbelhopp
-        if(characterController.isGrounded){
+        if(characterController.isGrounded){ //&& !crawling?
 
             ySpeed = -0.5f;
             characterController.stepOffset = originalOffset;
@@ -138,6 +166,13 @@ public class PlayerBehaviour : MonoBehaviour
                 
             }
         }else _climb = false;
+
+        /* if(Input.GetKeyDown(KeyCode.LeftControl)){
+            if(!crawling){
+                crawling = true;
+            }else crawling = false;
+            Debug.Log(crawling);
+        } */
     }
         
 

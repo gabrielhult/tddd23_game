@@ -11,10 +11,9 @@ public class PlayerCollision : MonoBehaviour
 
     void OnTriggerEnter(Collider other) {
         if(other.tag == "Goal"){
-            //Debug.Log("Goal!");
-            GameManager.Instance.NextLevel(); //Inför nån form av Invoke så det blir liite delayed?
+            GameManager.Instance.NextLevel(other.gameObject); //Inför nån form av Invoke så det blir liite delayed?
         }else if(other.tag == "Banana"){
-            GameManager.Instance.CollectScore(other);
+            GameManager.Instance.CollectScore(other.gameObject);
         }else if(other.tag == "Hazard"){
             GameManager.Instance.isGameOver = true;
         }else if(other.tag == "Bamboo"){    
