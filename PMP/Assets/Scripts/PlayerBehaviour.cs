@@ -81,7 +81,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void PlayerJump(){
-        //Lägg till dubbelhopp
+        //Lägg KANSKE till dubbelhopp
         if(characterController.isGrounded){
 
             ySpeed = -0.5f;
@@ -118,8 +118,9 @@ public class PlayerBehaviour : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
 
         CorrectDirection(horizontal, vertical); 
+
         if(climbing){
-            _movementForce = new Vector3(0f, horizontal, 0f);
+            _movementForce = new Vector3(0f, horizontalEven, 0f);
         }else _movementForce = new Vector3(horizontalEven, 0f, horizontalOdd); //Odd levels moves in x-direction and Even levels in z-direction.
         
         _movementForce.Normalize();
@@ -127,6 +128,7 @@ public class PlayerBehaviour : MonoBehaviour
         if(Input.GetButtonDown("Jump")){
                 _jump = true;
         }
+
         if(GameManager.Instance.isClimbable){
             if(Input.GetKeyDown(KeyCode.K)){
                 if(!_climb){
@@ -134,7 +136,6 @@ public class PlayerBehaviour : MonoBehaviour
                 }else _climb = false;
                 
             }
-            //Debug.Log(_climb); //TODO: Ska bli false om man lämnar collisionområdet, climb bool logik konstig atm. 
         }else _climb = false;
     }
         
@@ -161,5 +162,4 @@ public class PlayerBehaviour : MonoBehaviour
                 break;
         } 
     }
-    
 }

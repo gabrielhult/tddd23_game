@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; //Borde göra att jag kan ta den varifrån somhelst
     
-    public GameObject goalLine;
+    //public GameObject goalLine;
     public CameraBehaviour cameraBehaviour;
     public PlayerInventory playerInventory;
     public int levelCount;

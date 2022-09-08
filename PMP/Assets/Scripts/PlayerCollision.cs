@@ -27,6 +27,7 @@ public class PlayerCollision : MonoBehaviour
         if(other.tag == "Bamboo"){
             //Debug.Log("You can't climb anymore");
             GameManager.Instance.isClimbable = false;
+            GameManager.Instance.setClimbObject(null);
         }
     }
 
