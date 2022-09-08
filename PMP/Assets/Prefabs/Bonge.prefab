@@ -759,6 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 10
+  _climbSpeed: 3
   _jumpSpeed: 10
   rotationSpeed: 650
   gravityMagnitude: 3

@@ -6,6 +6,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
 
     public float _moveSpeed;
+    public float _climbSpeed;
     public float _jumpSpeed;   
     public int rotationSpeed;
     public float gravityMagnitude;
@@ -65,11 +66,11 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void PlayerMove(){
-        playerVelocity = _movementForce * _moveSpeed;
-        
         if(climbing){
+            playerVelocity = _movementForce * _climbSpeed;
             characterController.Move(playerVelocity * Time.deltaTime);
         }else{
+            playerVelocity = _movementForce * _moveSpeed;
             playerVelocity.y = ySpeed;
             characterController.Move(playerVelocity * Time.deltaTime);
             if(_movementForce != Vector3.zero){ 

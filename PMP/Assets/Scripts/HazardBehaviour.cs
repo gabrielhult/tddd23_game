@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class HazardBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   public float moveSpeed;
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(1 * Time.deltaTime, 0, 0);
+        transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
     }
 }
