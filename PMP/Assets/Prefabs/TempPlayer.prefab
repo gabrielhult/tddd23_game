@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 6015574674002726457}
   - component: {fileID: 5576649139531281278}
   m_Layer: 0
-  m_Name: NewTempPlayer
+  m_Name: TempPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

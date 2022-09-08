@@ -18,6 +18,6 @@ public class BananaBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         //Performance issues with this in use.
-        transform.Rotate(0, 1, 0);
+        //transform.Rotate(0, 1, 0);
     }
 }
