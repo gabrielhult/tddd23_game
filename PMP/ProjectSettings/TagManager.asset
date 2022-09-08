@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Banana
   - Hazard
+  - Bamboo
   layers:
   - Default
   - TransparentFX

@@ -1,0 +1,11 @@
+Model Information:
+* title:	bamboo
+* source:	https://sketchfab.com/3d-models/bamboo-22e339f37f684b288e8af2c23d0edf08
+* author:	Rain (https://sketchfab.com/prostuda213)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "bamboo" (https://sketchfab.com/3d-models/bamboo-22e339f37f684b288e8af2c23d0edf08) by Rain (https://sketchfab.com/prostuda213) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

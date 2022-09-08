@@ -9,6 +9,9 @@ public class PlayerBehaviour : MonoBehaviour
     public float _jumpSpeed;   
     public int rotationSpeed;
     public float gravityMagnitude;
+    public bool _climb;
+
+    [SerializeField] GameObject tempClimbObject;
 
     //public Rigidbody _rigidbody;
 
@@ -20,6 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
     private Vector3 playerVelocity;
     private float ySpeed;
     private bool _jump;
+    private bool climbing;
     private float originalOffset;
     private Animator animator;
 
@@ -32,7 +36,7 @@ public class PlayerBehaviour : MonoBehaviour
     void Awake(){
         currentAngle = -90;
         //targetRotation = Quaternion.AngleAxis(currentAngle, transform.right);
-        Debug.Log("Desired angle:" + currentAngle);
+        //Debug.Log("Desired angle:" + currentAngle);
     }
 
     // Start is called before the first frame update
@@ -56,18 +60,24 @@ public class PlayerBehaviour : MonoBehaviour
             animator.SetBool("isDead", false);
             PlayerMove();
             PlayerJump();
+            PlayerClimb();
         }else animator.SetBool("isDead", true);
     }
 
     private void PlayerMove(){
         playerVelocity = _movementForce * _moveSpeed;
-        playerVelocity.y = ySpeed;
-        characterController.Move(playerVelocity * Time.deltaTime);
-        if(_movementForce != Vector3.zero){
-            animator.SetBool("isMoving", true);
-            Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }else animator.SetBool("isMoving", false);
+        
+        if(climbing){
+            characterController.Move(playerVelocity * Time.deltaTime);
+        }else{
+            playerVelocity.y = ySpeed;
+            characterController.Move(playerVelocity * Time.deltaTime);
+            if(_movementForce != Vector3.zero){ 
+                animator.SetBool("isMoving", true);
+                Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            }else animator.SetBool("isMoving", false);
+        }
     }
 
     private void PlayerJump(){
@@ -87,22 +97,50 @@ public class PlayerBehaviour : MonoBehaviour
             }
     }
 
+    private void PlayerClimb(){
+        if(_climb){ //Should we climb?
+            if(!climbing){ //If we aren't climbing already...
+                tempClimbObject = GameManager.Instance.getClimbObject();
+                transform.position = new Vector3(tempClimbObject.transform.position.x, transform.position.y, tempClimbObject.transform.position.z);
+                //TODO: Rotate always towards end of level direction.
+                //transform.rotation = new Quaternion(tempClimbObject.transform.rotation.x, 90 , tempClimbObject.transform.rotation.z)
+                climbing = true;
+            }
+            animator.SetBool("isClimbing", true);
+            Debug.Log(GameManager.Instance.getClimbObject().name);
+        }else {
+            animator.SetBool("isClimbing", false);
+            climbing = false;
+        }
+    }
+
     private void ReadInput(){
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        CorrectAngleAndDirection(horizontal, vertical); //ta in vertical
-
-        _movementForce = new Vector3(horizontalEven, 0f, horizontalOdd); //Odd levels moves in x-direction and Even levels in z-direction.
+        CorrectDirection(horizontal, vertical); 
+        if(climbing){
+            _movementForce = new Vector3(0f, horizontal, 0f);
+        }else _movementForce = new Vector3(horizontalEven, 0f, horizontalOdd); //Odd levels moves in x-direction and Even levels in z-direction.
+        
         _movementForce.Normalize();
 
         if(Input.GetButtonDown("Jump")){
                 _jump = true;
         }
+        if(GameManager.Instance.isClimbable){
+            if(Input.GetKeyDown(KeyCode.K)){
+                if(!_climb){
+                    _climb = true;
+                }else _climb = false;
+                
+            }
+            //Debug.Log(_climb); //TODO: Ska bli false om man lämnar collisionområdet, climb bool logik konstig atm. 
+        }else _climb = false;
     }
         
 
-    void CorrectAngleAndDirection(float horizontal, float vertical){
+    void CorrectDirection(float horizontal, float vertical){
         switch(GameManager.Instance.levelCount % 4){
             case 0:
                 horizontalEven = horizontal;
