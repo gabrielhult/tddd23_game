@@ -34,7 +34,7 @@ public class PlayerBehaviour : MonoBehaviour
     
 
     void Awake(){
-        currentAngle = -90;
+        //currentAngle = -90;
         //targetRotation = Quaternion.AngleAxis(currentAngle, transform.right);
         //Debug.Log("Desired angle:" + currentAngle);
     }
@@ -107,7 +107,6 @@ public class PlayerBehaviour : MonoBehaviour
                 climbing = true;
             }
             animator.SetBool("isClimbing", true);
-            Debug.Log(GameManager.Instance.getClimbObject().name);
         }else {
             animator.SetBool("isClimbing", false);
             climbing = false;

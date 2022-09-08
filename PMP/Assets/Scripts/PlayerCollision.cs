@@ -10,12 +10,11 @@ public class PlayerCollision : MonoBehaviour
 
 
     void OnTriggerEnter(Collider other) {
-        //Debug.Log("Trigger");
         if(other.tag == "Goal"){
             //Debug.Log("Goal!");
             GameManager.Instance.NextLevel(); //Inför nån form av Invoke så det blir liite delayed?
         }else if(other.tag == "Banana"){
-            GameManager.Instance.CollectBanana();
+            GameManager.Instance.CollectScore(other);
         }else if(other.tag == "Hazard"){
             GameManager.Instance.isGameOver = true;
         }else if(other.tag == "Bamboo"){    
@@ -26,9 +25,8 @@ public class PlayerCollision : MonoBehaviour
 
     void OnTriggerExit(Collider other){
         if(other.tag == "Bamboo"){
-            Debug.Log("You can't climb anymore");
+            //Debug.Log("You can't climb anymore");
             GameManager.Instance.isClimbable = false;
-            //set _climb bool in PlayerBehaviour to false. Se även climb i ReadInput och PlayerClimb.
         }
     }
 

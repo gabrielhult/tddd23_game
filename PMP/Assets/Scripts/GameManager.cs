@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     
     public GameObject goalLine;
     public CameraBehaviour cameraBehaviour;
+    public PlayerInventory playerInventory;
     public int levelCount;
     public bool changePlayerAngleAndDir;
     public bool isGameOver;
@@ -22,18 +23,22 @@ public class GameManager : MonoBehaviour
 
     void Start(){
         cameraBehaviour = cameraBehaviour.GetComponent<CameraBehaviour>();
+        playerInventory = playerInventory.GetComponent<PlayerInventory>();
     }
 
     
-
     public void NextLevel(){
         changePlayerAngleAndDir = true;
         levelCount++;
         cameraBehaviour.rotateCamera = true;
     }
 
-    public void CollectBanana(){
-        Debug.Log("Banana");
+    public void CollectScore(Collider other){
+        if(playerInventory != null){
+            playerInventory.ScoreCollected();
+            other.gameObject.SetActive(false);
+        }
+        Debug.Log(playerInventory.ScoreCounter);
     }
 
     public void GameOver(){
