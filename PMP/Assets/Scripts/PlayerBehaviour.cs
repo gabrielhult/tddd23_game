@@ -70,12 +70,13 @@ public class PlayerBehaviour : MonoBehaviour
     private void PlayerMove(){
         if(climbing){
             applyMovement(_climbSpeed);
+            //animateMovement("isClimbing");
         }else if(crawling){
             applyMovement(_crawlSpeed);
-            animateMovement();
+            //animateMovement();
         }else{
             applyMovement(_moveSpeed);
-            animateMovement();
+            animateMovement("isMoving");
             /* Sparad ifall revert av crawl sker
             if(_movementForce != Vector3.zero){ 
                 animator.SetBool("isMoving", true);
@@ -94,17 +95,17 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     //Funkar inte riktigt, kolla här och i hur animationerna är kopplade.
-    private void animateMovement(){
+    private void animateMovement(string animParameter){
         if(_movementForce != Vector3.zero){ 
             if(!crawling){
-                animator.SetBool("isMoving", true);
+                animator.SetBool(animParameter, true);
             }//else animator.SetBool("isCrawling", true);
                 
                 Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }else {
                 if(!crawling){
-                    animator.SetBool("isMoving", false);
+                    animator.SetBool(animParameter, false);
                 }//else animator.SetBool("isCrawling", false);
             }
     }
