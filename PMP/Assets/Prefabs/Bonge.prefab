@@ -766,7 +766,7 @@ MonoBehaviour:
   rotationSpeed: 650
   gravityMagnitude: 3
   _climb: 0
-  tempClimbObject: {fileID: 0}
+  currentClimbObject: {fileID: 0}
 --- !u!114 &5600553832759436351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,36 +818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55118d3c802e1b54fb7ae0b1b9113017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GamePaused:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5600553832759436350}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  GameResumed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5600553832759436350}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!1 &4808765322464580653
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,30 +5,18 @@ using UnityEngine.Events;
 
 public class PauseController : MonoBehaviour
 {
-
-    public bool isPaused;
-    public UnityEvent GamePaused;
-    public UnityEvent GameResumed;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape)){
-            isPaused = !isPaused;
+            //Pause the game if it isn't paused and vice versa
+            GameManager.Instance.changePauseState();
 
-            if(isPaused){
-                Time.timeScale = 0;
-                GamePaused.Invoke();
+            if(GameManager.Instance.isPaused){
+                GameManager.Instance.Pause();
             }else{
-                Time.timeScale = 1;
-                GameResumed.Invoke();
+                GameManager.Instance.Resume();
             }
         }
     }
 }
+
