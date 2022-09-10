@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
             playerInventory.ScoreCollected();
             gameObject.SetActive(false);
         }
-        Debug.Log(playerInventory.ScoreCounter);
+        //Debug.Log(playerInventory.ScoreCounter);
     }
 
     public void GameOver(){

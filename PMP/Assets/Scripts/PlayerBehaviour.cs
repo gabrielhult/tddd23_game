@@ -13,7 +13,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float gravityMagnitude;
     public bool _climb;
 
-    [SerializeField] GameObject tempClimbObject;
+    [SerializeField] GameObject currentClimbObject;
 
     //public Rigidbody _rigidbody;
 
@@ -64,7 +64,10 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerMove();
             PlayerJump();
             PlayerClimb();
-        }else animator.SetBool("isDead", true); //Fixa så kropp alltid ligger ner på marken vid GameOver
+        }else {
+            animator.SetBool("isDead", true); //Fixa så kropp alltid ligger ner på marken vid GameOver
+            
+        }
     }
 
     private void PlayerMove(){
@@ -130,8 +133,8 @@ public class PlayerBehaviour : MonoBehaviour
     private void PlayerClimb(){
         if(_climb){ //Should we climb?
             if(!climbing){ //If we aren't climbing already...
-                tempClimbObject = GameManager.Instance.getClimbObject();
-                transform.position = new Vector3(tempClimbObject.transform.position.x, transform.position.y, tempClimbObject.transform.position.z);
+                currentClimbObject = GameManager.Instance.getClimbObject();
+                transform.position = new Vector3(currentClimbObject.transform.position.x, transform.position.y, currentClimbObject.transform.position.z);
                 //TODO: Rotate always towards end of level direction.
                 //transform.rotation = new Quaternion(tempClimbObject.transform.rotation.x, 90 , tempClimbObject.transform.rotation.z)
                 climbing = true;
