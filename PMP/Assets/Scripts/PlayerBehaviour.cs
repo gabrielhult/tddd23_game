@@ -29,6 +29,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool crawling;
     private float originalOffset;
     private Animator animator;
+    private float gameOverYPosition;
 
     //private int jumpCounter;
     //public int maxJumpAllowed;
@@ -40,6 +41,7 @@ public class PlayerBehaviour : MonoBehaviour
         //currentAngle = -90;
         //targetRotation = Quaternion.AngleAxis(currentAngle, transform.right);
         //Debug.Log("Desired angle:" + currentAngle);
+        gameOverYPosition = 0;
     }
 
     // Start is called before the first frame update
@@ -66,26 +68,20 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerClimb();
         }else {
             animator.SetBool("isDead", true); //Fixa så kropp alltid ligger ner på marken vid GameOver
-            
+            if(transform.position.y != gameOverYPosition){
+                transform.position = new Vector3(transform.position.x, gameOverYPosition, transform.position.z);
+            }
         }
     }
 
     private void PlayerMove(){
         if(climbing){
             applyMovement(_climbSpeed);
-            //animateMovement("isClimbing");
         }else if(crawling){
             applyMovement(_crawlSpeed);
-            //animateMovement();
         }else{
             applyMovement(_moveSpeed);
-            animateMovement("isMoving");
-            /* Sparad ifall revert av crawl sker
-            if(_movementForce != Vector3.zero){ 
-                animator.SetBool("isMoving", true);
-                Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-            }else animator.SetBool("isMoving", false); */
+            displayMovement("isMoving");
         }
     }
 
@@ -98,7 +94,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     //Funkar inte riktigt, kolla här och i hur animationerna är kopplade.
-    private void animateMovement(string animParameter){
+    private void displayMovement(string animParameter){
         if(_movementForce != Vector3.zero){ 
             if(!crawling){
                 animator.SetBool(animParameter, true);
@@ -116,7 +112,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void PlayerJump(){
         //Lägg KANSKE till dubbelhopp
         if(characterController.isGrounded){ //&& !crawling?
-
+            gameOverYPosition = transform.position.y; //Hoppar man av och dör så kvarstår buggen.
             ySpeed = -0.5f;
             characterController.stepOffset = originalOffset;
             
@@ -132,17 +128,22 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void PlayerClimb(){
         if(_climb){ //Should we climb?
+            ySpeed = -0.5f;
             if(!climbing){ //If we aren't climbing already...
                 currentClimbObject = GameManager.Instance.getClimbObject();
                 transform.position = new Vector3(currentClimbObject.transform.position.x, transform.position.y, currentClimbObject.transform.position.z);
                 //TODO: Rotate always towards end of level direction.
                 //transform.rotation = new Quaternion(tempClimbObject.transform.rotation.x, 90 , tempClimbObject.transform.rotation.z)
                 climbing = true;
-            }
-            animator.SetBool("isClimbing", true);
+            }if(_movementForce != Vector3.zero){
+                animator.SetBool("isClimbing", true);
+                animator.speed = 1;
+            }else animator.speed = 0;
+            
         }else {
             animator.SetBool("isClimbing", false);
             climbing = false;
+            animator.speed = 1;
         }
     }
 
