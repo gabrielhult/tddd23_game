@@ -12,6 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
     public int rotationSpeed;
     public float gravityMagnitude;
     public bool _climb;
+    public float raycastDistance;
 
     [SerializeField] GameObject currentClimbObject;
 
@@ -30,6 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float originalOffset;
     private Animator animator;
     private float gameOverYPosition;
+    private RaycastHit raycastHit;
 
     //private int jumpCounter;
     //public int maxJumpAllowed;
@@ -60,6 +62,10 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     void FixedUpdate() {
+        if(Physics.Raycast(transform.position, Vector3.down, raycastDistance)){
+            Debug.DrawRay(transform.position, Vector3.down, Color.cyan);
+            //Debug.Log()
+        }
         ySpeed += Physics.gravity.y * gravityMagnitude * Time.deltaTime;
         if(!GameManager.Instance.isGameOver){
             animator.SetBool("isDead", false);
@@ -112,7 +118,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void PlayerJump(){
         //Lägg KANSKE till dubbelhopp
         if(characterController.isGrounded){ //&& !crawling?
-            gameOverYPosition = transform.position.y; //Hoppar man av och dör så kvarstår buggen.
+            gameOverYPosition = transform.position.y; //Hoppar man av och dör så kvarstår buggen, vilket är rimligt.
             ySpeed = -0.5f;
             characterController.stepOffset = originalOffset;
             
@@ -132,8 +138,7 @@ public class PlayerBehaviour : MonoBehaviour
             if(!climbing){ //If we aren't climbing already...
                 currentClimbObject = GameManager.Instance.getClimbObject();
                 transform.position = new Vector3(currentClimbObject.transform.position.x, transform.position.y, currentClimbObject.transform.position.z);
-                //TODO: Rotate always towards end of level direction.
-                //transform.rotation = new Quaternion(tempClimbObject.transform.rotation.x, 90 , tempClimbObject.transform.rotation.z)
+                transform.LookAt(transform.forward);  //Makes Bonge look forward when climbinb.
                 climbing = true;
             }if(_movementForce != Vector3.zero){
                 animator.SetBool("isClimbing", true);
@@ -151,11 +156,11 @@ public class PlayerBehaviour : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        CorrectDirection(horizontal, vertical); 
+        //CorrectDirection(horizontal, vertical); 
 
         if(climbing){
-            _movementForce = new Vector3(0f, horizontalEven, 0f);
-        }else _movementForce = new Vector3(horizontalEven, 0f, horizontalOdd); //Odd levels moves in x-direction and Even levels in z-direction.
+            _movementForce = new Vector3(0f, vertical, 0f);
+        }else _movementForce = new Vector3(vertical, 0f, -1 * horizontal); //Odd levels moves in x-direction and Even levels in z-direction.
         
         _movementForce.Normalize();
 
