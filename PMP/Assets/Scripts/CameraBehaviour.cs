@@ -18,21 +18,18 @@ public class CameraBehaviour : MonoBehaviour
 
     void Start(){
         transform.position = target.position + offset;
-        //transform.Rotate(0, offsetYInit, 0);
+        //GetComponent<Rigidbody>().velocity = new Vector3(3,0,0); //Kanske kör på detta istället?
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         transform.position = target.position + offset;
-        if(rotateCamera){
+        if(rotateCamera){ //Kan vara orelevant del nu!
             oldOffsetX = offset.x;
             offsetX = offset.z * -1;
             offsetZ = oldOffsetX;
             offset = new Vector3(offsetX, offset.y, offsetZ);
-            //Smooth rotation dream..=? <3
-            //Quaternion toRotation = Quaternion.LookRotation(offset, Vector3.up);
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             transform.Rotate(0, -90, 0);
             rotateCamera = false;
         

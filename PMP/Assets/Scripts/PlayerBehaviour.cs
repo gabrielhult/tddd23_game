@@ -31,6 +31,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float originalOffset;
     private Animator animator;
     private float gameOverYPosition;
+    private Ray ray;
     private RaycastHit raycastHit;
 
     //private int jumpCounter;
@@ -52,6 +53,7 @@ public class PlayerBehaviour : MonoBehaviour
         originalOffset = characterController.stepOffset;
         animator = GetComponent<Animator>();
         animator.SetBool("isMoving", false);
+        ray.direction = Vector3.down;
     }
 
     // Update is called once per frame
@@ -62,16 +64,19 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if(Physics.Raycast(transform.position, Vector3.down, raycastDistance)){
-            Debug.DrawRay(transform.position, Vector3.down, Color.cyan);
-            //Debug.Log()
-        }
         ySpeed += Physics.gravity.y * gravityMagnitude * Time.deltaTime;
+        ray.origin = transform.position;
         if(!GameManager.Instance.isGameOver){
             animator.SetBool("isDead", false);
             PlayerMove();
             PlayerJump();
             PlayerClimb();
+            if(Physics.Raycast(ray, out raycastHit, raycastDistance)){
+                gameOverYPosition = transform.position.y - raycastHit.distance; //Funkar fortfarande inte riktigt...
+                /* Debug.Log("Transform pos: " + transform.position.y);
+                Debug.Log("Distance: " + raycastHit.distance);
+                Debug.Log("GO Pos: " +  gameOverYPosition); */
+            }
         }else {
             animator.SetBool("isDead", true); //Fixa så kropp alltid ligger ner på marken vid GameOver
             if(transform.position.y != gameOverYPosition){
@@ -85,6 +90,7 @@ public class PlayerBehaviour : MonoBehaviour
             applyMovement(_climbSpeed);
         }else if(crawling){
             applyMovement(_crawlSpeed);
+            displayMovement("isCrawling");
         }else{
             applyMovement(_moveSpeed);
             displayMovement("isMoving");
@@ -104,21 +110,20 @@ public class PlayerBehaviour : MonoBehaviour
         if(_movementForce != Vector3.zero){ 
             if(!crawling){
                 animator.SetBool(animParameter, true);
-            }//else animator.SetBool("isCrawling", true);
+            }else animator.SetBool("isCrawling", true);
                 
                 Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }else {
                 if(!crawling){
                     animator.SetBool(animParameter, false);
-                }//else animator.SetBool("isCrawling", false);
+                }else animator.SetBool("isCrawling", false);
             }
     }
 
     private void PlayerJump(){
         //Lägg KANSKE till dubbelhopp
         if(characterController.isGrounded){ //&& !crawling?
-            gameOverYPosition = transform.position.y; //Hoppar man av och dör så kvarstår buggen, vilket är rimligt.
             ySpeed = -0.5f;
             characterController.stepOffset = originalOffset;
             
@@ -177,12 +182,13 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }else _climb = false;
 
-        /* if(Input.GetKeyDown(KeyCode.LeftControl)){
-            if(!crawling){
-                crawling = true;
-            }else crawling = false;
+        if(Input.GetKeyDown(KeyCode.LeftControl)){
+            if(_jump || !_climb){
+                crawling = !crawling;
+            }
+
             Debug.Log(crawling);
-        } */
+        }
     }
         
 
