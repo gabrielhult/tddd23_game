@@ -23,7 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float horizontalOdd;
     private float horizontalEven;
     private Vector3 _movementForce;
-    private Vector3 playerVelocity;
+    public Vector3 playerVelocity;
     private float ySpeed;
     private bool _jump;
     private bool climbing;
@@ -103,6 +103,7 @@ public class PlayerBehaviour : MonoBehaviour
             playerVelocity.y = ySpeed;
         } 
         characterController.Move(playerVelocity * Time.deltaTime);
+        //Debug.Log(playerVelocity.x);
     }
 
     //Funkar inte riktigt, kolla här och i hur animationerna är kopplade.
@@ -143,7 +144,7 @@ public class PlayerBehaviour : MonoBehaviour
             if(!climbing){ //If we aren't climbing already...
                 currentClimbObject = GameManager.Instance.getClimbObject();
                 transform.position = new Vector3(currentClimbObject.transform.position.x, transform.position.y, currentClimbObject.transform.position.z);
-                transform.LookAt(transform.forward);  //Makes Bonge look forward when climbinb.
+                transform.LookAt(transform.position);  //Makes Bonge look forward when climbinb.
                 climbing = true;
             }if(_movementForce != Vector3.zero){
                 animator.SetBool("isClimbing", true);
