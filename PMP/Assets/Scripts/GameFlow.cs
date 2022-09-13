@@ -5,17 +5,25 @@ using UnityEngine;
 public class GameFlow : MonoBehaviour
 {
 
-    public Transform firstMainTile;
-    public Transform[] obstacleObjects;
-    private int randObstacleIndex;
+    public Transform[] nextTile;
+    public Transform[] smallObjects;
+    public Transform[] largeObjects;
     public PlayerBehaviour playerBehaviour;
+    public int obstacleSpawnRateIndex;
+    private int randObstacleIndex;
     private Vector3 nextMainTileSpawn;
     private Vector3 nextObstacleSpawn;
     private float currentVelocityX;
-    private int randZObstacleIndex;
-    private int stepValue = 6;
-    private int roundValue;
-    private int adjustedValue;
+    private int randZPos;
+    private int randLargeObjSpawn;
+    private int obstacleSpawnCounter;
+    private bool isLargeObjectSpawned;
+
+
+    private int tileRand;
+    private int holeSpawnCounter;
+    public int holeSpawnRateIndex;
+  
 
 
 
@@ -23,38 +31,72 @@ public class GameFlow : MonoBehaviour
     void Start()
     {
         nextMainTileSpawn.x = 44;
-        StartCoroutine(spawnMainTile());
+        StartCoroutine(spawnTile());
         playerBehaviour = playerBehaviour.GetComponent<PlayerBehaviour>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    void tileSpawn(){
+        holeSpawnCounter++;
+        if(holeSpawnCounter % holeSpawnRateIndex == 0){
+            tileRand = Random.Range(0, nextTile.Length);
+        }else tileRand = 0;
+        Instantiate(nextTile[tileRand], nextMainTileSpawn, nextTile[tileRand].rotation);
+        nextObstacleSpawn = nextMainTileSpawn;
     }
 
-    IEnumerator spawnMainTile(){
+    void obstacleSpawn(){
+        //Spawns an obstacle every "obstacleSpawnRateIndex" tile
+        obstacleSpawnCounter++;
+        if(obstacleSpawnCounter % obstacleSpawnRateIndex == 0){
+            randLargeObjSpawn = Random.Range(0, 5);
+            if(randLargeObjSpawn == 0){
+                largeObjectSpawn();
+                isLargeObjectSpawned = true;
+            }else isLargeObjectSpawned = false;
+            
+            if(!isLargeObjectSpawned){
+                locationObstacle();
+                smallObjectSpawn();
+            }
+            obstacleSpawnCounter = 0;
+        }
+    }
+
+    void locationObstacle(){
+        //Randomly chooses where to place the next obstacle; left, center or right. -6 = left, 0 = center, 6 = right
+        randZPos = Random.Range(-1, 2) * 6;
+        nextObstacleSpawn.z = randZPos;
+    }
+
+    void smallObjectSpawn(){
+        //Randomly chooses an obstacle type from GameManager array
+        randObstacleIndex = Random.Range(0, smallObjects.Length);
+        //Spawns an object from the "Small Object"-array.
+        Instantiate(smallObjects[randObstacleIndex], nextObstacleSpawn, smallObjects[randObstacleIndex].rotation);
+    }
+
+    /* Large Objects are ALWAYS spawned in the middle */
+    void largeObjectSpawn(){
+        nextObstacleSpawn.z = 0;
+        //Randomly chooses an obstacle type from GameManager array
+        randObstacleIndex = Random.Range(0, largeObjects.Length);
+        //Spawns an object from the "Small Object"-array.
+        Instantiate(largeObjects[randObstacleIndex], nextObstacleSpawn, largeObjects[randObstacleIndex].rotation);
+    }
+
+    IEnumerator spawnTile(){
         //Logic for how often new tiles spawn.
-        if(playerBehaviour.playerVelocity.x < 0.5){
+        /* if(playerBehaviour.playerVelocity.x < 0.5){
             currentVelocityX = 1;
         }else currentVelocityX = playerBehaviour.playerVelocity.x;
-        yield return new WaitForSeconds(1 / (currentVelocityX / 1.4f)); //Optimera detta
-
-        //Randomly places an obstacle
-        randZObstacleIndex = Random.Range(-6, 7);
+        yield return new WaitForSeconds(1 / (currentVelocityX / 1.4f)); //Optimera detta */
+        yield return new WaitForSeconds(.25f); //Optimera detta
         
-        //Rounds value so that obstacle spawns at the different roads
-        roundValue = ((int)Mathf.Floor(randZObstacleIndex / stepValue));
-        adjustedValue = stepValue * roundValue;
-        nextObstacleSpawn = nextMainTileSpawn;
-        nextObstacleSpawn.z = adjustedValue;
+        tileSpawn();
 
-        //Randomly chooses an obstacle type from GameManager array
-        randObstacleIndex = Random.Range(0, obstacleObjects.Length);
+        obstacleSpawn();
 
-        Instantiate(obstacleObjects[randObstacleIndex], nextObstacleSpawn, obstacleObjects[randObstacleIndex].rotation);
-        Instantiate(firstMainTile, nextMainTileSpawn, firstMainTile.rotation);
         nextMainTileSpawn.x += 4;
-        StartCoroutine(spawnMainTile());
+        StartCoroutine(spawnTile()); //Makes this IEnumerator loop.
     }
 }

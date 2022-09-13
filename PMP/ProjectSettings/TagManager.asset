@@ -9,6 +9,7 @@ TagManager:
   - Banana
   - Hazard
   - Bamboo
+  - Lava
   layers:
   - Default
   - TransparentFX
