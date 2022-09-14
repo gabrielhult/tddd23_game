@@ -34,16 +34,10 @@ public class PlayerBehaviour : MonoBehaviour
     private Ray ray;
     private RaycastHit raycastHit;
 
-    //private int jumpCounter;
-    //public int maxJumpAllowed;
-
     private CharacterController characterController;
     
 
     void Awake(){
-        //currentAngle = -90;
-        //targetRotation = Quaternion.AngleAxis(currentAngle, transform.right);
-        //Debug.Log("Desired angle:" + currentAngle);
         gameOverYPosition = 0;
     }
 
@@ -103,7 +97,6 @@ public class PlayerBehaviour : MonoBehaviour
             playerVelocity.y = ySpeed;
         } 
         characterController.Move(playerVelocity * Time.deltaTime);
-        //Debug.Log(playerVelocity.x);
     }
 
     //Funkar inte riktigt, kolla här och i hur animationerna är kopplade.
