@@ -10,6 +10,10 @@ public class GameFlow : MonoBehaviour
     public Transform[] largeObjects;
     public PlayerBehaviour playerBehaviour;
     public int obstacleSpawnRateIndex;
+    public int maxLoadedChunks;
+    private Queue<Transform> chunksQueue;
+    private Transform newChunk;
+    private Transform tempChunk; //Chunk to be removed from the game
     private int randObstacleIndex;
     private Vector3 nextMainTileSpawn;
     private Vector3 nextObstacleSpawn;
@@ -33,6 +37,7 @@ public class GameFlow : MonoBehaviour
         nextMainTileSpawn.x = 44;
         StartCoroutine(spawnTile());
         playerBehaviour = playerBehaviour.GetComponent<PlayerBehaviour>();
+        chunksQueue = new Queue<Transform>();
     }
 
     void tileSpawn(){
@@ -40,7 +45,13 @@ public class GameFlow : MonoBehaviour
         if(holeSpawnCounter % holeSpawnRateIndex == 0){
             tileRand = Random.Range(0, nextTile.Length);
         }else tileRand = 0;
-        Instantiate(nextTile[tileRand], nextMainTileSpawn, nextTile[tileRand].rotation);
+        newChunk = Instantiate(nextTile[tileRand], nextMainTileSpawn, nextTile[tileRand].rotation);
+        if(chunksQueue.Count <= maxLoadedChunks){
+            chunksQueue.Enqueue(newChunk);
+        }else{
+            tempChunk = chunksQueue.Dequeue();
+            tempChunk.gameObject.SetActive(false);
+        }
         nextObstacleSpawn = nextMainTileSpawn;
     }
 
@@ -71,6 +82,7 @@ public class GameFlow : MonoBehaviour
     void smallObjectSpawn(){
         //Randomly chooses an obstacle type from GameManager array
         randObstacleIndex = Random.Range(0, smallObjects.Length);
+        Debug.Log(randObstacleIndex);
         //Spawns an object from the "Small Object"-array.
         Instantiate(smallObjects[randObstacleIndex], nextObstacleSpawn, smallObjects[randObstacleIndex].rotation);
     }
@@ -97,6 +109,8 @@ public class GameFlow : MonoBehaviour
         obstacleSpawn();
 
         nextMainTileSpawn.x += 4;
-        StartCoroutine(spawnTile()); //Makes this IEnumerator loop.
+        if(!GameManager.Instance.isGameOver){
+            StartCoroutine(spawnTile()); //Makes this IEnumerator loop.
+        }
     }
 }
