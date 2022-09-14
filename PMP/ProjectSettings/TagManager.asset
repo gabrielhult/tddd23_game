@@ -10,6 +10,7 @@ TagManager:
   - Hazard
   - Bamboo
   - Lava
+  - Tile
   layers:
   - Default
   - TransparentFX

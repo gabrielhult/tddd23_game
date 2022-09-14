@@ -5,10 +5,11 @@ using UnityEngine;
 public class HazardBehaviour : MonoBehaviour
 {
    public float moveSpeed;
+   public Rigidbody rigidbody; 
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
+    void Start(){
+        rigidbody.GetComponent<Rigidbody>();
+        rigidbody.velocity = new Vector3(moveSpeed, 0, 0);
     }
+
 }

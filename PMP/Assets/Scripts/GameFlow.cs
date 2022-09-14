@@ -45,13 +45,16 @@ public class GameFlow : MonoBehaviour
         if(holeSpawnCounter % holeSpawnRateIndex == 0){
             tileRand = Random.Range(0, nextTile.Length);
         }else tileRand = 0;
+
         newChunk = Instantiate(nextTile[tileRand], nextMainTileSpawn, nextTile[tileRand].rotation);
-        if(chunksQueue.Count <= maxLoadedChunks){
-            chunksQueue.Enqueue(newChunk);
-        }else{
+
+        //Not needed but stays here for one push so I can see it.
+        /* if(chunksQueue.Count > maxLoadedChunks){ //If the queue has reached the amount we accept.
             tempChunk = chunksQueue.Dequeue();
             tempChunk.gameObject.SetActive(false);
         }
+        chunksQueue.Enqueue(newChunk); //Enter the new tile into our queue. */
+        
         nextObstacleSpawn = nextMainTileSpawn;
     }
 
@@ -82,12 +85,11 @@ public class GameFlow : MonoBehaviour
     void smallObjectSpawn(){
         //Randomly chooses an obstacle type from GameManager array
         randObstacleIndex = Random.Range(0, smallObjects.Length);
-        Debug.Log(randObstacleIndex);
         //Spawns an object from the "Small Object"-array.
         Instantiate(smallObjects[randObstacleIndex], nextObstacleSpawn, smallObjects[randObstacleIndex].rotation);
     }
 
-    /* Large Objects are ALWAYS spawned in the middle */
+    /* Large Objects should ALWAYS spawned in the middle */
     void largeObjectSpawn(){
         nextObstacleSpawn.z = 0;
         //Randomly chooses an obstacle type from GameManager array
@@ -102,14 +104,13 @@ public class GameFlow : MonoBehaviour
             currentVelocityX = 1;
         }else currentVelocityX = playerBehaviour.playerVelocity.x;
         yield return new WaitForSeconds(1 / (currentVelocityX / 1.4f)); //Optimera detta */
-        yield return new WaitForSeconds(.25f); //Optimera detta
-        
-        tileSpawn();
-
-        obstacleSpawn();
-
-        nextMainTileSpawn.x += 4;
+        yield return new WaitForSeconds(.3f); //Optimera detta
         if(!GameManager.Instance.isGameOver){
+            tileSpawn();
+
+            obstacleSpawn();
+
+            nextMainTileSpawn.x += 4;
             StartCoroutine(spawnTile()); //Makes this IEnumerator loop.
         }
     }
