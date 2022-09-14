@@ -7,25 +7,30 @@ public class CameraBehaviour : MonoBehaviour
 
     public Transform target;
     public Vector3 offset;
-    public float offsetYInit;
+    /* public float offsetYInit;
     public float rotationSpeed;
-
 
     private float oldOffsetX;
     private float offsetZ;
     private float offsetX;
-    public bool rotateCamera;
+    public bool rotateCamera; */
 
     void Start(){
         transform.position = target.position + offset;
         //GetComponent<Rigidbody>().velocity = new Vector3(3,0,0); //Kanske kör på detta istället?
     }
 
+    void Update(){
+        ReadCameraInput();
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
         transform.position = target.position + offset;
-        if(rotateCamera){ //Kan vara orelevant del nu!
+
+
+        /* if(rotateCamera){ //Kan vara orelevant del nu!
             oldOffsetX = offset.x;
             offsetX = offset.z * -1;
             offsetZ = oldOffsetX;
@@ -33,6 +38,13 @@ public class CameraBehaviour : MonoBehaviour
             transform.Rotate(0, -90, 0);
             rotateCamera = false;
         
+        } */
+    }
+
+    void ReadCameraInput(){
+        if(Input.GetKeyDown(KeyCode.L)){
+            offset.x = -offset.x;
+            transform.Rotate(80, 180, 0);
         }
     }
 }

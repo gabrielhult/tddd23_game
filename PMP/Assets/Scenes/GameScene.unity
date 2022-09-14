@@ -1086,6 +1086,7 @@ GameObject:
   - component: {fileID: 878488474}
   - component: {fileID: 878488473}
   - component: {fileID: 878488472}
+  - component: {fileID: 878488475}
   m_Layer: 0
   m_Name: StartBlocker
   m_TagString: Ground
@@ -1171,6 +1172,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878488470}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &878488475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878488470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3d59906234c00429faa0a86e8cd92a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisTile: {fileID: 878488470}
 --- !u!1001 &928701312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1343,7 +1357,6 @@ MonoBehaviour:
   - {fileID: 2703726957875542147, guid: 2dced8b1fb71b0949a56fd57cf754844, type: 3}
   playerBehaviour: {fileID: 543450652399095185}
   obstacleSpawnRateIndex: 4
-  maxLoadedChunks: 20
   holeSpawnRateIndex: 3
 --- !u!4 &1183518768 stripped
 Transform:
@@ -1585,10 +1598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 543450652399095182}
-  offset: {x: -4, y: 7, z: 0}
-  offsetYInit: 2
-  rotationSpeed: 650
-  rotateCamera: 0
+  offset: {x: -5, y: 7, z: 0}
 --- !u!81 &1400993062
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3275,11 +3285,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!54 &2094648370 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 7064057812186297872, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
-  m_PrefabInstance: {fileID: 7064057813368366625}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2139990813
 GameObject:
   m_ObjectHideFlags: 0
@@ -3758,7 +3763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: _moveSpeed
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: raycastDistance
@@ -3781,17 +3786,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hazard
       objectReference: {fileID: 0}
-    - target: {fileID: 7064057812186297869, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
-      propertyPath: rigidbody
-      value: 
-      objectReference: {fileID: 2094648370}
     - target: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -35
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3838,6 +3839,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1521774194}
     m_Modifications:
+    - target: {fileID: 2487899032070163132, guid: 75513a410f13ef14ba5ee34e5a5da803, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487899032070163132, guid: 75513a410f13ef14ba5ee34e5a5da803, type: 3}
+      propertyPath: m_Center.z
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2537299668086353444, guid: 75513a410f13ef14ba5ee34e5a5da803, type: 3}
       propertyPath: m_Name
       value: MainTile

@@ -5,11 +5,11 @@ using UnityEngine;
 public class HazardBehaviour : MonoBehaviour
 {
    public float moveSpeed;
-   public Rigidbody rigidbody; 
+   public Rigidbody hazardRigidbody; 
 
     void Start(){
-        rigidbody.GetComponent<Rigidbody>();
-        rigidbody.velocity = new Vector3(moveSpeed, 0, 0);
+        hazardRigidbody.GetComponent<Rigidbody>();
+        hazardRigidbody.velocity = new Vector3(moveSpeed, 0, 0);
     }
 
 }

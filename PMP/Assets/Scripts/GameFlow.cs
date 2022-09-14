@@ -10,10 +10,6 @@ public class GameFlow : MonoBehaviour
     public Transform[] largeObjects;
     public PlayerBehaviour playerBehaviour;
     public int obstacleSpawnRateIndex;
-    public int maxLoadedChunks;
-    private Queue<Transform> chunksQueue;
-    private Transform newChunk;
-    private Transform tempChunk; //Chunk to be removed from the game
     private int randObstacleIndex;
     private Vector3 nextMainTileSpawn;
     private Vector3 nextObstacleSpawn;
@@ -37,7 +33,6 @@ public class GameFlow : MonoBehaviour
         nextMainTileSpawn.x = 44;
         StartCoroutine(spawnTile());
         playerBehaviour = playerBehaviour.GetComponent<PlayerBehaviour>();
-        chunksQueue = new Queue<Transform>();
     }
 
     void tileSpawn(){
@@ -46,14 +41,7 @@ public class GameFlow : MonoBehaviour
             tileRand = Random.Range(0, nextTile.Length);
         }else tileRand = 0;
 
-        newChunk = Instantiate(nextTile[tileRand], nextMainTileSpawn, nextTile[tileRand].rotation);
-
-        //Not needed but stays here for one push so I can see it.
-        /* if(chunksQueue.Count > maxLoadedChunks){ //If the queue has reached the amount we accept.
-            tempChunk = chunksQueue.Dequeue();
-            tempChunk.gameObject.SetActive(false);
-        }
-        chunksQueue.Enqueue(newChunk); //Enter the new tile into our queue. */
+        Instantiate(nextTile[tileRand], nextMainTileSpawn, nextTile[tileRand].rotation);
         
         nextObstacleSpawn = nextMainTileSpawn;
     }
