@@ -6,17 +6,25 @@ public class GameFlow : MonoBehaviour
 {
 
     public Transform[] nextTile;
+    public Transform[] traversableObjects;
     public Transform[] smallObjects;
     public Transform[] largeObjects;
-    public PlayerBehaviour playerBehaviour;
+    public Transform bananaInstance;
+    public int bananaSpawnRateIndex;
     public int obstacleSpawnRateIndex;
+    public int largeObjChance;
+    public int secondObjChance;
+    public int maxBananaHeight;
+
     private int randObstacleIndex;
     private Vector3 nextMainTileSpawn;
     private Vector3 nextObstacleSpawn;
     private float currentVelocityX;
+    private int tempRandZPos;
     private int randZPos;
-    private int randLargeObjSpawn;
+    private int randYPos;
     private int obstacleSpawnCounter;
+    private int bananaSpawnCounter;
     private bool isLargeObjectSpawned;
 
 
@@ -32,7 +40,6 @@ public class GameFlow : MonoBehaviour
     {
         nextMainTileSpawn.x = 44;
         StartCoroutine(spawnTile());
-        playerBehaviour = playerBehaviour.GetComponent<PlayerBehaviour>();
     }
 
     void tileSpawn(){
@@ -50,15 +57,23 @@ public class GameFlow : MonoBehaviour
         //Spawns an obstacle every "obstacleSpawnRateIndex" tile
         obstacleSpawnCounter++;
         if(obstacleSpawnCounter % obstacleSpawnRateIndex == 0){
-            randLargeObjSpawn = Random.Range(0, 5);
-            if(randLargeObjSpawn == 0){
+            if(Random.Range(0, largeObjChance) == 0){ //5 here is just to increase unlikelyhood
                 largeObjectSpawn();
                 isLargeObjectSpawned = true;
             }else isLargeObjectSpawned = false;
             
             if(!isLargeObjectSpawned){
                 locationObstacle();
-                smallObjectSpawn();
+                traverseableObjectSpawn();
+                if(Random.Range(0, secondObjChance) == 0){ //5 here is just to increase unlikelyhood
+                //Makes sure two obstacles don't spawn at the same location
+                do{ 
+                    tempRandZPos = randZPos;
+                    locationObstacle();
+                }while(randZPos == tempRandZPos);
+
+                    smallObjectSpawn();
+                }
             }
             obstacleSpawnCounter = 0;
         }
@@ -70,20 +85,44 @@ public class GameFlow : MonoBehaviour
         nextObstacleSpawn.z = randZPos;
     }
 
+    void traverseableObjectSpawn(){
+        //Randomly chooses an obstacle type from traversableObjects array
+        randObstacleIndex = Random.Range(0, traversableObjects.Length);
+        //Spawns an object from the "Traversable Objects"-array.
+        Instantiate(traversableObjects[randObstacleIndex], nextObstacleSpawn, traversableObjects[randObstacleIndex].rotation);
+    }
+
     void smallObjectSpawn(){
-        //Randomly chooses an obstacle type from GameManager array
+        //Randomly chooses an obstacle type from smallObjects array
         randObstacleIndex = Random.Range(0, smallObjects.Length);
-        //Spawns an object from the "Small Object"-array.
+        //Spawns an object from the "Small Objects"-array.
         Instantiate(smallObjects[randObstacleIndex], nextObstacleSpawn, smallObjects[randObstacleIndex].rotation);
     }
 
     /* Large Objects should ALWAYS spawned in the middle */
     void largeObjectSpawn(){
         nextObstacleSpawn.z = 0;
-        //Randomly chooses an obstacle type from GameManager array
+        //Randomly chooses an obstacle type from largeObjects array
         randObstacleIndex = Random.Range(0, largeObjects.Length);
-        //Spawns an object from the "Small Object"-array.
+        //Spawns an object from the "Large Objects"-array.
         Instantiate(largeObjects[randObstacleIndex], nextObstacleSpawn, largeObjects[randObstacleIndex].rotation);
+    }
+
+    void bananaSpawn(){ 
+        bananaSpawnCounter++;
+        if(bananaSpawnCounter % bananaSpawnRateIndex == 0){
+            randYPos = Random.Range(1, maxBananaHeight);
+            nextObstacleSpawn.y = randYPos;
+            //Improve where these can spawn, right now only at empty, not taken lanes
+            do{ 
+                tempRandZPos = randZPos;
+                locationObstacle();
+            }while(randZPos == tempRandZPos);
+            //Spawns a banana
+            Instantiate(bananaInstance, nextObstacleSpawn, bananaInstance.rotation);
+            //Resets y position so obstacles don't spawn weirdly
+            //nextObstacleSpawn
+        }
     }
 
     IEnumerator spawnTile(){
@@ -97,6 +136,8 @@ public class GameFlow : MonoBehaviour
             tileSpawn();
 
             obstacleSpawn();
+
+            bananaSpawn();
 
             nextMainTileSpawn.x += 4;
             StartCoroutine(spawnTile()); //Makes this IEnumerator loop.

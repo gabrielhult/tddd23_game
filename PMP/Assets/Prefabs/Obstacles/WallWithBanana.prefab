@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3673780474544573361}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 2, y: 3, z: 8}
+  m_LocalScale: {x: 3.5, y: 3, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 646727045080143087}
@@ -127,7 +127,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7342355115665270447}
+  - {fileID: 3909522910991892170}
   - {fileID: 7759559319865698153}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisTile: {fileID: 5885429712992843831}
---- !u!1001 &8845096540951257387
+--- !u!1001 &2982573986229238094
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -211,12 +211,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8497118245762789169, guid: ea88320ee83d884468fc253bf1017d3b, type: 3}
       propertyPath: m_Name
-      value: BananaInstance
+      value: Banana
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea88320ee83d884468fc253bf1017d3b, type: 3}
---- !u!4 &7342355115665270447 stripped
+--- !u!4 &3909522910991892170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2244289476223272836, guid: ea88320ee83d884468fc253bf1017d3b, type: 3}
-  m_PrefabInstance: {fileID: 8845096540951257387}
+  m_PrefabInstance: {fileID: 2982573986229238094}
   m_PrefabAsset: {fileID: 0}
