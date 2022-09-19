@@ -18,11 +18,17 @@ public class MainMenuManager : MonoBehaviour
         BongeMainMenuStyle();
     }
 
+    void Update(){ //Kan göras om enligt https://www.youtube.com/watch?v=Hn804Wgr3KE
+        if(Input.GetKeyDown(KeyCode.P)){
+            LoadGameScene("GameScene");
+        }else if(Input.GetKeyDown(KeyCode.Q)){
+            Quit();
+        }
+    }
+
     public void BongeMainMenuStyle(){
         randomModelIndex = Random.Range(0, BongeStyles.Length);
-        Debug.Log(randomModelIndex);
         chosenBonge = BongeStyles[randomModelIndex];
-        Debug.Log(chosenBonge.name);
 
         chosenBonge.SetActive(true);
  
