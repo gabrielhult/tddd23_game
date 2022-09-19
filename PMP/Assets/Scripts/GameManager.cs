@@ -40,12 +40,18 @@ public class GameManager : MonoBehaviour
     public void CollectScore(GameObject gameObject){
         if(playerInventory != null){
             playerInventory.ScoreCollected();
+            if(playerInventory.ScoreCounter % 10 == 0){
+                FindObjectOfType<AudioManager>().PlaySound("TenBananasCollected");
+            }else{
+                FindObjectOfType<AudioManager>().PlaySound("BananaCollect");
+            }
+            
             gameObject.SetActive(false);
         }
-        //Debug.Log(playerInventory.ScoreCounter);
     }
 
     public void GameOver(){
+        FindObjectOfType<AudioManager>().PlaySound("BongeDead");
         isGameOver = true;
     }
 

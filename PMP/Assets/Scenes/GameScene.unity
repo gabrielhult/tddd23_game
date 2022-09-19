@@ -264,7 +264,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1106629700}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1128,6 +1128,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1106629699}
+  - {fileID: 1155101198}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1426,8 +1427,68 @@ MonoBehaviour:
   obstacleSpawnRateIndex: 4
   largeObjChance: 5
   secondObjChance: 0
-  maxBananaHeight: 5
+  maxBananaHeight: 6
   holeSpawnRateIndex: 3
+--- !u!1 &1155101197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1155101198}
+  - component: {fileID: 1155101199}
+  m_Layer: 0
+  m_Name: Audio Managar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1155101198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155101197}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 838205129}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1155101199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155101197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2814c09c3867f42a753fe10973987c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BananaCollect
+    clip: {fileID: 8300000, guid: 59bd47bad114a28419ef8d87ab7f8628, type: 3}
+    volume: 0.8
+    pitch: 1
+    source: {fileID: 0}
+  - name: TenBananasCollected
+    clip: {fileID: 8300000, guid: a663361a161cb6244add029f04ac6504, type: 3}
+    volume: 0.8
+    pitch: 1.5
+    source: {fileID: 0}
+  - name: BongeDead
+    clip: {fileID: 8300000, guid: 1aa16ea69bfe4de4daa06d036e318d7a, type: 3}
+    volume: 0.8
+    pitch: 0.65
+    source: {fileID: 0}
 --- !u!4 &1183518768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
@@ -2699,7 +2760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}

@@ -111,7 +111,7 @@ public class GameFlow : MonoBehaviour
     void bananaSpawn(){ 
         bananaSpawnCounter++;
         if(bananaSpawnCounter % bananaSpawnRateIndex == 0){
-            randYPos = Random.Range(1, maxBananaHeight);
+            randYPos = Random.Range(2, maxBananaHeight);
             nextObstacleSpawn.y = randYPos;
             //Improve where these can spawn, right now only at empty, not taken lanes
             do{ 
@@ -134,7 +134,6 @@ public class GameFlow : MonoBehaviour
         yield return new WaitForSeconds(.3f); //Optimera detta
         if(!GameManager.Instance.isGameOver){
             tileSpawn();
-
             obstacleSpawn();
 
             bananaSpawn();
