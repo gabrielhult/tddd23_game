@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver(){
-        FindObjectOfType<AudioManager>().PlaySound("BongeDead");
+        FindObjectOfType<AudioManager>().PlaySound("BongeLost");
         isGameOver = true;
     }
 
