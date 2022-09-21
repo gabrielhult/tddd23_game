@@ -21,7 +21,7 @@ public class HazardBehaviour : MonoBehaviour
     void Start(){
         //Initial velocity / Base velocity
         hazardRigidbody.GetComponent<Rigidbody>();
-        hazardRigidbody.velocity = new Vector3(baseMoveSpeed, 0, 0);
+        //hazardRigidbody.velocity = new Vector3(baseMoveSpeed, 0, 0);
         hazardXScale = transform.localScale.x / 2;
         isClose = false;
         StartCoroutine(distanceBehaviour());
@@ -32,17 +32,19 @@ public class HazardBehaviour : MonoBehaviour
     IEnumerator distanceBehaviour(){
 
         yield return new WaitForSeconds(.5f);
-        Debug.Log(transform.localScale.x);
-        distanceBetween = player.position.x - transform.position.x;
+        //Debug.Log(transform.localScale.x);
+        if(GameManager.Instance.roundStarted){
+            distanceBetween = player.position.x - transform.position.x;
 
-        if(distanceBetween > upperDistanceBound - hazardXScale){
-            hazardRigidbody.velocity = new Vector3(baseMoveSpeed * fastModeMultiplier, 0, 0);
-            isClose = false;
-        }else if(distanceBetween < lowerDistanceBound + hazardXScale){
-            isClose = true; //Detta skickas till DangerUI som sätter igång User Interface för Danger.
-        }else{
-            hazardRigidbody.velocity = new Vector3(baseMoveSpeed, 0, 0);
-            isClose = false;
+            if(distanceBetween > upperDistanceBound - hazardXScale){
+                hazardRigidbody.velocity = new Vector3(baseMoveSpeed * fastModeMultiplier, 0, 0);
+                isClose = false;
+            }else if(distanceBetween < lowerDistanceBound + hazardXScale){
+                isClose = true; //Detta skickas till DangerUI som sätter igång User Interface för Danger.
+            }else{
+                hazardRigidbody.velocity = new Vector3(baseMoveSpeed, 0, 0);
+                isClose = false;
+            }
         }
 
         StartCoroutine(distanceBehaviour());

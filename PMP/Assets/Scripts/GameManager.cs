@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance; //Borde göra att jag kan ta den varifrån somhelst
     public CameraBehaviour cameraBehaviour;
     public PlayerInventory playerInventory;
+    public StartGameUI startGameUI;
     public int levelCount;
     public bool changePlayerAngleAndDir;
     public bool isGameOver;
     public bool isPaused;
     public bool isClimbable;
+    public bool roundStarted;
+    
     public GameObject climbObject;
     public UnityEvent GamePaused;
     public UnityEvent GameResumed;
@@ -22,12 +26,16 @@ public class GameManager : MonoBehaviour
     private void Awake() {
         Instance = this;
         isGameOver = false;
+        roundStarted = false;
     }
 
     void Start(){
         cameraBehaviour = cameraBehaviour.GetComponent<CameraBehaviour>();
         playerInventory = playerInventory.GetComponent<PlayerInventory>();
+        startGameUI = startGameUI.GetComponent<StartGameUI>();
     }
+
+   
 
     
     public void NextLevel(GameObject gameObject){

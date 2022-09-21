@@ -131,7 +131,7 @@ public class GameFlow : MonoBehaviour
             currentVelocityX = 1;
         }else currentVelocityX = playerBehaviour.playerVelocity.x;
         yield return new WaitForSeconds(1 / (currentVelocityX / 1.4f)); //Optimera detta */
-        yield return new WaitForSeconds(.3f); //Optimera detta
+        yield return new WaitForSeconds(.33f); //Optimera detta
         if(!GameManager.Instance.isGameOver){
             tileSpawn();
             obstacleSpawn();
