@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
 
-    public static GameManager Instance;
+    public static MainMenuManager Instance;
 
     public GameObject[] BongeStyles;
     private int randomModelIndex;
@@ -15,6 +15,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         BongeMainMenuStyle();
     }
 

@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dacbc4ca4f48504eb16acf563ca61bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  thisBanana: {fileID: 8497118245762789169}
 --- !u!135 &5899306935209739243
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -139,7 +140,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8497118245762789169}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 59bd47bad114a28419ef8d87ab7f8628, type: 3}

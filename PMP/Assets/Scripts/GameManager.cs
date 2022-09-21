@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour
         if(playerInventory != null){
             playerInventory.ScoreCollected();
             if(playerInventory.ScoreCounter % 10 == 0){
-                FindObjectOfType<AudioManager>().PlaySound("TenBananasCollected");
+                AudioManager.Instance.PlaySound("TenBananasCollected");
             }else{
-                FindObjectOfType<AudioManager>().PlaySound("BananaCollect");
+                AudioManager.Instance.PlaySound("BananaCollect");
             }
             
             gameObject.SetActive(false);
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver(){
-        FindObjectOfType<AudioManager>().PlaySound("BongeLost");
+        AudioManager.Instance.PlaySound("BongeLost");
         isGameOver = true;
     }
 
