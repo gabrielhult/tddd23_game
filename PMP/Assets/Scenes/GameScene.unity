@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658262, g: 0.4964168, b: 0.5748205, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658262, g: 0.49641657, b: 0.5748205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1527,6 +1527,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  levelLoader: {fileID: 1697925973}
 --- !u!114 &1106629701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1982,7 +1983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5adec361aa736224583f501f6029f2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLeft: 3
+  timeLeft: 3.5
   countdownText: {fileID: 605860473}
   isCountdown: 0
 --- !u!1 &1469570487
@@ -2567,6 +2568,74 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75513a410f13ef14ba5ee34e5a5da803, type: 3}
+--- !u!1001 &1697925972
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8118340228185112333, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_Name
+      value: Level Loader
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118340228185112334, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+--- !u!114 &1697925973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8118340228796105458, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+  m_PrefabInstance: {fileID: 1697925972}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac04d815681bfc847b54791ff9423a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1722903179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2957134500017929881, guid: 75513a410f13ef14ba5ee34e5a5da803, type: 3}

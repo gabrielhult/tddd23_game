@@ -11,12 +11,15 @@ public class MainMenuManager : MonoBehaviour
     public GameObject[] BongeStyles;
     private int randomModelIndex;
     private GameObject chosenBonge;
+    public LevelLoader levelLoader;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Instance = this;
         BongeMainMenuStyle();
+        levelLoader = levelLoader.GetComponent<LevelLoader>();
     }
 
     void Update(){ //Kan göras om enligt https://www.youtube.com/watch?v=Hn804Wgr3KE
@@ -36,8 +39,7 @@ public class MainMenuManager : MonoBehaviour
     }
 
     public void LoadGameScene(string sceneName){
-        SceneManager.LoadScene(sceneName);
-        Debug.Log("Load " + sceneName + "!");
+        levelLoader.LevelLoad(sceneName);
     }
 
     public void Quit(){

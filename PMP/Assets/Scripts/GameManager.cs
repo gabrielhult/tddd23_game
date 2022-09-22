@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject climbObject;
     public UnityEvent GamePaused;
     public UnityEvent GameResumed;
+    public LevelLoader levelLoader;
     
 
     private void Awake() {
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
         cameraBehaviour = cameraBehaviour.GetComponent<CameraBehaviour>();
         playerInventory = playerInventory.GetComponent<PlayerInventory>();
         startGameUI = startGameUI.GetComponent<StartGameUI>();
+        levelLoader = levelLoader.GetComponent<LevelLoader>();
+
     }
 
    
@@ -79,8 +82,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void LoadGameScene(string sceneName){
-        SceneManager.LoadScene(sceneName);
-        Debug.Log("Load " + sceneName + "!");
+        levelLoader.LevelLoad(sceneName);
     }
 
     public void Quit(){
@@ -95,5 +97,7 @@ public class GameManager : MonoBehaviour
     public void setClimbObject(GameObject gameObject){
         climbObject = gameObject;
     }
+
+    
 
 }
