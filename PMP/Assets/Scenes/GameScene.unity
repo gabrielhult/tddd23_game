@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658262, g: 0.49641657, b: 0.5748205, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658262, g: 0.4964168, b: 0.5748205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2575,6 +2575,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4569644753404857541, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569644753404857541, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8118340228185112333, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
       propertyPath: m_Name
       value: Level Loader
@@ -4644,7 +4652,7 @@ PrefabInstance:
       objectReference: {fileID: 543450652399095182}
     - target: {fileID: 7064057812186297869, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: baseMoveSpeed
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297869, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: fastModeMultiplier
