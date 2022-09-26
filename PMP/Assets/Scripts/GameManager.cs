@@ -38,7 +38,22 @@ public class GameManager : MonoBehaviour
 
     }
 
-   
+    void Update(){ //Kan göras om enligt https://www.youtube.com/watch?v=Hn804Wgr3KE
+        if(isGameOver){
+            if(Input.GetKeyDown(KeyCode.R)){ //Retry
+                LoadGameScene("GameScene");
+            }else if(Input.GetKeyDown(KeyCode.Q)){
+                Quit();
+            }
+        }else if(isPaused){
+            if(Input.GetKeyDown(KeyCode.R)){ //Retry
+                changePauseState();
+                Resume();
+            }else if(Input.GetKeyDown(KeyCode.Q)){
+                Quit();
+            }
+        }
+    }
 
     
     public void NextLevel(GameObject gameObject){
