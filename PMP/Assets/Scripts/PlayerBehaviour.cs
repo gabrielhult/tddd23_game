@@ -28,7 +28,8 @@ public class PlayerBehaviour : MonoBehaviour
     private bool _jump;
     private bool climbing;
     private bool crawling;
-    private bool autorun;
+    [HideInInspector]
+    public bool autorun;
     private float originalOffset;
     private Animator animator;
     private float gameOverYPosition;
@@ -156,7 +157,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         //Checks whether auto-run is turned on
         if(Input.GetKeyDown(KeyCode.LeftShift)){
-            autorun = true;
+            autorun = !autorun;
         }
 
         if(climbing){
