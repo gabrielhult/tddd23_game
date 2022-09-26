@@ -28,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool _jump;
     private bool climbing;
     private bool crawling;
+    private bool autorun;
     private float originalOffset;
     private Animator animator;
     private float gameOverYPosition;
@@ -39,6 +40,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Awake(){
         gameOverYPosition = 0;
+        autorun = false;
+        ray.direction = Vector3.down;
     }
 
     // Start is called before the first frame update
@@ -47,7 +50,6 @@ public class PlayerBehaviour : MonoBehaviour
         originalOffset = characterController.stepOffset;
         animator = GetComponent<Animator>();
         animator.SetBool("isMoving", false);
-        ray.direction = Vector3.down;
     }
 
     // Update is called once per frame
@@ -152,11 +154,16 @@ public class PlayerBehaviour : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        //CorrectDirection(horizontal, vertical); 
+        //Checks whether auto-run is turned on
+        if(Input.GetKeyDown(KeyCode.LeftShift)){
+            autorun = true;
+        }
 
         if(climbing){
             _movementForce = new Vector3(0f, vertical, 0f);
-        }else _movementForce = new Vector3(vertical, 0f, -1 * horizontal); //Odd levels moves in x-direction and Even levels in z-direction.
+        }else if(autorun){
+            _movementForce = new Vector3(1, 0f, -1 * horizontal); //make character move forward automatically, 
+        }else _movementForce = new Vector3(vertical, 0f, -1 * horizontal);
         
         _movementForce.Normalize();
 

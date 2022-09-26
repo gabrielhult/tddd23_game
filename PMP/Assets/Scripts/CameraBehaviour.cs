@@ -35,6 +35,9 @@ public class CameraBehaviour : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.L)){
             offset.x = -offset.x;
             transform.Rotate(80, 180, 0);
+        }else if(Input.GetKeyUp(KeyCode.L)){
+            offset.x = -offset.x;
+            transform.Rotate(80, 180, 0);
         }
     }
 }

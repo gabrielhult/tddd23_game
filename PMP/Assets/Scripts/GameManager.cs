@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
     public void NextLevel(GameObject gameObject){
         changePlayerAngleAndDir = true;
         levelCount++;
-        //cameraBehaviour.rotateCamera = true;
         gameObject.SetActive(false);
     }
 
