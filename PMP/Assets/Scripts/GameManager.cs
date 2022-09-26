@@ -22,12 +22,18 @@ public class GameManager : MonoBehaviour
     public UnityEvent GamePaused;
     public UnityEvent GameResumed;
     public LevelLoader levelLoader;
+
+    public float gameplayScaleMultiplier;
+    public float gameplayScaleAdder;
+    public float gameplayScaleTimer;
     
 
     private void Awake() {
         Instance = this;
         isGameOver = false;
         roundStarted = false;
+        gameplayScaleMultiplier = 1f;
+        StartCoroutine(ScaleGameplay());
     }
 
     void Start(){
@@ -113,6 +119,18 @@ public class GameManager : MonoBehaviour
         climbObject = gameObject;
     }
 
+
+    IEnumerator ScaleGameplay(){
+        //Logic for how often new tiles spawn.
+
+        yield return new WaitForSeconds(gameplayScaleTimer); //Optimera detta
+        if(roundStarted){
+            if(!GameManager.Instance.isGameOver){
+                gameplayScaleMultiplier += gameplayScaleAdder;
+            }
+        }
+        StartCoroutine(ScaleGameplay()); //Makes this IEnumerator loop.
+    }
     
 
 }

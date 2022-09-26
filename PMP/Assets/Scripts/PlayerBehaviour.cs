@@ -66,13 +66,10 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerJump();
             PlayerClimb();
             if(Physics.Raycast(ray, out raycastHit, raycastDistance)){
-                gameOverYPosition = transform.position.y - raycastHit.distance; //Funkar fortfarande inte riktigt...
-                /* Debug.Log("Transform pos: " + transform.position.y);
-                Debug.Log("Distance: " + raycastHit.distance);
-                Debug.Log("GO Pos: " +  gameOverYPosition); */
+                gameOverYPosition = transform.position.y - raycastHit.distance; //Funkar detta nu helt plötsigt?
             }
         }else {
-            animator.SetBool("isDead", true); //Fixa så kropp alltid ligger ner på marken vid GameOver
+            animator.SetBool("isDead", true); //Kanske funkar nu?
             if(transform.position.y != gameOverYPosition){
                 transform.position = new Vector3(transform.position.x, gameOverYPosition, transform.position.z);
             }
@@ -92,7 +89,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void applyMovement(float movementMultiplier){
-        playerVelocity = _movementForce * movementMultiplier;
+        playerVelocity = _movementForce * movementMultiplier * GameManager.Instance.gameplayScaleMultiplier;
         if(!climbing){ //&&!crawling?
             playerVelocity.y = ySpeed;
         } 

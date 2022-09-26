@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658262, g: 0.49641657, b: 0.5748205, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658262, g: 0.4964168, b: 0.5748205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1528,6 +1528,9 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   levelLoader: {fileID: 1697925973}
+  gameplayScaleMultiplier: 0
+  gameplayScaleAdder: 0.05
+  gameplayScaleTimer: 10
 --- !u!114 &1106629701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1616,13 +1619,13 @@ MonoBehaviour:
   sounds:
   - name: BananaCollect
     clip: {fileID: 8300000, guid: 59bd47bad114a28419ef8d87ab7f8628, type: 3}
-    volume: 0.8
+    volume: 0.75
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: TenBananasCollected
     clip: {fileID: 8300000, guid: a663361a161cb6244add029f04ac6504, type: 3}
-    volume: 0.8
+    volume: 0.6
     pitch: 1.5
     loop: 0
     source: {fileID: 0}
