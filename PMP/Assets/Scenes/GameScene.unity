@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658262, g: 0.49641657, b: 0.5748205, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658262, g: 0.4964168, b: 0.5748205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1373,7 +1373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &509083039
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6099,7 +6099,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4717595206438238070, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: m_Name
-      value: Bonge
+      value: Manke
       objectReference: {fileID: 0}
     - target: {fileID: 5346779313127976396, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: m_RootOrder
@@ -6166,40 +6166,116 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 704746601}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1232378308}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1277181168}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 81304214}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: updateBananaText
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: updateBananaText
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: updateDistanceText
       objectReference: {fileID: 0}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: updateDistanceText
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: InventoryUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: InventoryUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: InventoryUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 543450652399095183}
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onBananaCollected.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: PlayerInventory, Assembly-CSharp
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: onDistanceTravelled.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}

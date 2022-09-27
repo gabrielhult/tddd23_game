@@ -17,13 +17,13 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void updateBananaText(PlayerInventory playerInventory){
-        if(GameManager.Instance.roundStarted && !GameManager.Instance.isGameOver){
+        if(GameManager.Instance.roundStarted){
             bananaText.text = playerInventory.ScoreCounter.ToString();
         }
     }
 
     public void updateDistanceText(PlayerInventory playerInventory){
-        if(GameManager.Instance.roundStarted && !GameManager.Instance.isGameOver){
+        if(GameManager.Instance.roundStarted){
             distanceText.text = playerInventory.DistanceCounter.ToString();
         }
         

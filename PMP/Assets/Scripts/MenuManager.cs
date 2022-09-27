@@ -20,7 +20,7 @@ public class MenuManager : MonoBehaviour
         Instance = this;
         if(MankeStyles.Length != 0){
             MankeMainMenuStyle();
-        }
+        }else Debug.Log("No Manke Styles Available! Range is 0!");
         levelLoader = levelLoader.GetComponent<LevelLoader>();
     }
 
@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour
             Quit();
         }
     }
+
 
     public void MankeMainMenuStyle(){
         randomModelIndex = Random.Range(0, MankeStyles.Length);

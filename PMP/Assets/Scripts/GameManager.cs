@@ -52,6 +52,11 @@ public class GameManager : MonoBehaviour
 
 
         if(isGameOver){
+            //Check if new highscore is set for banana and/or distance
+            playerInventory.BananaHighScoreCheck();  
+            playerInventory.DistanceHighScoreCheck();
+
+
             if(Input.GetKeyDown(KeyCode.R)){ //Retry
                 LoadGameScene("GameScene");
             }else if(Input.GetKeyDown(KeyCode.Q)){
@@ -87,10 +92,6 @@ public class GameManager : MonoBehaviour
             
             gameObject.SetActive(false);
         }
-    }
-
-    public void AddDistanceScore(){
-        
     }
 
     public void GameOver(){
