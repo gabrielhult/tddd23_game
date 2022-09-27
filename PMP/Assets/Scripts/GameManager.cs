@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public float gameplayScaleAdder;
     public float gameplayScaleTimer;
     
+    public TextMeshProUGUI bananaEndScore;
+    public TextMeshProUGUI distanceEndScore;
 
     private void Awake() {
         Instance = this;
@@ -95,8 +97,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver(){
-        AudioManager.Instance.PlaySound("BongeLost");
-        isGameOver = true;
+        //AudioManager.Instance.PlaySound("BongeLost");
+        bananaEndScore.text = playerInventory.ScoreCounter.ToString();
+        distanceEndScore.text = playerInventory.DistanceCounter.ToString();
+        isGameOver = true;  
     }
 
     public void Resume(){

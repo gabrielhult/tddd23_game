@@ -19,5 +19,7 @@ public class HighScoreLoader : MonoBehaviour
         Debug.Log("Highscores resetted!");
         PlayerPrefs.DeleteKey("BananaHighScore");
         PlayerPrefs.DeleteKey("DistanceHighScore");
+        bananaHighScore.text = "0";
+        distanceHighScore.text = "0";
     }
 }

@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 81304215}
   - component: {fileID: 81304214}
   m_Layer: 5
-  m_Name: DistanceText
+  m_Name: DistanceEndText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2537,6 +2537,8 @@ MonoBehaviour:
   gameplayScaleMultiplier: 0
   gameplayScaleAdder: 0.05
   gameplayScaleTimer: 10
+  bananaEndScore: {fileID: 1232378309}
+  distanceEndScore: {fileID: 81304215}
 --- !u!114 &1106629701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2747,7 +2749,7 @@ GameObject:
   - component: {fileID: 1232378309}
   - component: {fileID: 1232378308}
   m_Layer: 5
-  m_Name: BananaText
+  m_Name: BananaEndText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

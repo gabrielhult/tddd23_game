@@ -15,7 +15,7 @@ public class PlayerCollision : MonoBehaviour
         }else if(other.tag == "Banana"){
             GameManager.Instance.CollectBanana(other.gameObject);
         }else if(other.tag == "Hazard" || other.tag == "Lava"){
-            GameManager.Instance.isGameOver = true;
+            GameManager.Instance.GameOver();
         }else if(other.tag == "Bamboo"){    
             GameManager.Instance.isClimbable = true;
             GameManager.Instance.setClimbObject(other.gameObject);
