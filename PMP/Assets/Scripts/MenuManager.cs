@@ -8,9 +8,9 @@ public class MenuManager : MonoBehaviour
 
     public static MenuManager Instance;
 
-    public GameObject[] BongeStyles;
+    public GameObject[] MankeStyles;
     private int randomModelIndex;
-    private GameObject chosenBonge;
+    private GameObject chosenManke;
     public LevelLoader levelLoader;
 
 
@@ -18,8 +18,8 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-        if(BongeStyles.Length != 0){
-            BongeMainMenuStyle();
+        if(MankeStyles.Length != 0){
+            MankeMainMenuStyle();
         }
         levelLoader = levelLoader.GetComponent<LevelLoader>();
     }
@@ -36,11 +36,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void BongeMainMenuStyle(){
-        randomModelIndex = Random.Range(0, BongeStyles.Length);
-        chosenBonge = BongeStyles[randomModelIndex];
+    public void MankeMainMenuStyle(){
+        randomModelIndex = Random.Range(0, MankeStyles.Length);
+        chosenManke = MankeStyles[randomModelIndex];
 
-        chosenBonge.SetActive(true);
+        chosenManke.SetActive(true);
  
     }
 
