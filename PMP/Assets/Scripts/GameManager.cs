@@ -44,12 +44,20 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void Update(){ //Kan göras om enligt https://www.youtube.com/watch?v=Hn804Wgr3KE
+    void Update(){ //Kan göras om enligt https://www.youtube.com/watch?v=Hn804Wgr3KE vid behov
+
+        if(playerInventory != null){
+            playerInventory.AwardDistanceScore(); 
+        }
+
+
         if(isGameOver){
             if(Input.GetKeyDown(KeyCode.R)){ //Retry
                 LoadGameScene("GameScene");
             }else if(Input.GetKeyDown(KeyCode.Q)){
                 Quit();
+            }else if(Input.GetKeyDown(KeyCode.H)){
+                LoadGameScene("HighScoreScene");
             }
         }else if(isPaused){
             if(Input.GetKeyDown(KeyCode.R)){ //Retry
@@ -68,7 +76,7 @@ public class GameManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void CollectScore(GameObject gameObject){
+    public void CollectBanana(GameObject gameObject){
         if(playerInventory != null){
             playerInventory.ScoreCollected();
             if(playerInventory.ScoreCounter % 10 == 0){
@@ -79,6 +87,10 @@ public class GameManager : MonoBehaviour
             
             gameObject.SetActive(false);
         }
+    }
+
+    public void AddDistanceScore(){
+        
     }
 
     public void GameOver(){

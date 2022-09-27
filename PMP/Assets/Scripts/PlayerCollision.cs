@@ -13,7 +13,7 @@ public class PlayerCollision : MonoBehaviour
         if(other.tag == "Goal"){
             GameManager.Instance.NextLevel(other.gameObject); //Inför nån form av Invoke så det blir liite delayed?
         }else if(other.tag == "Banana"){
-            GameManager.Instance.CollectScore(other.gameObject);
+            GameManager.Instance.CollectBanana(other.gameObject);
         }else if(other.tag == "Hazard" || other.tag == "Lava"){
             GameManager.Instance.isGameOver = true;
         }else if(other.tag == "Bamboo"){    

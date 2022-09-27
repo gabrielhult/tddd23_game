@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuManager : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
 
-    public static MainMenuManager Instance;
+    public static MenuManager Instance;
 
     public GameObject[] BongeStyles;
     private int randomModelIndex;
@@ -18,13 +18,19 @@ public class MainMenuManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-        BongeMainMenuStyle();
+        if(BongeStyles.Length != 0){
+            BongeMainMenuStyle();
+        }
         levelLoader = levelLoader.GetComponent<LevelLoader>();
     }
 
     void Update(){ //Kan göras om enligt https://www.youtube.com/watch?v=Hn804Wgr3KE
         if(Input.GetKeyDown(KeyCode.P)){
             LoadGameScene("GameScene");
+        }else if(Input.GetKeyDown(KeyCode.H)){
+            if(SceneManager.GetActiveScene().name != "HighScoreScene"){
+                LoadGameScene("HighScoreScene");
+            }
         }else if(Input.GetKeyDown(KeyCode.Q)){
             Quit();
         }
