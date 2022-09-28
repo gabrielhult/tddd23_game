@@ -72,6 +72,10 @@ public class GameManager : MonoBehaviour
                 Resume();
             }else if(Input.GetKeyDown(KeyCode.Q)){
                 Quit();
+            }else if(Input.GetKeyDown(KeyCode.H)){
+                changePauseState();
+                Resume();
+                LoadGameScene("HighScoreScene");
             }
         }
     }
