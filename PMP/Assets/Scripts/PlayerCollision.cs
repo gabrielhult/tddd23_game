@@ -19,6 +19,8 @@ public class PlayerCollision : MonoBehaviour
         }else if(other.tag == "Bamboo"){    
             GameManager.Instance.isClimbable = true;
             GameManager.Instance.setClimbObject(other.gameObject);
+        }else if(other.tag == "Sideways" || other.tag == "UpAndDown"){
+            GameManager.Instance.GameOver();
         }
     }
 

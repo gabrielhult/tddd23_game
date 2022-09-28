@@ -11,11 +11,13 @@ public class GameFlow : MonoBehaviour
     public Transform[] largeObjects;
     public Transform[] movingObjects;
     public Transform bananaInstance;
+    public PlayerInventory playerInventory;
     public int bananaSpawnRateIndex;
     public int obstacleSpawnRateIndex;
     public int largeObjChance;
     public int movingObjChance;
     public int secondObjChance;
+    public int secondMovingObjChance;
     public int maxBananaHeight;
 
     private int randObstacleIndex;
@@ -41,6 +43,7 @@ public class GameFlow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerInventory = playerInventory.GetComponent<PlayerInventory>();
         nextMainTileSpawn.x = 44;
         StartCoroutine(spawnTile());
     }
@@ -60,26 +63,43 @@ public class GameFlow : MonoBehaviour
         //Spawns an obstacle every "obstacleSpawnRateIndex" tile
         obstacleSpawnCounter++;
         if(obstacleSpawnCounter % obstacleSpawnRateIndex == 0){
-            if(Random.Range(0, movingObjChance) == 0){ //movingObjChance here is just to increase unlikelyhood
-                movingObjectSpawn();
-                isMovableObjectSpawned = true;
-            }else isMovableObjectSpawned = false;
+            
+            //For movable obstacles (IDEA: scale movingObjChance so more and more movable spawns once it can)
+            if(playerInventory.DistanceCounter > 300f){ //Start spawning when score is over 300
+                if(Random.Range(0, movingObjChance) == 0){ //movingObjChance here is just to increase unlikelyhood
+                    locationObstacle();
+                    movingObjectSpawn();
+                    if(Random.Range(0, secondMovingObjChance) == 0){ //secondMovingObjChance here is just to increase unlikelyhood
+                        //Makes sure two obstacles don't spawn at the same location
+                        do{ 
+                            tempRandZPos = randZPos;
+                            locationObstacle();
+                        }while(randZPos == tempRandZPos);
+                        movingObjectSpawn();
+                    }
+                    isMovableObjectSpawned = true;
+                }else isMovableObjectSpawned = false;
+            }
+            
+
+            //For large obstacles
             if(Random.Range(0, largeObjChance) == 0 && !isMovableObjectSpawned){ //largeObjChance here is just to increase unlikelyhood
                 largeObjectSpawn();
                 isLargeObjectSpawned = true;
             }else isLargeObjectSpawned = false;
             
+            //For small objects
             if(!isLargeObjectSpawned && !isMovableObjectSpawned){
                 locationObstacle();
                 traverseableObjectSpawn();
-                if(Random.Range(0, secondObjChance) == 0){ //5 here is just to increase unlikelyhood
-                //Makes sure two obstacles don't spawn at the same location
-                do{ 
-                    tempRandZPos = randZPos;
-                    locationObstacle();
-                }while(randZPos == tempRandZPos);
+                if(Random.Range(0, secondObjChance) == 0){ //secondObjChance here is just to increase unlikelyhood
+                    //Makes sure two obstacles don't spawn at the same location
+                    do{ 
+                        tempRandZPos = randZPos;
+                        locationObstacle();
+                    }while(randZPos == tempRandZPos);
 
-                    smallObjectSpawn();
+                        smallObjectSpawn();
                 }
             }
             obstacleSpawnCounter = 0;
@@ -116,13 +136,14 @@ public class GameFlow : MonoBehaviour
     }
 
     void movingObjectSpawn(){
-        nextObstacleSpawn.z = -4;
+        //nextObstacleSpawn.z = -4;
         //Randomly chooses an obstacle type from largeObjects array
         randObstacleIndex = Random.Range(0, movingObjects.Length);
         //Spawns an object from the "Large Objects"-array.
         Instantiate(movingObjects[randObstacleIndex], nextObstacleSpawn, movingObjects[randObstacleIndex].rotation);
     } 
 
+    /* TODO: Fix so banana don't spawn inside a wall */
     void bananaSpawn(){ 
         bananaSpawnCounter++;
         if(bananaSpawnCounter % bananaSpawnRateIndex == 0){
@@ -141,11 +162,7 @@ public class GameFlow : MonoBehaviour
     }
 
     IEnumerator spawnTile(){
-        //Logic for how often new tiles spawn.
-        /* if(playerBehaviour.playerVelocity.x < 0.5){
-            currentVelocityX = 1;
-        }else currentVelocityX = playerBehaviour.playerVelocity.x;
-        yield return new WaitForSeconds(1 / (currentVelocityX / 1.4f)); //Optimera detta */
+        //Logic for how often new tiles spawn
         yield return new WaitForSeconds(.33f / GameManager.Instance.gameplayScaleMultiplier); //Optimera detta
         if(!GameManager.Instance.isGameOver){
             tileSpawn();

@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 3569427684689805017}
   m_Layer: 0
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Sideways
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -141,7 +141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 85d7b40d6a5ebbd4292a496bf92dcefa, type: 2}
+  - {fileID: 2100000, guid: d38a815da33a9354cb1cd2dffb9b3d9f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

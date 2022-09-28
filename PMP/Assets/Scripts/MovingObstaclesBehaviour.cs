@@ -34,6 +34,9 @@ public class MovingObstaclesBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameManager.Instance.isGameOver){
+           speed = 0.8f; 
+        }
         if(sideways){
             if(dirRight){
                 transform.Translate((Vector3.forward * speed * Time.deltaTime) / GameManager.Instance.gameplayScaleMultiplier);
@@ -55,7 +58,6 @@ public class MovingObstaclesBehaviour : MonoBehaviour
             }
 
             if(transform.position.y >= upperUpAndDown){
-                Debug.Log("false");
                 dirUp = false;
             }else if (transform.position.y <= lowerUpAndDown){
                 dirUp = true;

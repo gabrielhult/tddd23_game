@@ -22,20 +22,16 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public void BananaHighScoreCheck(){
-        //Debug.Log("Pre Score: " + PlayerPrefs.GetInt("ScoreHighScore", 0));
         if(ScoreCounter > PlayerPrefs.GetInt("BananaHighScore", 0)){
             PlayerPrefs.SetInt("BananaHighScore", ScoreCounter);
             //Celebration call?
         }
-        //Debug.Log("Score: " + PlayerPrefs.GetInt("BananaHighScore", 0));
     }
 
     public void DistanceHighScoreCheck(){
-        //Debug.Log("Pre Distance: " + PlayerPrefs.GetFloat("DistanceHighScore", 0));
         if(DistanceCounter > PlayerPrefs.GetFloat("DistanceHighScore", 0)){
             PlayerPrefs.SetFloat("DistanceHighScore", DistanceCounter);
             //Celebration call?
         }
-        //Debug.Log("Distance: " + PlayerPrefs.GetFloat("DistanceHighScore", 0));
     }
 }
