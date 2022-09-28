@@ -11,6 +11,8 @@ TagManager:
   - Bamboo
   - Lava
   - Tile
+  - UpAndDown
+  - Sideways
   layers:
   - Default
   - TransparentFX

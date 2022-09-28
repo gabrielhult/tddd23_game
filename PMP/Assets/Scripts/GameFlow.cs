@@ -9,10 +9,12 @@ public class GameFlow : MonoBehaviour
     public Transform[] traversableObjects;
     public Transform[] smallObjects;
     public Transform[] largeObjects;
+    public Transform[] movingObjects;
     public Transform bananaInstance;
     public int bananaSpawnRateIndex;
     public int obstacleSpawnRateIndex;
     public int largeObjChance;
+    public int movingObjChance;
     public int secondObjChance;
     public int maxBananaHeight;
 
@@ -26,6 +28,7 @@ public class GameFlow : MonoBehaviour
     private int obstacleSpawnCounter;
     private int bananaSpawnCounter;
     private bool isLargeObjectSpawned;
+    private bool isMovableObjectSpawned;
 
 
     private int tileRand;
@@ -57,12 +60,16 @@ public class GameFlow : MonoBehaviour
         //Spawns an obstacle every "obstacleSpawnRateIndex" tile
         obstacleSpawnCounter++;
         if(obstacleSpawnCounter % obstacleSpawnRateIndex == 0){
-            if(Random.Range(0, largeObjChance) == 0){ //5 here is just to increase unlikelyhood
+            if(Random.Range(0, movingObjChance) == 0){ //movingObjChance here is just to increase unlikelyhood
+                movingObjectSpawn();
+                isMovableObjectSpawned = true;
+            }else isMovableObjectSpawned = false;
+            if(Random.Range(0, largeObjChance) == 0 && !isMovableObjectSpawned){ //largeObjChance here is just to increase unlikelyhood
                 largeObjectSpawn();
                 isLargeObjectSpawned = true;
             }else isLargeObjectSpawned = false;
             
-            if(!isLargeObjectSpawned){
+            if(!isLargeObjectSpawned && !isMovableObjectSpawned){
                 locationObstacle();
                 traverseableObjectSpawn();
                 if(Random.Range(0, secondObjChance) == 0){ //5 here is just to increase unlikelyhood
@@ -107,6 +114,14 @@ public class GameFlow : MonoBehaviour
         //Spawns an object from the "Large Objects"-array.
         Instantiate(largeObjects[randObstacleIndex], nextObstacleSpawn, largeObjects[randObstacleIndex].rotation);
     }
+
+    void movingObjectSpawn(){
+        nextObstacleSpawn.z = -4;
+        //Randomly chooses an obstacle type from largeObjects array
+        randObstacleIndex = Random.Range(0, movingObjects.Length);
+        //Spawns an object from the "Large Objects"-array.
+        Instantiate(movingObjects[randObstacleIndex], nextObstacleSpawn, movingObjects[randObstacleIndex].rotation);
+    } 
 
     void bananaSpawn(){ 
         bananaSpawnCounter++;
