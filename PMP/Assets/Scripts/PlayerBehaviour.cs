@@ -33,6 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
     private float originalOffset;
     private Animator animator;
     private float gameOverYPosition;
+    private float jumpCheckDistance;
     private Ray ray;
     private RaycastHit raycastHit;
 
@@ -69,7 +70,8 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerJump();
             PlayerClimb();
             if(Physics.Raycast(ray, out raycastHit, raycastDistance)){
-                gameOverYPosition = transform.position.y - raycastHit.distance; //Funkar detta nu helt plötsigt?
+                jumpCheckDistance = raycastHit.distance;
+                gameOverYPosition = transform.position.y - raycastHit.distance;
             }
         }else {
             animator.SetBool("isDead", true); //Kanske funkar nu?
@@ -120,8 +122,8 @@ public class PlayerBehaviour : MonoBehaviour
         if(characterController.isGrounded){ //&& !crawling?
             ySpeed = -0.5f;
             characterController.stepOffset = originalOffset;
-            
-            if(_jump){
+            //Debug.Log(jumpCheckDistance);
+            if(_jump){// && jumpCheckDistance < 0.1f){
                 animator.SetBool("isJumping", true);
                 ySpeed = _jumpSpeed;
                 _jump = false; 
@@ -168,8 +170,10 @@ public class PlayerBehaviour : MonoBehaviour
         
         _movementForce.Normalize();
 
-        if(Input.GetButtonDown("Jump")){
-                _jump = true;
+        if(!climbing){
+            if(Input.GetButtonDown("Jump")){ //Man borde kunna hoppa medans hopp är nedtryckt, GetButton fixar detta men annat skit händer då
+                _jump = true;   
+            }
         }
 
         if(GameManager.Instance.isClimbable){
@@ -181,13 +185,13 @@ public class PlayerBehaviour : MonoBehaviour
             }
         }else _climb = false;
 
-        if(Input.GetKeyDown(KeyCode.LeftControl)){
+        /* if(Input.GetKeyDown(KeyCode.LeftControl)){
             if(_jump || !_climb){
                 crawling = !crawling;
             }
 
             Debug.Log(crawling);
-        }
+        } */
     }
         
 

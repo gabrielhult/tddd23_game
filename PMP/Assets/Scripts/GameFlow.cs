@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameFlow : MonoBehaviour
 {
 
-    public Transform[] nextTile;
+    public Transform[] nextTileDefault;
+    public Transform[] nextTileSlippery;
     public Transform[] traversableObjects;
     public Transform[] smallObjects;
     public Transform[] largeObjects;
@@ -19,10 +20,14 @@ public class GameFlow : MonoBehaviour
     public int secondObjChance;
     public int secondMovingObjChance;
     public int maxBananaHeight;
+    public float movingObstacleThreshold;
 
+    
+    private Transform[] tileArray;
     private int randObstacleIndex;
     private Vector3 nextMainTileSpawn;
     private Vector3 nextObstacleSpawn;
+    private int obstacleBiomeLength;
     private float currentVelocityX;
     private int tempRandZPos;
     private int randZPos;
@@ -34,6 +39,7 @@ public class GameFlow : MonoBehaviour
 
 
     private int tileRand;
+    //private int biomeRand;
     private int holeSpawnCounter;
     public int holeSpawnRateIndex;
   
@@ -45,16 +51,20 @@ public class GameFlow : MonoBehaviour
     {
         playerInventory = playerInventory.GetComponent<PlayerInventory>();
         nextMainTileSpawn.x = 44;
+        tileArray = nextTileDefault;
         StartCoroutine(spawnTile());
     }
 
     void tileSpawn(){
+        if(playerInventory.DistanceCounter > 50f && playerInventory.DistanceCounter < 200f){
+            tileArray = nextTileSlippery;
+        }else tileArray = nextTileDefault;
         holeSpawnCounter++;
         if(holeSpawnCounter % holeSpawnRateIndex == 0){
-            tileRand = Random.Range(0, nextTile.Length);
+            tileRand = Random.Range(0, tileArray.Length);
         }else tileRand = 0;
 
-        Instantiate(nextTile[tileRand], nextMainTileSpawn, nextTile[tileRand].rotation);
+        Instantiate(tileArray[tileRand], nextMainTileSpawn, tileArray[tileRand].rotation);
         
         nextObstacleSpawn = nextMainTileSpawn;
     }
@@ -65,7 +75,7 @@ public class GameFlow : MonoBehaviour
         if(obstacleSpawnCounter % obstacleSpawnRateIndex == 0){
             
             //For movable obstacles (IDEA: scale movingObjChance so more and more movable spawns once it can)
-            if(playerInventory.DistanceCounter > 300f){ //Start spawning when score is over 300
+            if(playerInventory.DistanceCounter > movingObstacleThreshold){ //Start spawning when score is over 300
                 if(Random.Range(0, movingObjChance) == 0){ //movingObjChance here is just to increase unlikelyhood
                     locationObstacle();
                     movingObjectSpawn();
