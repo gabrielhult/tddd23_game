@@ -6,7 +6,7 @@ public class GameFlow : MonoBehaviour
 {
 
     public Transform[] nextTileDefault;
-    public Transform[] nextTileSlippery;
+    public Transform[] nextTileArctic;
     public Transform[] nextTileMagma;
     public Transform[] traversableObjects;
     public Transform[] smallObjects;
@@ -16,6 +16,7 @@ public class GameFlow : MonoBehaviour
     public PlayerInventory playerInventory;
     public int bananaSpawnRateIndex;
     public int obstacleSpawnRateIndex;
+    public float biomeChangeRateIndex;
     public int largeObjChance;
     public int movingObjChance;
     public int secondObjChance;
@@ -23,6 +24,9 @@ public class GameFlow : MonoBehaviour
     public int maxBananaHeight;
     public float largeObstacleThreshold;
     public float movingObstacleThreshold;
+    public string[] biomeArray;
+    [HideInInspector]
+    public string chosenBiome;
 
     
     private Transform[] tileArray;
@@ -59,12 +63,19 @@ public class GameFlow : MonoBehaviour
 
     void tileSpawn(){
         //TODO: Tänk ut något smartare sätt att skifta biomes
-        if(playerInventory.DistanceCounter > 50f && playerInventory.DistanceCounter < 200f){ //Gör denna logik bättre
-            tileArray = nextTileMagma; //Testar med magma nu, hade slippery innan
-            holeSpawnRateIndex = 2; //Här medans magma testas
-        }else {
-            tileArray = nextTileDefault;
-            holeSpawnRateIndex = 3; //Här medans magma testas
+        if(playerInventory.DistanceCounter % biomeChangeRateIndex == 0 && playerInventory.DistanceCounter > 3f){ //Kan säkert fortfarande bli bättre men är okej
+            chosenBiome = biomeArray[Random.Range(0, biomeArray.Length)];
+            Debug.Log(chosenBiome);
+            if(chosenBiome == "Default"){
+                tileArray = nextTileDefault;
+                holeSpawnRateIndex = 3; //Här medans magma testas 
+            }else if(chosenBiome == "Arctic"){
+                tileArray = nextTileArctic;
+                holeSpawnRateIndex = 3; //Här medans magma testas 
+            }else if(chosenBiome == "Magma"){
+                tileArray = nextTileMagma;
+                holeSpawnRateIndex = 2; //Här medans magma testas 
+            }
         }
         
         holeSpawnCounter++;
