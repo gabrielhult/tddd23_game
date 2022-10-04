@@ -56,9 +56,12 @@ public class GameFlow : MonoBehaviour
     }
 
     void tileSpawn(){
+        //TODO: Tänk ut något smartare sätt att skifta biomes
         if(playerInventory.DistanceCounter > 50f && playerInventory.DistanceCounter < 200f){
             tileArray = nextTileSlippery;
         }else tileArray = nextTileDefault;
+
+        
         holeSpawnCounter++;
         if(holeSpawnCounter % holeSpawnRateIndex == 0){
             tileRand = Random.Range(0, tileArray.Length);
@@ -173,11 +176,15 @@ public class GameFlow : MonoBehaviour
 
     IEnumerator spawnTile(){
         //Logic for how often new tiles spawn
-        yield return new WaitForSeconds(.33f / GameManager.Instance.gameplayScaleMultiplier); //Optimera detta
+        yield return new WaitForSeconds(.33f / GameManager.Instance.gameplayScaleMultiplier); 
         if(!GameManager.Instance.isGameOver){
             tileSpawn();
             
-            obstacleSpawn();
+            if(GameManager.Instance.chosenPowerUp != "NoObstacles"){ //Borde kanske göra att alla obstacles försvinner tillfälligt istället?
+                obstacleSpawn();
+            }
+
+            //Isåfall om typ: tag == SideWays || UpAndDown || Obstacle.   ^^^^^^
 
             bananaSpawn();
 

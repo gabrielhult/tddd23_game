@@ -8,6 +8,9 @@ public class DistanceTracker : MonoBehaviour
     [HideInInspector]
     public float distanceTravelled;
     public Transform player;
+    public float chosenBonus;
+    [HideInInspector]
+    public float powerUpBonus;
 
     public static DistanceTracker Instance;
 
@@ -25,6 +28,10 @@ public class DistanceTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        distanceTravelled = Mathf.Ceil(player.position.x - startPosition.position.x);
+        if(GameManager.Instance.chosenPowerUp == "IncreaseDistanceAward" && GameManager.Instance.distanceBonusLimiter){
+            powerUpBonus += chosenBonus;
+            GameManager.Instance.distanceBonusLimiter = false;
+        }
+        distanceTravelled = Mathf.Ceil(player.position.x - startPosition.position.x) + powerUpBonus;
     }
 }

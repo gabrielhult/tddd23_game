@@ -193,28 +193,4 @@ public class PlayerBehaviour : MonoBehaviour
             Debug.Log(crawling);
         } */
     }
-        
-
-    void CorrectDirection(float horizontal, float vertical){
-        switch(GameManager.Instance.levelCount % 4){
-            case 0:
-                horizontalEven = horizontal;
-                horizontalOdd = vertical;
-                break;
-            case 1:
-                horizontalEven = vertical * -1;
-                horizontalOdd = horizontal;
-                break;
-
-            case 2:
-                horizontalEven = horizontal* -1;
-                horizontalOdd = vertical * -1;
-                break;
-
-            case 3:
-                horizontalEven = vertical;
-                horizontalOdd = horizontal * -1;
-                break;
-        } 
-    }
 }

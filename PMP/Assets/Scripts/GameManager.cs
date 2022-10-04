@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour
     public CameraBehaviour cameraBehaviour;
     public PlayerInventory playerInventory;
     public StartGameUI startGameUI;
-    public int levelCount;
-    public bool changePlayerAngleAndDir;
+    [HideInInspector]
     public bool isGameOver;
+    [HideInInspector]
     public bool isPaused;
+    [HideInInspector]
     public bool isClimbable;
+    [HideInInspector]
     public bool roundStarted;
     
     public GameObject climbObject;
@@ -23,9 +25,19 @@ public class GameManager : MonoBehaviour
     public UnityEvent GameResumed;
     public LevelLoader levelLoader;
 
+
+    public int bananasForPowerUp;
     public float gameplayScaleMultiplier;
     public float gameplayScaleAdder;
     public float gameplayScaleTimer;
+    public float basePowerUpDuration;
+    //public bool isPowerUp;
+
+    //Power up related variables
+    public string[] powerUpArray;
+    [HideInInspector]
+    public string chosenPowerUp;
+    public bool distanceBonusLimiter;
     
     public TextMeshProUGUI bananaEndScore;
     public TextMeshProUGUI distanceEndScore;
@@ -34,6 +46,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         isGameOver = false;
         roundStarted = false;
+        distanceBonusLimiter = true;
         gameplayScaleMultiplier = 1f;
         StartCoroutine(ScaleGameplay());
     }
@@ -80,18 +93,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
-    public void NextLevel(GameObject gameObject){
-        changePlayerAngleAndDir = true;
-        levelCount++;
-        gameObject.SetActive(false);
-    }
 
     public void CollectBanana(GameObject gameObject){
         if(playerInventory != null){
             playerInventory.ScoreCollected();
-            if(playerInventory.ScoreCounter % 10 == 0){
+            if(playerInventory.ScoreCounter % bananasForPowerUp == 0){
                 AudioManager.Instance.PlaySound("TenBananasCollected");
+                //isPowerUp = true;
+                StartCoroutine(awardPowerUp());
             }else{
                 AudioManager.Instance.PlaySound("BananaCollect");
             }
@@ -139,6 +148,19 @@ public class GameManager : MonoBehaviour
         climbObject = gameObject;
     }
 
+
+    IEnumerator awardPowerUp(){
+        //Award a temporary-powerup
+        chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)];
+        //Debug.Log(chosenPowerUp);
+
+        //wait 5 seconds
+        yield return new WaitForSeconds(basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier);
+
+        //turn it off
+        chosenPowerUp = "";
+        //Debug.Log(chosenPowerUp);
+    }
 
     IEnumerator ScaleGameplay(){
         //Logic for how often new tiles spawn.

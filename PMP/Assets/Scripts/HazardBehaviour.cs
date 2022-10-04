@@ -5,6 +5,7 @@ using UnityEngine;
 public class HazardBehaviour : MonoBehaviour
 {
     public float baseMoveSpeed;
+    public float slowedDownMoveSpeed;
     public float upperDistanceBound;
     public float lowerDistanceBound;
     public float fastModeMultiplier;
@@ -33,17 +34,22 @@ public class HazardBehaviour : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         //Debug.Log(transform.localScale.x);
         if(GameManager.Instance.roundStarted){
-            distanceBetween = player.position.x - transform.position.x;
-
-            if(distanceBetween > upperDistanceBound - hazardXScale){
-                hazardRigidbody.velocity = new Vector3(baseMoveSpeed * fastModeMultiplier * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
-                isClose = false;
-            }else if(distanceBetween < lowerDistanceBound + hazardXScale){
-                isClose = true; //Detta skickas till DangerUI som sätter igång User Interface för Danger.
+            if(GameManager.Instance.chosenPowerUp == "SlowDownHazard"){
+                hazardRigidbody.velocity = new Vector3(slowedDownMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
             }else{
-                hazardRigidbody.velocity = new Vector3(baseMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
-                isClose = false;
+                distanceBetween = player.position.x - transform.position.x;
+
+                if(distanceBetween > upperDistanceBound - hazardXScale){
+                    hazardRigidbody.velocity = new Vector3(baseMoveSpeed * fastModeMultiplier * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                    isClose = false;
+                }else if(distanceBetween < lowerDistanceBound + hazardXScale){
+                    isClose = true; //Detta skickas till DangerUI som sätter igång User Interface för Danger.
+                }else{
+                    hazardRigidbody.velocity = new Vector3(baseMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                    isClose = false;
+                }
             }
+            
         }
 
         StartCoroutine(distanceBehaviour());
