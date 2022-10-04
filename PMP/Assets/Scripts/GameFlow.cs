@@ -20,6 +20,7 @@ public class GameFlow : MonoBehaviour
     public int secondObjChance;
     public int secondMovingObjChance;
     public int maxBananaHeight;
+    public float largeObstacleThreshold;
     public float movingObstacleThreshold;
 
     
@@ -78,7 +79,7 @@ public class GameFlow : MonoBehaviour
         if(obstacleSpawnCounter % obstacleSpawnRateIndex == 0){
             
             //For movable obstacles (IDEA: scale movingObjChance so more and more movable spawns once it can)
-            if(playerInventory.DistanceCounter > movingObstacleThreshold){ //Start spawning when score is over 300
+            if(playerInventory.DistanceCounter > movingObstacleThreshold){ //Start spawning when score is over movingObstacleThreshold
                 if(Random.Range(0, movingObjChance) == 0){ //movingObjChance here is just to increase unlikelyhood
                     locationObstacle();
                     movingObjectSpawn();
@@ -96,7 +97,7 @@ public class GameFlow : MonoBehaviour
             
 
             //For large obstacles
-            if(Random.Range(0, largeObjChance) == 0 && !isMovableObjectSpawned){ //largeObjChance here is just to increase unlikelyhood
+            if(Random.Range(0, largeObjChance) == 0 && playerInventory.DistanceCounter > largeObstacleThreshold && !isMovableObjectSpawned){ //largeObjChance here is just to increase unlikelyhood
                 largeObjectSpawn();
                 isLargeObjectSpawned = true;
             }else isLargeObjectSpawned = false;

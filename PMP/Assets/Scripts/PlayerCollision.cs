@@ -30,4 +30,10 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter(Collision other){
+        if(other.collider.tag == "Ground"){
+            Debug.Log("OKEJ");
+        }
+    }
+
 }

@@ -94,7 +94,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void applyMovement(float movementMultiplier){
-        playerVelocity = _movementForce * movementMultiplier * GameManager.Instance.gameplayScaleMultiplier;
+        playerVelocity = _movementForce * movementMultiplier * GameManager.Instance.gameplayScaleMultiplier; //Se till att climbing skalas också, gör int det?
         if(!climbing){ //&&!crawling?
             playerVelocity.y = ySpeed;
         } 
@@ -139,7 +139,7 @@ public class PlayerBehaviour : MonoBehaviour
             if(!climbing){ //If we aren't climbing already...
                 currentClimbObject = GameManager.Instance.getClimbObject();
                 transform.position = new Vector3(currentClimbObject.transform.position.x, transform.position.y, currentClimbObject.transform.position.z);
-                transform.LookAt(transform.position);  //Makes Bonge look forward when climbinb.
+                transform.LookAt(transform.position);  //Makes Manke look forward when climbinb.
                 climbing = true;
             }if(_movementForce != Vector3.zero){
                 animator.SetBool("isClimbing", true);

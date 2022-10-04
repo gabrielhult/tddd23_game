@@ -19,7 +19,6 @@ public class GameplayUI : MonoBehaviour
         }else gameplayMenu.SetActive(true);
 
         if(GameManager.Instance.chosenPowerUp == "IncreaseDistanceAward"){ //IEnumerator behövs för att inte logik och UI krockar
-            Debug.Log("AWARD");      
             increaseDistanceUI.SetActive(true);     
             StartCoroutine(showDistanceAward());
         }else increaseDistanceUI.SetActive(false);

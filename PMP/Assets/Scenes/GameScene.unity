@@ -3232,7 +3232,7 @@ MonoBehaviour:
   gameplayScaleMultiplier: 0
   gameplayScaleAdder: 0.03
   gameplayScaleTimer: 10
-  basePowerUpDuration: 2
+  basePowerUpDuration: 3
   powerUpArray:
   - DoubleBananaScoreCollect
   - SlowDownHazard
@@ -3288,11 +3288,12 @@ MonoBehaviour:
   bananaSpawnRateIndex: 15
   obstacleSpawnRateIndex: 4
   largeObjChance: 5
-  movingObjChance: 1
+  movingObjChance: 5
   secondObjChance: 1
   secondMovingObjChance: 20
   maxBananaHeight: 6
-  movingObstacleThreshold: 1
+  largeObstacleThreshold: 500
+  movingObstacleThreshold: 1000
   holeSpawnRateIndex: 3
 --- !u!1 &1139998569
 GameObject:
@@ -7376,7 +7377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297866, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297869, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: player
@@ -7397,6 +7398,10 @@ PrefabInstance:
     - target: {fileID: 7064057812186297869, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: upperDistanceBound
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064057812186297869, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
+      propertyPath: slowedDownMoveSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: m_RootOrder
