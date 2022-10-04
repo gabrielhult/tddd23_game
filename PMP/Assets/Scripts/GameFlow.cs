@@ -196,9 +196,9 @@ public class GameFlow : MonoBehaviour
         if(!GameManager.Instance.isGameOver){
             tileSpawn();
             
-            if(GameManager.Instance.chosenPowerUp != "NoObstacles"){ //Borde kanske göra att alla obstacles försvinner tillfälligt istället?
-                obstacleSpawn();
-            }
+            //if(GameManager.Instance.chosenPowerUp != "NoObstacles"){ //Borde kanske göra att alla obstacles försvinner tillfälligt istället?
+            obstacleSpawn();
+            //}
 
             //Isåfall om typ: tag == SideWays || UpAndDown || Obstacle.   ^^^^^^
 

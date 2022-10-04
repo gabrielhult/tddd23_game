@@ -10,6 +10,7 @@ public class PauseController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)){
             //Pause the game if it isn't paused and vice versa
             if(!GameManager.Instance.isGameOver && GameManager.Instance.roundStarted){
+                AudioManager.Instance.PlaySound("ButtonClick");
                 GameManager.Instance.changePauseState();
 
                 if(GameManager.Instance.isPaused){

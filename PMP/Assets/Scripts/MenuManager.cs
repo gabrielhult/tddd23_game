@@ -18,6 +18,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         Instance = this;
+        AudioManager.Instance.PlaySound("MenuMusic");
         if(MankeStyles.Length != 0){
             MankeMainMenuStyle();
         }else Debug.Log("No Manke Styles Available! Range is 0!");
@@ -26,14 +27,20 @@ public class MenuManager : MonoBehaviour
 
     void Update(){ //Kan göras om enligt https://www.youtube.com/watch?v=Hn804Wgr3KE
         if(Input.GetKeyDown(KeyCode.P)){
+            AudioManager.Instance.PlaySound("ButtonClick");
             LoadGameScene("GameScene");
         }else if(Input.GetKeyDown(KeyCode.H)){
             if(SceneManager.GetActiveScene().name != "HighScoreScene"){
+                AudioManager.Instance.PlaySound("ButtonClick");
                 LoadGameScene("HighScoreScene");
             }
         }else if(Input.GetKeyDown(KeyCode.Q)){
             Quit();
         }
+    }
+
+    public void playButtonClick(){
+        AudioManager.Instance.PlaySound("ButtonClick");
     }
 
 

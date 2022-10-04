@@ -41,11 +41,17 @@ public class HazardBehaviour : MonoBehaviour
 
                 if(distanceBetween > upperDistanceBound - hazardXScale){
                     hazardRigidbody.velocity = new Vector3(baseMoveSpeed * fastModeMultiplier * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                    AudioManager.Instance.StopSound("Danger");
                     isClose = false;
                 }else if(distanceBetween < lowerDistanceBound + hazardXScale){
+                    if(!GameManager.Instance.isGameOver){
+                        AudioManager.Instance.PlaySound("Danger");
+                    }else AudioManager.Instance.StopSound("Danger");
+                    
                     isClose = true; //Detta skickas till DangerUI som sätter igång User Interface för Danger.
                 }else{
                     hazardRigidbody.velocity = new Vector3(baseMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                    AudioManager.Instance.StopSound("Danger");
                     isClose = false;
                 }
             }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658262, g: 0.49641657, b: 0.5748205, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658262, g: 0.4964168, b: 0.5748205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -802,7 +802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 49.999878, y: -402}
+  m_AnchoredPosition: {x: 50, y: -402}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!1 &260535422
@@ -892,6 +892,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1106629700}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Resume
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1106629700}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1685,6 +1697,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: HighScoreScene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1106629700}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &454798708
@@ -3087,6 +3111,18 @@ MonoBehaviour:
           m_StringArgument: HighScoreScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1106629700}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1014665801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3285,9 +3321,12 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   levelLoader: {fileID: 1697925973}
-  bananasForPowerUp: 2
+  activeStaticObstacles: []
+  activeSidewaysObstacles: []
+  activeUpAndDownObstacles: []
+  bananasForPowerUp: 10
   gameplayScaleMultiplier: 0
-  gameplayScaleAdder: 0.03
+  gameplayScaleAdder: 0.05
   gameplayScaleTimer: 10
   basePowerUpDuration: 3
   powerUpArray:
@@ -3354,7 +3393,7 @@ MonoBehaviour:
   biomeChangeRateIndex: 50
   largeObjChance: 5
   movingObjChance: 5
-  secondObjChance: 1
+  secondObjChance: 2
   secondMovingObjChance: 20
   maxBananaHeight: 6
   largeObstacleThreshold: 500
@@ -3501,7 +3540,7 @@ MonoBehaviour:
   - name: BongeLost
     clip: {fileID: 8300000, guid: 1aa16ea69bfe4de4daa06d036e318d7a, type: 3}
     volume: 0.8
-    pitch: 0.65
+    pitch: 1.1
     loop: 0
     source: {fileID: 0}
   - name: GameMusic
@@ -3515,6 +3554,24 @@ MonoBehaviour:
     volume: 0.75
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 04a45301b92794d40b8ce7d3ebd41e9c, type: 3}
+    volume: 0.3
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: f97d95b58a3cf1d45961332d97b037af, type: 3}
+    volume: 0.3
+    pitch: 0.8
+    loop: 0
+    source: {fileID: 0}
+  - name: Danger
+    clip: {fileID: 8300000, guid: 536e257389940a14cafe96b412e7430c, type: 3}
+    volume: 0.75
+    pitch: 1.2
+    loop: 0
     source: {fileID: 0}
 --- !u!4 &1183518768 stripped
 Transform:
@@ -4964,6 +5021,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8118340228796105458, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: transitionTime
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
 --- !u!114 &1697925973 stripped
@@ -5466,6 +5527,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: GameScene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1106629700}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: playButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1801448439

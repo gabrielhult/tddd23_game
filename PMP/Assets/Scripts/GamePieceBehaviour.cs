@@ -17,7 +17,7 @@ public class GamePieceBehaviour : MonoBehaviour
         if(other.tag == "Hazard"){
             if(!GameManager.Instance.isGameOver){
                 thisTile.SetActive(false);
-            }
+             }
         }
     }
 }

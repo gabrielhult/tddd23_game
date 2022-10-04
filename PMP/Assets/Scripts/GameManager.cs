@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
     public UnityEvent GamePaused;
     public UnityEvent GameResumed;
     public LevelLoader levelLoader;
+    [HideInInspector]
+    public GameObject[] activeStaticObstacles;
+    [HideInInspector]
+    public GameObject[] activeSidewaysObstacles;
+    [HideInInspector]
+    public GameObject[] activeUpAndDownObstacles;
 
 
     public int bananasForPowerUp;
@@ -74,19 +80,23 @@ public class GameManager : MonoBehaviour
 
 
             if(Input.GetKeyDown(KeyCode.R)){ //Retry
+                AudioManager.Instance.PlaySound("ButtonClick");
                 LoadGameScene("GameScene");
             }else if(Input.GetKeyDown(KeyCode.Q)){
                 Quit();
             }else if(Input.GetKeyDown(KeyCode.H)){
+                AudioManager.Instance.PlaySound("ButtonClick");
                 LoadGameScene("HighScoreScene");
             }
         }else if(isPaused){
             if(Input.GetKeyDown(KeyCode.R)){ //Retry
+                AudioManager.Instance.PlaySound("ButtonClick");
                 changePauseState();
                 Resume();
             }else if(Input.GetKeyDown(KeyCode.Q)){
                 Quit();
             }else if(Input.GetKeyDown(KeyCode.H)){
+                AudioManager.Instance.PlaySound("ButtonClick");
                 changePauseState();
                 Resume();
                 LoadGameScene("HighScoreScene");
@@ -100,7 +110,6 @@ public class GameManager : MonoBehaviour
             playerInventory.ScoreCollected();
             if(playerInventory.ScoreCounter % bananasForPowerUp == 0){
                 AudioManager.Instance.PlaySound("TenBananasCollected");
-                //isPowerUp = true;
                 StartCoroutine(awardPowerUp());
             }else{
                 AudioManager.Instance.PlaySound("BananaCollect");
@@ -110,11 +119,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void playButtonClick(){
+        AudioManager.Instance.PlaySound("ButtonClick");
+    }
+
     public void GameOver(){
-        //AudioManager.Instance.PlaySound("BongeLost");
+        AudioManager.Instance.PlaySound("GameOver");
+        isGameOver = true;  
+        AudioManager.Instance.PlaySound("BongeLost");
         bananaEndScore.text = playerInventory.ScoreCounter.ToString();
         distanceEndScore.text = playerInventory.DistanceCounter.ToString();
-        isGameOver = true;  
     }
 
     public void Resume(){
@@ -148,19 +162,55 @@ public class GameManager : MonoBehaviour
     public void setClimbObject(GameObject gameObject){
         climbObject = gameObject;
     }
+    
+
+    /* public void disableObstacles(GameObject[] obstacleArray, string obstacleTag){
+        obstacleArray = GameObject.FindGameObjectsWithTag(obstacleTag);
+            foreach(GameObject obst in obstacleArray){
+                obst.SetActive(false);
+            }
+    }
+
+    public void enableObstacles(GameObject[] obstacleArray){
+        foreach(GameObject obst in obstacleArray){
+                obst.SetActive(true);
+        }
+    } */
 
 
     IEnumerator awardPowerUp(){
         //Award a temporary-powerup
         chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)];
-        //Debug.Log(chosenPowerUp);
 
-        //wait 5 seconds
+        //Detta kan verkligen se bättre ut, men kan inte ha detta i extern funktion (funkar ej då)
+        if(chosenPowerUp == "NoObstacles"){
+            activeStaticObstacles = GameObject.FindGameObjectsWithTag("Obstacle");
+            foreach(GameObject obst in activeStaticObstacles){
+                obst.SetActive(false);
+            }
+            activeSidewaysObstacles = GameObject.FindGameObjectsWithTag("Sideways");
+            foreach(GameObject obst in activeSidewaysObstacles){
+                obst.SetActive(false);
+            }
+            activeUpAndDownObstacles = GameObject.FindGameObjectsWithTag("UpAndDown");
+            foreach(GameObject obst in activeUpAndDownObstacles){
+                obst.SetActive(false);
+            }
+        }
+        //wait x seconds
         yield return new WaitForSeconds(basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier);
-
         //turn it off
         chosenPowerUp = "";
-        //Debug.Log(chosenPowerUp);
+        //Detta kan verkligen se bättre ut
+        foreach(GameObject obst in activeStaticObstacles){
+                obst.SetActive(true);
+        }
+        foreach(GameObject obst in activeSidewaysObstacles){
+                obst.SetActive(false);
+        }
+        foreach(GameObject obst in activeUpAndDownObstacles){
+            obst.SetActive(false);
+        }
     }
 
     IEnumerator ScaleGameplay(){

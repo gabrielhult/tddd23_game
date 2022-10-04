@@ -31,7 +31,7 @@ public class PlayerCollision : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision other){
-        if(other.collider.tag == "Ground"){
+        if(other.collider.tag == "Tile"){
             Debug.Log("OKEJ");
         }
     }

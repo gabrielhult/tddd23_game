@@ -448,6 +448,18 @@ MonoBehaviour:
           m_StringArgument: HighScoreScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1223309917}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: playButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &281341243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,6 +1011,18 @@ MonoBehaviour:
           m_StringArgument: GameScene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1223309917}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
+        m_MethodName: playButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1194242614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1264,7 +1288,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1223309917}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: Quit
+        m_MethodName: playButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1560,7 +1584,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2814c09c3867f42a753fe10973987c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: MenuMusic
+    clip: {fileID: 8300000, guid: bb35c3c4d1d826d4491107531ebd60b9, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: f97d95b58a3cf1d45961332d97b037af, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1 &1514400845
 GameObject:
   m_ObjectHideFlags: 0

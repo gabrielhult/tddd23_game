@@ -1700,7 +1700,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2814c09c3867f42a753fe10973987c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: MenuMusic
+    clip: {fileID: 8300000, guid: bb35c3c4d1d826d4491107531ebd60b9, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: f97d95b58a3cf1d45961332d97b037af, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!1001 &1362745742
 PrefabInstance:
   m_ObjectHideFlags: 0

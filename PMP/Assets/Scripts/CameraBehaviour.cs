@@ -20,7 +20,6 @@ public class CameraBehaviour : MonoBehaviour
             ReadCameraInput();
         }else{
             AudioManager.Instance.StopSound("GameMusic");
-            //AudioManager.Instance.PlaySound("GameOver");
         }
         
     }

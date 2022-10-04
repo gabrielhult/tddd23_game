@@ -126,6 +126,7 @@ public class PlayerBehaviour : MonoBehaviour
             if(_jump){// && jumpCheckDistance < 0.1f){
                 animator.SetBool("isJumping", true);
                 ySpeed = _jumpSpeed;
+                AudioManager.Instance.PlaySound("Jump");
                 _jump = false; 
             }else animator.SetBool("isJumping", false);
         }else{

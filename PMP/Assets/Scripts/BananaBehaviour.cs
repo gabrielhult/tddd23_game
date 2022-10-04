@@ -15,7 +15,7 @@ public class BananaBehaviour : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if(other.tag == "Hazard"){
             if(!GameManager.Instance.isGameOver){
-                thisBanana.SetActive(false);
+                Destroy(thisBanana);
             }
         }
     }
