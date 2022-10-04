@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
 
 
     public int bananasForPowerUp;
+    [HideInInspector]
     public float gameplayScaleMultiplier;
     public float gameplayScaleAdder;
     public float gameplayScaleTimer;

@@ -7,6 +7,7 @@ public class GameFlow : MonoBehaviour
 
     public Transform[] nextTileDefault;
     public Transform[] nextTileSlippery;
+    public Transform[] nextTileMagma;
     public Transform[] traversableObjects;
     public Transform[] smallObjects;
     public Transform[] largeObjects;
@@ -59,9 +60,12 @@ public class GameFlow : MonoBehaviour
     void tileSpawn(){
         //TODO: Tänk ut något smartare sätt att skifta biomes
         if(playerInventory.DistanceCounter > 50f && playerInventory.DistanceCounter < 200f){
-            tileArray = nextTileSlippery;
-        }else tileArray = nextTileDefault;
-
+            tileArray = nextTileMagma; //Testar med magma nu, hade slippery innan, har ingen variant med hål än dock
+            holeSpawnRateIndex = 2; //Här medans magma testas
+        }else {
+            tileArray = nextTileDefault;
+            holeSpawnRateIndex = 3; //Här medans magma testas
+        }
         
         holeSpawnCounter++;
         if(holeSpawnCounter % holeSpawnRateIndex == 0){
