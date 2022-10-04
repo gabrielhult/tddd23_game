@@ -59,8 +59,8 @@ public class GameFlow : MonoBehaviour
 
     void tileSpawn(){
         //TODO: Tänk ut något smartare sätt att skifta biomes
-        if(playerInventory.DistanceCounter > 50f && playerInventory.DistanceCounter < 200f){
-            tileArray = nextTileMagma; //Testar med magma nu, hade slippery innan, har ingen variant med hål än dock
+        if(playerInventory.DistanceCounter > 50f && playerInventory.DistanceCounter < 200f){ //Gör denna logik bättre
+            tileArray = nextTileMagma; //Testar med magma nu, hade slippery innan
             holeSpawnRateIndex = 2; //Här medans magma testas
         }else {
             tileArray = nextTileDefault;
