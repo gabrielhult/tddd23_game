@@ -36,12 +36,14 @@ public class PlayerBehaviour : MonoBehaviour
     private float jumpCheckDistance;
     private Ray ray;
     private RaycastHit raycastHit;
+    private float featherEffect;
 
     private CharacterController characterController;
     
 
     void Awake(){
         gameOverYPosition = 0;
+        featherEffect = 1.6f;
         autorun = false;
         ray.direction = Vector3.down;
     }
@@ -125,7 +127,11 @@ public class PlayerBehaviour : MonoBehaviour
             //Debug.Log(jumpCheckDistance);
             if(_jump){// && jumpCheckDistance < 0.1f){
                 animator.SetBool("isJumping", true);
-                ySpeed = _jumpSpeed;
+                if(GameManager.Instance.chosenPowerUp == "FeatherJump"){
+                    Debug.Log("feather");
+                    ySpeed = _jumpSpeed * featherEffect;
+                }else ySpeed = _jumpSpeed;
+                
                 AudioManager.Instance.PlaySound("Jump");
                 _jump = false; 
             }else animator.SetBool("isJumping", false);

@@ -10,6 +10,7 @@ public class GameplayUI : MonoBehaviour
     public GameObject increaseDistanceUI;
     public GameObject noObstaclesUI;
     public GameObject slowHazardUI;
+    public GameObject featherJumpUI;
 
     // Update is called once per frame
     void Update()
@@ -34,6 +35,10 @@ public class GameplayUI : MonoBehaviour
         if(GameManager.Instance.chosenPowerUp == "SlowDownHazard"){
             slowHazardUI.SetActive(true);
         }else slowHazardUI.SetActive(false);
+
+        if(GameManager.Instance.chosenPowerUp == "FeatherJump"){
+            featherJumpUI.SetActive(true);
+        }else featherJumpUI.SetActive(false);
     }
 
     IEnumerator showDistanceAward(){

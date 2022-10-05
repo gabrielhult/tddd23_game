@@ -9,7 +9,7 @@ public class PowerUpTimerUI : MonoBehaviour
     private float timeLeftStartValue;
     public GameObject timerUI;
     public TextMeshProUGUI countdownText;
-    public bool countdownStarted;
+    private bool countdownStarted;
 
     void Awake(){
         countdownStarted = false;
@@ -24,7 +24,6 @@ public class PowerUpTimerUI : MonoBehaviour
             }
             countdownStarted = true;
             timeLeft -= Time.deltaTime;
-            Debug.Log(timeLeft);
             if(timeLeft < 0){
                 countdownText.text = "0";
                 timerUI.gameObject.SetActive(false);

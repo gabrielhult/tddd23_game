@@ -128,8 +128,10 @@ public class GameManager : MonoBehaviour
 
     public void GameOver(){
         AudioManager.Instance.PlaySound("GameOver");
+        if(!isGameOver){
+            AudioManager.Instance.PlaySound("BongeLost");
+        }
         isGameOver = true;  
-        AudioManager.Instance.PlaySound("BongeLost");
         bananaEndScore.text = playerInventory.ScoreCounter.ToString();
         distanceEndScore.text = playerInventory.DistanceCounter.ToString();
     }
