@@ -117,7 +117,7 @@ public class GameFlow : MonoBehaviour
             }else isLargeObjectSpawned = false;
             
             //For small objects
-            if(!isLargeObjectSpawned ){  //&& !isMovableObjectSpawned..?
+            if(!isLargeObjectSpawned){  //&& !isMovableObjectSpawned..?
                 locationObstacle();
                 traverseableObjectSpawn();
                 if(Random.Range(0, secondObjChance) == 0){ //secondObjChance here is just to increase unlikelyhood

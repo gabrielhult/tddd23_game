@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     public float gameplayScaleAdder;
     public float gameplayScaleTimer;
     public float basePowerUpDuration;
-    //public bool isPowerUp;
+    public bool isPowerUp; //Helps us decide whether or not to play.
 
     //Power up related variables
     public string[] powerUpArray;
@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
     IEnumerator awardPowerUp(){
         //Award a temporary-powerup
         chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)];
-
+        isPowerUp = true;
         //Detta kan verkligen se bättre ut, men kan inte ha detta i extern funktion (funkar ej då)
         if(chosenPowerUp == "NoObstacles"){
             cancelClimbing = true;
@@ -205,6 +205,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier);
         //turn it off
         chosenPowerUp = "";
+        isPowerUp = false;
         //Detta kan verkligen se bättre ut
         foreach(GameObject obst in activeStaticObstacles){
                 obst.SetActive(true);
