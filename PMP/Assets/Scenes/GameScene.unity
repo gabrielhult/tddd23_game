@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44658262, g: 0.4964168, b: 0.5748205, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658262, g: 0.49641657, b: 0.5748205, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3289,6 +3289,7 @@ MonoBehaviour:
   isPaused: 0
   isClimbable: 0
   roundStarted: 0
+  cancelClimbing: 0
   climbObject: {fileID: 0}
   GamePaused:
     m_PersistentCalls:
@@ -3326,7 +3327,7 @@ MonoBehaviour:
   activeUpAndDownObstacles: []
   bananasForPowerUp: 10
   gameplayScaleMultiplier: 0
-  gameplayScaleAdder: 0.05
+  gameplayScaleAdder: 0.03
   gameplayScaleTimer: 10
   basePowerUpDuration: 3
   powerUpArray:
@@ -3377,6 +3378,8 @@ MonoBehaviour:
   - {fileID: 1203886958227529608, guid: 3107813fad0f78c4cbfd115980ffec8e, type: 3}
   - {fileID: 646727045080143087, guid: 44f1acfea1ad68c49962424ffc04728c, type: 3}
   - {fileID: 5755830104153734342, guid: d6b1a6de4ea902340be01f0c576f725f, type: 3}
+  - {fileID: 2437333668894102472, guid: 8ab72828a49c38046a982503af257b07, type: 3}
+  - {fileID: 2437333668894102472, guid: 4721e33eea4fb224ca7082de7b15248c, type: 3}
   smallObjects:
   - {fileID: 1312373847370242803, guid: 1d9a1de1cd7df564998bb796fbd9bbf7, type: 3}
   - {fileID: 1368078606472757619, guid: 7bd889e29df5a38418d7fea77c6bbbc5, type: 3}
@@ -3390,11 +3393,11 @@ MonoBehaviour:
   playerInventory: {fileID: 543450652399095183}
   bananaSpawnRateIndex: 15
   obstacleSpawnRateIndex: 4
-  biomeChangeRateIndex: 50
+  biomeChangeRateIndex: 100
   largeObjChance: 5
   movingObjChance: 5
   secondObjChance: 2
-  secondMovingObjChance: 20
+  secondMovingObjChance: 10
   maxBananaHeight: 6
   largeObstacleThreshold: 500
   movingObstacleThreshold: 1000
@@ -3533,13 +3536,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: TenBananasCollected
     clip: {fileID: 8300000, guid: a663361a161cb6244add029f04ac6504, type: 3}
-    volume: 0.6
+    volume: 0.3
     pitch: 1.5
     loop: 0
     source: {fileID: 0}
   - name: BongeLost
     clip: {fileID: 8300000, guid: 1aa16ea69bfe4de4daa06d036e318d7a, type: 3}
-    volume: 0.8
+    volume: 0.3
     pitch: 1.1
     loop: 0
     source: {fileID: 0}
@@ -7533,6 +7536,10 @@ PrefabInstance:
     - target: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: m_LocalScale.x
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: m_LocalPosition.x

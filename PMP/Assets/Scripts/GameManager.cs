@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public bool isClimbable;
     [HideInInspector]
     public bool roundStarted;
+    [HideInInspector]
+    public bool cancelClimbing;
     
     public GameObject climbObject;
     public UnityEvent GamePaused;
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         roundStarted = false;
         distanceBonusLimiter = true;
+        cancelClimbing = false;
         gameplayScaleMultiplier = 1f;
         StartCoroutine(ScaleGameplay());
     }
@@ -184,6 +187,7 @@ public class GameManager : MonoBehaviour
 
         //Detta kan verkligen se bättre ut, men kan inte ha detta i extern funktion (funkar ej då)
         if(chosenPowerUp == "NoObstacles"){
+            cancelClimbing = true;
             activeStaticObstacles = GameObject.FindGameObjectsWithTag("Obstacle");
             foreach(GameObject obst in activeStaticObstacles){
                 obst.SetActive(false);
@@ -211,6 +215,7 @@ public class GameManager : MonoBehaviour
         foreach(GameObject obst in activeUpAndDownObstacles){
             obst.SetActive(false);
         }
+        cancelClimbing = false;
     }
 
     IEnumerator ScaleGameplay(){

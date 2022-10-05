@@ -82,7 +82,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void PlayerMove(){
-        if(climbing){
+        if(climbing && !GameManager.Instance.cancelClimbing){
             applyMovement(_climbSpeed);
         }else if(crawling){
             applyMovement(_crawlSpeed);
