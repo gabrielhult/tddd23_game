@@ -62,7 +62,6 @@ public class GameFlow : MonoBehaviour
     }
 
     void tileSpawn(){
-        //TODO: Tänk ut något smartare sätt att skifta biomes
         if(playerInventory.DistanceCounter % biomeChangeRateIndex == 0 && playerInventory.DistanceCounter > 3f){ //Kan säkert fortfarande bli bättre men är okej
             chosenBiome = biomeArray[Random.Range(0, biomeArray.Length)];
             Debug.Log(chosenBiome);
