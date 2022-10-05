@@ -19,6 +19,17 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.setClimbObject(other.gameObject);
         }else if(other.tag == "Sideways" || other.tag == "UpAndDown"){
             GameManager.Instance.GameOver();
+        }else if(other.tag == "DefaultTile"){
+            //Debug.Log("OKEJDEF");
+            AudioManager.Instance.DefaultPitch("GameMusic");
+        }else if(other.tag == "ArcticTile"){
+            //Debug.Log("OKEJARC");
+            AudioManager.Instance.ArcticPitch("GameMusic");
+
+        }else if(other.tag == "MagmaTile"){
+            //Debug.Log("OKEJMAG");
+            AudioManager.Instance.MagmaPitch("GameMusic");
+
         }
     }
 
@@ -29,11 +40,4 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.setClimbObject(null);
         }
     }
-
-    void OnCollisionEnter(Collision other){
-        if(other.collider.tag == "Tile"){
-            Debug.Log("OKEJ");
-        }
-    }
-
 }

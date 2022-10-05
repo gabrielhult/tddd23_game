@@ -15,6 +15,9 @@ TagManager:
   - Sideways
   - Ice
   - Obstacle
+  - DefaultTile
+  - ArcticTile
+  - MagmaTile
   layers:
   - Default
   - TransparentFX
