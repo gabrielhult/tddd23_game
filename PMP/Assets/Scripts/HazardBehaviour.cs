@@ -34,7 +34,7 @@ public class HazardBehaviour : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         //Debug.Log(transform.localScale.x);
         if(GameManager.Instance.roundStarted){
-            if(GameManager.Instance.chosenPowerUp == "SlowDownHazard"){
+            if(GameManager.Instance.chosenPowerUp == "SlowDownHazard" && GameManager.Instance.isPowerUp){
                 hazardRigidbody.velocity = new Vector3(slowedDownMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
             }else{
                 distanceBetween = player.position.x - transform.position.x;

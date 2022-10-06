@@ -12,7 +12,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void ScoreCollected(){
         //IDEA: x amount of score gives an extra life?
-        if(GameManager.Instance.chosenPowerUp == "DoubleBananaScoreCollect"){
+        if(GameManager.Instance.chosenPowerUp == "DoubleBananaScoreCollect" && GameManager.Instance.isPowerUp){
             ScoreCounter = ScoreCounter + 2;
         }else ScoreCounter++;
         onBananaCollected.Invoke(this);

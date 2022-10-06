@@ -28,7 +28,7 @@ public class DistanceTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameManager.Instance.chosenPowerUp == "IncreaseDistanceAward" && GameManager.Instance.distanceBonusLimiter){
+        if(GameManager.Instance.chosenPowerUp == "IncreaseDistanceAward" && GameManager.Instance.distanceBonusLimiter && GameManager.Instance.isPowerUp){
             powerUpBonus += chosenBonus;
             GameManager.Instance.distanceBonusLimiter = false;
         }

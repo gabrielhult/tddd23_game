@@ -127,7 +127,7 @@ public class PlayerBehaviour : MonoBehaviour
             //Debug.Log(jumpCheckDistance);
             if(_jump){// && jumpCheckDistance < 0.1f){
                 animator.SetBool("isJumping", true);
-                if(GameManager.Instance.chosenPowerUp == "FeatherJump"){
+                if(GameManager.Instance.chosenPowerUp == "FeatherJump" && GameManager.Instance.isPowerUp){
                     Debug.Log("feather");
                     ySpeed = _jumpSpeed * featherEffect;
                 }else ySpeed = _jumpSpeed;
@@ -141,7 +141,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void PlayerClimb(){
-        if(_climb){ //Should we climb?
+        if(_climb && !GameManager.Instance.cancelClimbing){ //Should we climb? Dubbelchecka så detta är okej med GameManager delen
             ySpeed = -0.5f;
             if(!climbing){ //If we aren't climbing already...
                 currentClimbObject = GameManager.Instance.getClimbObject();

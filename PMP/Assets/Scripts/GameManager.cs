@@ -33,13 +33,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public GameObject[] activeUpAndDownObstacles;
 
-
-    public int bananasForPowerUp;
     [HideInInspector]
     public float gameplayScaleMultiplier;
     public float gameplayScaleAdder;
     public float gameplayScaleTimer;
     public float basePowerUpDuration;
+    public bool closePowerUp;
     public bool isPowerUp; //Helps us decide whether or not to play.
 
     //Power up related variables
@@ -47,6 +46,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public string chosenPowerUp;
     public bool distanceBonusLimiter;
+    [HideInInspector]
+    public bool increaseDistanceTimerDisabled;
+    public int bananasForPowerUp;
     
     public TextMeshProUGUI bananaEndScore;
     public TextMeshProUGUI distanceEndScore;
@@ -57,6 +59,7 @@ public class GameManager : MonoBehaviour
         roundStarted = false;
         distanceBonusLimiter = true;
         cancelClimbing = false;
+        increaseDistanceTimerDisabled = false; //Makes sure timer doesn't get activated if distance power-up is used.
         gameplayScaleMultiplier = 1f;
         StartCoroutine(ScaleGameplay());
     }
@@ -111,10 +114,21 @@ public class GameManager : MonoBehaviour
     public void CollectBanana(GameObject gameObject){
         if(playerInventory != null){
             playerInventory.ScoreCollected();
+
             if(playerInventory.ScoreCounter % bananasForPowerUp == 0){
+                closePowerUp = false;
+                Debug.Log(chosenPowerUp);
                 AudioManager.Instance.PlaySound("TenBananasCollected");
-                StartCoroutine(awardPowerUp());
+                if(chosenPowerUp == ""){
+                    Debug.Log("Power-up time but no power-up set! Fix this if I see it.");
+                }
+                StartCoroutine(awardPowerUp(chosenPowerUp));
             }else{
+                //If we are one away from a power-up
+                if(playerInventory.ScoreCounter % bananasForPowerUp == bananasForPowerUp - 1){
+                    chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)]; //Choose power-up and display it over the banana
+                    closePowerUp = true;
+                }
                 AudioManager.Instance.PlaySound("BananaCollect");
             }
             
@@ -167,25 +181,9 @@ public class GameManager : MonoBehaviour
     public void setClimbObject(GameObject gameObject){
         climbObject = gameObject;
     }
-    
-
-    /* public void disableObstacles(GameObject[] obstacleArray, string obstacleTag){
-        obstacleArray = GameObject.FindGameObjectsWithTag(obstacleTag);
-            foreach(GameObject obst in obstacleArray){
-                obst.SetActive(false);
-            }
-    }
-
-    public void enableObstacles(GameObject[] obstacleArray){
-        foreach(GameObject obst in obstacleArray){
-                obst.SetActive(true);
-        }
-    } */
 
 
-    IEnumerator awardPowerUp(){
-        //Award a temporary-powerup
-        chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)];
+    IEnumerator awardPowerUp(string chosenPowerUp){
         isPowerUp = true;
         //Detta kan verkligen se bättre ut, men kan inte ha detta i extern funktion (funkar ej då)
         if(chosenPowerUp == "NoObstacles"){
@@ -202,23 +200,30 @@ public class GameManager : MonoBehaviour
             foreach(GameObject obst in activeUpAndDownObstacles){
                 obst.SetActive(false);
             }
+        }else if(chosenPowerUp == "IncreaseDistanceAward"){
+            increaseDistanceTimerDisabled = true;
         }
         //wait x seconds
         yield return new WaitForSeconds(basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier);
-        //turn it off
-        chosenPowerUp = "";
-        isPowerUp = false;
         //Detta kan verkligen se bättre ut
-        foreach(GameObject obst in activeStaticObstacles){
+        if(chosenPowerUp == "NoObstacles"){
+            foreach(GameObject obst in activeStaticObstacles){
                 obst.SetActive(true);
+            }
+            foreach(GameObject obst in activeSidewaysObstacles){
+                    obst.SetActive(true);
+            }
+            foreach(GameObject obst in activeUpAndDownObstacles){
+                obst.SetActive(true);
+            }
+            cancelClimbing = false;
         }
-        foreach(GameObject obst in activeSidewaysObstacles){
-                obst.SetActive(false);
-        }
-        foreach(GameObject obst in activeUpAndDownObstacles){
-            obst.SetActive(false);
-        }
-        cancelClimbing = false;
+        
+        //turn it off
+        Debug.Log("Turn off");
+        chosenPowerUp = "";
+        increaseDistanceTimerDisabled = false;
+        isPowerUp = false;
     }
 
     IEnumerator ScaleGameplay(){
