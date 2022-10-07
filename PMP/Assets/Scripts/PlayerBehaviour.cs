@@ -184,12 +184,12 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         if(GameManager.Instance.isClimbable){
-            if(Input.GetKeyDown(KeyCode.K)){
-                if(!_climb){
+            if(vertical > 0){
+               /*  if(!_climb){
                     _climb = true;
-                }else _climb = false;
-                
-            }
+                }else _climb = false; */
+                _climb = true;
+            }else _climb = false;
         }else _climb = false;
 
         /* if(Input.GetKeyDown(KeyCode.LeftControl)){
