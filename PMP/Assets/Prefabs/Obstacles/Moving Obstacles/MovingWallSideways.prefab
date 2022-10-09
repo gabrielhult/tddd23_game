@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5755830104153734342}
   - component: {fileID: 7784073222063877398}
-  - component: {fileID: 9077987990238209094}
   - component: {fileID: 799084631036806403}
+  - component: {fileID: -8438445315596439595}
   m_Layer: 0
   m_Name: MovingWallSideways
   m_TagString: Sideways
@@ -48,19 +48,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.1, z: 3}
   m_Center: {x: 1, y: 0, z: 0}
---- !u!114 &9077987990238209094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636017285091119134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3d59906234c00429faa0a86e8cd92a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thisTile: {fileID: 1636017285091119134}
 --- !u!114 &799084631036806403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +66,19 @@ MonoBehaviour:
   lowerSideways: -4
   upperUpAndDown: 0
   lowerUpAndDown: 0
+--- !u!114 &-8438445315596439595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1636017285091119134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0ca750e5807c74db795d247ef521fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisTile: {fileID: 1636017285091119134}
 --- !u!1 &8494512140769043352
 GameObject:
   m_ObjectHideFlags: 0

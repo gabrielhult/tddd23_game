@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
                 LoadGameScene("HighScoreScene");
             }
         }else if(isPaused){
-            if(Input.GetKeyDown(KeyCode.R)){ //Retry
+            if(Input.GetKeyDown(KeyCode.R)){ //Resume
                 AudioManager.Instance.PlaySound("ButtonClick");
                 changePauseState();
                 Resume();
@@ -196,32 +196,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator awardPowerUp(string chosenPowerUp){
         isPowerUp = true;
-        //Detta kan verkligen se bättre ut, men kan inte ha detta i extern funktion (funkar ej då tydligen)
         if(chosenPowerUp == "NoObstacles"){
             cancelClimbing = true;
-            activeStaticObstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-            foreach(GameObject obst in activeStaticObstacles){ //Fixa Opacity för "children objects"
-                /* childRendererObjects = obst.GetComponentsInChildren<Renderer>();
-                foreach(Renderer rend in childRendererObjects){
-                    tempObstacleMaterial = rend.material.color.a;
-                } */
-                //childRendererObjects
-                obst.SetActive(false);
-                /* tempObstacleMaterial = obst.GetComponent<Renderer>().material.color.a;
-                tempObstacleMaterial = obstacleOpacity; */
-            }
-            activeSidewaysObstacles = GameObject.FindGameObjectsWithTag("Sideways");
-            foreach(GameObject obst in activeSidewaysObstacles){
-                //obst.SetActive(false);
-                tempObstacleMaterial = obst.GetComponent<Renderer>().material.color.a;
-                tempObstacleMaterial = obstacleOpacity;
-            }
-            activeUpAndDownObstacles = GameObject.FindGameObjectsWithTag("UpAndDown");
-            foreach(GameObject obst in activeUpAndDownObstacles){
-                //obst.SetActive(false);
-                tempObstacleMaterial = obst.GetComponent<Renderer>().material.color.a;
-                tempObstacleMaterial = obstacleOpacity;
-            }
         }else if(chosenPowerUp == "IncreaseDistanceAward"){
             increaseDistanceTimerDisabled = true;
         }else if(chosenPowerUp == "DoubleBananaScoreCollect"){
@@ -230,9 +206,7 @@ public class GameManager : MonoBehaviour
             extraPowerUpDuration = extraClimbSpeedDuration;
         }else if(chosenPowerUp == "FeatherJump"){
             extraPowerUpDuration = extraFeatherJumpDuration;
-        }/* else if(chosenPowerUp == "SlowDownHazard"){
-            extraPowerUpDuration = 0;
-        } */
+        }
         //wait x seconds
         yield return new WaitForSeconds(basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier + extraPowerUpDuration); 
         //Detta kan verkligen se bättre ut

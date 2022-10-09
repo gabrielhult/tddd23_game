@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5755830104153734342}
   - component: {fileID: 7784073222063877398}
-  - component: {fileID: 9077987990238209094}
+  - component: {fileID: -8310992967618904666}
   m_Layer: 0
   m_Name: JumpWall
   m_TagString: Obstacle
@@ -42,12 +42,12 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636017285091119134}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.1, z: 3}
   m_Center: {x: 1, y: 0, z: 0}
---- !u!114 &9077987990238209094
+--- !u!114 &-8310992967618904666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1636017285091119134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c3d59906234c00429faa0a86e8cd92a, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0ca750e5807c74db795d247ef521fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thisTile: {fileID: 1636017285091119134}

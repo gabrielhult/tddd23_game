@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePieceBehaviour : MonoBehaviour
+public class TileBehaviour : MonoBehaviour
 {
 
     public GameObject thisTile;
