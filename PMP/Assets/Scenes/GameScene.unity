@@ -3161,6 +3161,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014665798}
   m_CullTransparentMesh: 1
+--- !u!1 &1036236578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1036236579}
+  - component: {fileID: 1036236581}
+  - component: {fileID: 1036236580}
+  m_Layer: 5
+  m_Name: IncreaseClimbUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1036236579
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036236578}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 8.033882}
+  m_LocalScale: {x: 0.4564583, y: 0.4564583, z: 0.4564583}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1813796297}
+  m_Father: {fileID: 1285409158}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 445.35077, y: 201.0421}
+  m_SizeDelta: {x: 1920, y: 919.2516}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1036236580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036236578}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1036236581
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036236578}
+  m_CullTransparentMesh: 1
 --- !u!1 &1092539528
 GameObject:
   m_ObjectHideFlags: 0
@@ -3329,6 +3406,11 @@ MonoBehaviour:
   gameplayScaleAdder: 0.03
   gameplayScaleTimer: 10
   basePowerUpDuration: 3
+  extraDoubleBananaScoreDuration: 3
+  extraFeatherJumpDuration: 2
+  extraClimbSpeedDuration: 8
+  extraPowerUpDuration: 0
+  obstacleOpacity: 0.5
   closePowerUp: 0
   isPowerUp: 0
   powerUpArray:
@@ -3337,6 +3419,7 @@ MonoBehaviour:
   - NoObstacles
   - IncreaseDistanceAward
   - FeatherJump
+  - IncreaseClimbSpeed
   chosenPowerUp: 
   distanceBonusLimiter: 0
   increaseDistanceTimerDisabled: 0
@@ -3956,6 +4039,7 @@ Transform:
   - {fileID: 352457200}
   - {fileID: 1946675919}
   - {fileID: 1608065531}
+  - {fileID: 1036236579}
   m_Father: {fileID: 1992993345}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5333,6 +5417,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8118340229014049320, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa37cab21ec1e7e4cb8ba0605d8b7ce2, type: 3}
 --- !u!114 &1697925973 stripped
@@ -6020,6 +6108,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1804380517}
+  m_CullTransparentMesh: 1
+--- !u!1 &1813796296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1813796297}
+  - component: {fileID: 1813796299}
+  - component: {fileID: 1813796298}
+  m_Layer: 5
+  m_Name: IncreaseClimbImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1813796297
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813796296}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1036236579}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 12, y: 50}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1813796298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813796296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300010, guid: 37607ec1aab56e349af84a980f685a4b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1813796299
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1813796296}
   m_CullTransparentMesh: 1
 --- !u!1 &1839073539
 GameObject:
@@ -6746,6 +6910,7 @@ MonoBehaviour:
   noObstaclesUI: {fileID: 352457199}
   slowHazardUI: {fileID: 1946675918}
   featherJumpUI: {fileID: 1608065530}
+  climbSpeedUI: {fileID: 1036236578}
 --- !u!114 &1992993349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7615,6 +7780,14 @@ PrefabInstance:
     - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: raycastDistance
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: climbPowerUpSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: climbPowerUpMultiplier
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8486578001567528251, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: distanceAdder

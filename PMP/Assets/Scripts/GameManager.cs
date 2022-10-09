@@ -33,11 +33,19 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public GameObject[] activeUpAndDownObstacles;
 
+    private Component[] childRendererObjects;
+
     [HideInInspector]
     public float gameplayScaleMultiplier;
     public float gameplayScaleAdder;
     public float gameplayScaleTimer;
     public float basePowerUpDuration;
+    public float extraDoubleBananaScoreDuration;
+    public float extraFeatherJumpDuration;
+    public float extraClimbSpeedDuration;
+    [HideInInspector]
+    public float extraPowerUpDuration;
+    public float obstacleOpacity;
     public bool closePowerUp;
     public bool isPowerUp; //Helps us decide whether or not to play.
 
@@ -53,12 +61,15 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI bananaEndScore;
     public TextMeshProUGUI distanceEndScore;
 
+    private float tempObstacleMaterial;
+
     private void Awake() {
         Instance = this;
         isGameOver = false;
         roundStarted = false;
         distanceBonusLimiter = true;
         cancelClimbing = false;
+        extraPowerUpDuration = 0;
         increaseDistanceTimerDisabled = false; //Makes sure timer doesn't get activated if distance power-up is used.
         gameplayScaleMultiplier = 1f;
         StartCoroutine(ScaleGameplay());
@@ -185,26 +196,45 @@ public class GameManager : MonoBehaviour
 
     IEnumerator awardPowerUp(string chosenPowerUp){
         isPowerUp = true;
-        //Detta kan verkligen se bättre ut, men kan inte ha detta i extern funktion (funkar ej då)
+        //Detta kan verkligen se bättre ut, men kan inte ha detta i extern funktion (funkar ej då tydligen)
         if(chosenPowerUp == "NoObstacles"){
             cancelClimbing = true;
             activeStaticObstacles = GameObject.FindGameObjectsWithTag("Obstacle");
-            foreach(GameObject obst in activeStaticObstacles){
+            foreach(GameObject obst in activeStaticObstacles){ //Fixa Opacity för "children objects"
+                /* childRendererObjects = obst.GetComponentsInChildren<Renderer>();
+                foreach(Renderer rend in childRendererObjects){
+                    tempObstacleMaterial = rend.material.color.a;
+                } */
+                //childRendererObjects
                 obst.SetActive(false);
+                /* tempObstacleMaterial = obst.GetComponent<Renderer>().material.color.a;
+                tempObstacleMaterial = obstacleOpacity; */
             }
             activeSidewaysObstacles = GameObject.FindGameObjectsWithTag("Sideways");
             foreach(GameObject obst in activeSidewaysObstacles){
-                obst.SetActive(false);
+                //obst.SetActive(false);
+                tempObstacleMaterial = obst.GetComponent<Renderer>().material.color.a;
+                tempObstacleMaterial = obstacleOpacity;
             }
             activeUpAndDownObstacles = GameObject.FindGameObjectsWithTag("UpAndDown");
             foreach(GameObject obst in activeUpAndDownObstacles){
-                obst.SetActive(false);
+                //obst.SetActive(false);
+                tempObstacleMaterial = obst.GetComponent<Renderer>().material.color.a;
+                tempObstacleMaterial = obstacleOpacity;
             }
         }else if(chosenPowerUp == "IncreaseDistanceAward"){
             increaseDistanceTimerDisabled = true;
-        }
+        }else if(chosenPowerUp == "DoubleBananaScoreCollect"){
+            extraPowerUpDuration = extraDoubleBananaScoreDuration;
+        }else if(chosenPowerUp == "IncreaseClimbSpeed"){
+            extraPowerUpDuration = extraClimbSpeedDuration;
+        }else if(chosenPowerUp == "FeatherJump"){
+            extraPowerUpDuration = extraFeatherJumpDuration;
+        }/* else if(chosenPowerUp == "SlowDownHazard"){
+            extraPowerUpDuration = 0;
+        } */
         //wait x seconds
-        yield return new WaitForSeconds(basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier);
+        yield return new WaitForSeconds(basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier + extraPowerUpDuration); 
         //Detta kan verkligen se bättre ut
         if(chosenPowerUp == "NoObstacles"){
             foreach(GameObject obst in activeStaticObstacles){
@@ -222,6 +252,7 @@ public class GameManager : MonoBehaviour
         //turn it off
         Debug.Log("Turn off");
         chosenPowerUp = "";
+        extraPowerUpDuration = 0;
         increaseDistanceTimerDisabled = false;
         isPowerUp = false;
     }

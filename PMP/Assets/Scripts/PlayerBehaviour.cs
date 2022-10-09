@@ -13,6 +13,9 @@ public class PlayerBehaviour : MonoBehaviour
     public float gravityMagnitude;
     public bool _climb;
     public float raycastDistance;
+    public Vector3 playerVelocity;
+    public int climbPowerUpSpeed;
+
 
     [SerializeField] GameObject currentClimbObject;
 
@@ -23,7 +26,6 @@ public class PlayerBehaviour : MonoBehaviour
     private float horizontalOdd;
     private float horizontalEven;
     private Vector3 _movementForce;
-    public Vector3 playerVelocity;
     private float ySpeed;
     private bool _jump;
     private bool climbing;
@@ -71,12 +73,12 @@ public class PlayerBehaviour : MonoBehaviour
             PlayerMove();
             PlayerJump();
             PlayerClimb();
-            if(Physics.Raycast(ray, out raycastHit, raycastDistance)){
+            if(Physics.Raycast(ray, out raycastHit, raycastDistance)){ //Make Manke lay dead in the correct pos at game over
                 jumpCheckDistance = raycastHit.distance;
                 gameOverYPosition = transform.position.y - raycastHit.distance;
             }
         }else {
-            animator.SetBool("isDead", true); //Kanske funkar nu?
+            animator.SetBool("isDead", true);
             if(transform.position.y != gameOverYPosition){
                 transform.position = new Vector3(transform.position.x, gameOverYPosition, transform.position.z);
             }
@@ -97,9 +99,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void applyMovement(float movementMultiplier){
         playerVelocity = _movementForce * movementMultiplier * GameManager.Instance.gameplayScaleMultiplier; //Se till att climbing skalas också, gör int det?
-        if(!climbing){ //&&!crawling?
+        if(!climbing){ 
             playerVelocity.y = ySpeed;
-        } 
+        }else if(GameManager.Instance.chosenPowerUp == "IncreaseClimbSpeed" && GameManager.Instance.isPowerUp && climbing){
+            Debug.Log("Increased Climb");
+            playerVelocity.y = climbPowerUpSpeed; //Funkar inte, är det rätt värde som ändras?
+        }
         characterController.Move(playerVelocity * Time.deltaTime);
     }
 
@@ -108,10 +113,9 @@ public class PlayerBehaviour : MonoBehaviour
         if(_movementForce != Vector3.zero){ 
             if(!crawling){
                 animator.SetBool(animParameter, true);
-            }else animator.SetBool("isCrawling", true);
-                
-                Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            }//else animator.SetBool("isCrawling", true);
+            Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }else {
                 if(!crawling){
                     animator.SetBool(animParameter, false);
@@ -121,10 +125,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void PlayerJump(){
         //Lägg KANSKE till dubbelhopp
-        if(characterController.isGrounded){ //&& !crawling?
+        if(characterController.isGrounded){ 
             ySpeed = -0.5f;
             characterController.stepOffset = originalOffset;
-            //Debug.Log(jumpCheckDistance);
             if(_jump){// && jumpCheckDistance < 0.1f){
                 animator.SetBool("isJumping", true);
                 if(GameManager.Instance.chosenPowerUp == "FeatherJump" && GameManager.Instance.isPowerUp){
@@ -168,12 +171,13 @@ public class PlayerBehaviour : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.LeftShift)){
             autorun = !autorun;
         }
-
-        if(climbing){
+        if(autorun){
+            if(_climb){
+                _movementForce = new Vector3(0f, 1f, 0f);
+            }else _movementForce = new Vector3(1f, 0f, -1f * horizontal); //make character move forward automatically
+        }else if(climbing){
             _movementForce = new Vector3(0f, vertical, 0f);
-        }else if(autorun){
-            _movementForce = new Vector3(1, 0f, -1 * horizontal); //make character move forward automatically, 
-        }else _movementForce = new Vector3(vertical, 0f, -1 * horizontal);
+        }else _movementForce = new Vector3(vertical, 0f, -1f * horizontal);
         
         _movementForce.Normalize();
 
@@ -184,20 +188,9 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         if(GameManager.Instance.isClimbable){
-            if(vertical > 0){
-               /*  if(!_climb){
-                    _climb = true;
-                }else _climb = false; */
+            if(vertical >= 0){ //> 0 gör att man ramlar om man släpper, >= 0 gör att man står still i luften men autoclimb funkar då
                 _climb = true;
             }else _climb = false;
         }else _climb = false;
-
-        /* if(Input.GetKeyDown(KeyCode.LeftControl)){
-            if(_jump || !_climb){
-                crawling = !crawling;
-            }
-
-            Debug.Log(crawling);
-        } */
     }
 }

@@ -13,6 +13,7 @@ public class BananaBehaviour : MonoBehaviour
     public GameObject slowHazardUI;
     public GameObject featherJumpUI;
 
+    public GameObject climbSpeedUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +46,10 @@ public class BananaBehaviour : MonoBehaviour
         if(GameManager.Instance.chosenPowerUp == "FeatherJump"){
             featherJumpUI.SetActive(true);
         }else featherJumpUI.SetActive(false);
+
+        if(GameManager.Instance.chosenPowerUp == "IncreaseClimbSpeed"){
+            climbSpeedUI.SetActive(true);
+        }else climbSpeedUI.SetActive(false);
     }
 
     private void OnTriggerExit(Collider other) {
