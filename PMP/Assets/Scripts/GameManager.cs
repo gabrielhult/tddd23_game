@@ -224,7 +224,7 @@ public class GameManager : MonoBehaviour
         }
         
         //turn it off
-        Debug.Log("Turn off");
+        //Debug.Log("Turn off");
         chosenPowerUp = "";
         extraPowerUpDuration = 0;
         increaseDistanceTimerDisabled = false;

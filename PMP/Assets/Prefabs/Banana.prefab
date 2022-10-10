@@ -940,7 +940,6 @@ GameObject:
   - component: {fileID: 2264649566626183956}
   - component: {fileID: 6973778533825376604}
   - component: {fileID: 8909673205667001590}
-  - component: {fileID: 6187814147861015686}
   - component: {fileID: 7446550994039463908}
   - component: {fileID: 7200707565961366738}
   m_Layer: 0
@@ -1015,26 +1014,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6187814147861015686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8476658150269719457}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dacbc4ca4f48504eb16acf563ca61bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thisBanana: {fileID: 8476658150269719457}
-  powerUpObject: {fileID: 0}
-  doubleBananaUI: {fileID: 0}
-  increaseDistanceUI: {fileID: 0}
-  noObstaclesUI: {fileID: 0}
-  slowHazardUI: {fileID: 0}
-  featherJumpUI: {fileID: 0}
-  climbSpeedUI: {fileID: 0}
 --- !u!95 &7446550994039463908
 Animator:
   serializedVersion: 4

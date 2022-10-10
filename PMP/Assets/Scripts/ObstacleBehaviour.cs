@@ -57,13 +57,15 @@ public class ObstacleBehaviour : MonoBehaviour
          for (int index = 0; index < childRenderers.Length; index++)
          {
             rendererElement = childRenderers[index];
-            //Debug.Log(rendererElement);
-            if(rendererElement.gameObject.name != "BananaModel"){
-                elementColor = rendererElement.material.color;
-                elementColor.a = 0.5f;
-                rendererElement.material.color = elementColor;
-                rendererElement.material.shader = Shader.Find( "Transparent/Diffuse" );
+            if(rendererElement != null){
+                if(rendererElement.gameObject.name != "BananaModel"){
+                    elementColor = rendererElement.material.color;
+                    elementColor.a = 0.5f;
+                    rendererElement.material.color = elementColor;
+                    rendererElement.material.shader = Shader.Find( "Transparent/Diffuse" );
+                }
             }
+            
             
          }
     }
@@ -80,10 +82,12 @@ public class ObstacleBehaviour : MonoBehaviour
          for (int index = 0; index < childRenderers.Length; index++)
          {
             rendererElement = childRenderers[index];
-            if(rendererElement.gameObject.name != "BananaModel"){
-                elementColor = rendererElement.material.color;
-                elementColor.a = 1;
-                rendererElement.material.shader = Shader.Find( "Standard" );
+            if(rendererElement != null){
+                if(rendererElement.gameObject.name != "BananaModel"){
+                    elementColor = rendererElement.material.color;
+                    elementColor.a = 1;
+                    rendererElement.material.shader = Shader.Find( "Standard" );
+                }
             }
          }
     }

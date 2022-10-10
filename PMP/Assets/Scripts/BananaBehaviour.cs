@@ -8,6 +8,7 @@ public class BananaBehaviour : MonoBehaviour
 
     public GameObject powerUpObject;
     public GameObject doubleBananaUI;
+    //public GameObject secondBanana;
     public GameObject increaseDistanceUI;
     public GameObject noObstaclesUI;
     public GameObject slowHazardUI;
@@ -32,8 +33,12 @@ public class BananaBehaviour : MonoBehaviour
         }else increaseDistanceUI.SetActive(false);
 
         if(GameManager.Instance.chosenPowerUp == "DoubleBananaScoreCollect"){
-            doubleBananaUI.SetActive(true);
-        }else doubleBananaUI.SetActive(false);
+            doubleBananaUI.SetActive(true); //TODO: Add effect to banana when double score is active!
+            //secondBanana.SetActive(true);
+        }else {
+            doubleBananaUI.SetActive(false);
+            //secondBanana.SetActive(false);
+        }
 
         if(GameManager.Instance.chosenPowerUp == "NoObstacles"){
             noObstaclesUI.SetActive(true);

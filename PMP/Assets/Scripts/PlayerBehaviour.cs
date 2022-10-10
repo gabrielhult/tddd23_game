@@ -102,18 +102,17 @@ public class PlayerBehaviour : MonoBehaviour
         if(!climbing){ 
             playerVelocity.y = ySpeed;
         }else if(GameManager.Instance.chosenPowerUp == "IncreaseClimbSpeed" && GameManager.Instance.isPowerUp && climbing){
-            Debug.Log("Increased Climb");
-            playerVelocity.y = climbPowerUpSpeed; //Funkar inte, är det rätt värde som ändras?
+            playerVelocity.y = climbPowerUpSpeed;
         }
         characterController.Move(playerVelocity * Time.deltaTime);
     }
 
-    //Funkar inte riktigt, kolla här och i hur animationerna är kopplade.
+    //Funkar inte riktigt, kolla här och i hur animationerna är kopplade. (gäller crawling)
     private void displayMovement(string animParameter){
         if(_movementForce != Vector3.zero){ 
             if(!crawling){
                 animator.SetBool(animParameter, true);
-            }//else animator.SetBool("isCrawling", true);
+            }
             Quaternion toRotation = Quaternion.LookRotation(_movementForce, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }else {
@@ -128,10 +127,9 @@ public class PlayerBehaviour : MonoBehaviour
         if(characterController.isGrounded){ 
             ySpeed = -0.5f;
             characterController.stepOffset = originalOffset;
-            if(_jump){// && jumpCheckDistance < 0.1f){
+            if(_jump){
                 animator.SetBool("isJumping", true);
                 if(GameManager.Instance.chosenPowerUp == "FeatherJump" && GameManager.Instance.isPowerUp){
-                    Debug.Log("feather");
                     ySpeed = _jumpSpeed * featherEffect;
                 }else ySpeed = _jumpSpeed;
                 
@@ -188,7 +186,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         if(GameManager.Instance.isClimbable){
-            if(vertical >= 0){ //> 0 gör att man ramlar om man släpper, >= 0 gör att man står still i luften men autoclimb funkar då
+            if(vertical > 0 || (vertical >= 0 && autorun)){ //> 0 gör att man ramlar om man släpper, >= 0 gör att man står still i luften men autoclimb funkar då
                 _climb = true;
             }else _climb = false;
         }else _climb = false;
