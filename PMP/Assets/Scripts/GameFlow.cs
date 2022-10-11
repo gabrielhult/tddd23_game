@@ -69,15 +69,19 @@ public class GameFlow : MonoBehaviour
             if(chosenBiome == "Default"){
                 tileArray = nextTileDefault;
                 holeSpawnRateIndex = 3; 
+                obstacleSpawnRateIndex = 4;
             }else if(chosenBiome == "Arctic"){ //Vaska??
                 tileArray = nextTileArctic;
                 holeSpawnRateIndex = 3; 
+                obstacleSpawnRateIndex = 4;
             }else if(chosenBiome == "Magma"){
                 tileArray = nextTileMagma;
                 holeSpawnRateIndex = 2; 
+                obstacleSpawnRateIndex = 4;
             }else if(chosenBiome == "Swamp"){
                 tileArray = nextTileSwamp;
-                holeSpawnRateIndex = 5; 
+                holeSpawnRateIndex = 4; 
+                obstacleSpawnRateIndex = 3;
             }
         }
         

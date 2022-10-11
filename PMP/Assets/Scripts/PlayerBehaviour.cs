@@ -21,8 +21,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     [SerializeField] GameObject currentClimbObject;
 
-    //public Rigidbody _rigidbody;
-
     private Quaternion targetRotation;
     private int currentAngle;
     private float horizontalOdd;

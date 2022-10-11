@@ -62,7 +62,7 @@ public class ObstacleBehaviour : MonoBehaviour
                     elementColor = rendererElement.material.color;
                     elementColor.a = 0.5f;
                     rendererElement.material.color = elementColor;
-                    rendererElement.material.shader = Shader.Find( "Transparent/Diffuse" );
+                    rendererElement.material.shader = Shader.Find("Transparent/Diffuse");
                 }
             }
             
@@ -86,7 +86,7 @@ public class ObstacleBehaviour : MonoBehaviour
                 if(rendererElement.gameObject.name != "BananaModel"){
                     elementColor = rendererElement.material.color;
                     elementColor.a = 1;
-                    rendererElement.material.shader = Shader.Find( "Standard" );
+                    rendererElement.material.shader = Shader.Find("Standard");
                 }
             }
          }

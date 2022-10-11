@@ -24,6 +24,7 @@ public class PlayerCollision : MonoBehaviour
             AudioManager.Instance.DefaultPitch("GameMusic");
         }else if(other.tag == "ArcticTile"){
             //Debug.Log("OKEJARC");
+            GameManager.Instance.isArctic = true;
             AudioManager.Instance.ArcticPitch("GameMusic");
         }else if(other.tag == "MagmaTile"){
             //Debug.Log("OKEJMAG");
@@ -42,6 +43,8 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.setClimbObject(null);
         }else if(other.tag == "SwampTile"){
             GameManager.Instance.isSwamp = false;
+        }else if(other.tag == "ArcticTile"){
+            GameManager.Instance.isArctic = false;
         }
     }
 }
