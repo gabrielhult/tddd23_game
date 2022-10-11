@@ -28,6 +28,7 @@ public class GameFlow : MonoBehaviour
     public string[] biomeArray;
     [HideInInspector]
     public string chosenBiome;
+    public float biomeMultiplier;
 
     
     private Transform[] tileArray;
@@ -65,7 +66,7 @@ public class GameFlow : MonoBehaviour
     void tileSpawn(){
         if(playerInventory.DistanceCounter % biomeChangeRateIndex == 0 && playerInventory.DistanceCounter > 3f){ //Kan säkert fortfarande bli bättre men är okej
             chosenBiome = biomeArray[Random.Range(0, biomeArray.Length)];
-            Debug.Log(chosenBiome);
+            Debug.Log("New biome: " + chosenBiome);
             if(chosenBiome == "Default"){
                 tileArray = nextTileDefault;
                 holeSpawnRateIndex = 3; 
@@ -198,7 +199,12 @@ public class GameFlow : MonoBehaviour
 
     IEnumerator spawnTile(){
         //Logic for how often new tiles spawn
-        yield return new WaitForSeconds(.33f / GameManager.Instance.gameplayScaleMultiplier); 
+        if(GameManager.Instance.isArctic){
+            biomeMultiplier = 2f;
+        }else if(GameManager.Instance.isSwamp){
+            biomeMultiplier = 0.5f;
+        }else biomeMultiplier = 1;
+        yield return new WaitForSeconds(.33f / (GameManager.Instance.gameplayScaleMultiplier * biomeMultiplier)); 
         if(!GameManager.Instance.isGameOver){
             tileSpawn();
             

@@ -132,11 +132,8 @@ public class GameManager : MonoBehaviour
 
             if(playerInventory.ScoreCounter % bananasForPowerUp == 0){
                 closePowerUp = false;
-                Debug.Log(chosenPowerUp);
+                //Debug.Log(chosenPowerUp);
                 AudioManager.Instance.PlaySound("TenBananasCollected");
-                if(chosenPowerUp == ""){
-                    Debug.Log("Power-up time but no power-up set! Fix this if I see it.");
-                }
                 StartCoroutine(awardPowerUp(chosenPowerUp));
             }else{
                 //If we are one away from a power-up

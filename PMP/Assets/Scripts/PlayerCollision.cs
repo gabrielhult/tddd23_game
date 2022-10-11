@@ -19,32 +19,39 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.setClimbObject(other.gameObject);
         }else if(other.tag == "Sideways" || other.tag == "UpAndDown"){
             GameManager.Instance.GameOver();
-        }else if(other.tag == "DefaultTile"){ //TODO: Kolla om pitchen kan justeras, annars ha helt olika instanser av samma ljud men olika pitch
-            //Debug.Log("OKEJDEF");
+        }
+        else if(other.tag == "DefaultTile"){ //TODO: Kolla om pitchen kan justeras, annars ha helt olika instanser av samma ljud men olika pitch
+            GameManager.Instance.isArctic = false;
+            GameManager.Instance.isSwamp = false;
             AudioManager.Instance.DefaultPitch("GameMusic");
-        }else if(other.tag == "ArcticTile"){
-            //Debug.Log("OKEJARC");
+        }
+        else if(other.tag == "ArcticTile"){
             GameManager.Instance.isArctic = true;
+            GameManager.Instance.isSwamp = false;
             AudioManager.Instance.ArcticPitch("GameMusic");
-        }else if(other.tag == "MagmaTile"){
-            //Debug.Log("OKEJMAG");
+        }
+        else if(other.tag == "MagmaTile"){
+            GameManager.Instance.isArctic = false;
+            GameManager.Instance.isSwamp = false;
             AudioManager.Instance.MagmaPitch("GameMusic");
-        }else if(other.tag == "SwampTile"){
+        }
+        else if(other.tag == "SwampTile"){
             GameManager.Instance.isSwamp = true;
-            //Debug.Log("OKEJMAG");
+            GameManager.Instance.isArctic = false;
             //AudioManager.Instance.SwampPitch("GameMusic");
         }
     }
 
     void OnTriggerExit(Collider other){
         if(other.tag == "Bamboo"){
-            //Debug.Log("You can't climb anymore");
             GameManager.Instance.isClimbable = false;
             GameManager.Instance.setClimbObject(null);
-        }else if(other.tag == "SwampTile"){
+        }/* else if(other.tag == "SwampTile"){
+            Debug.Log("left swamp");
             GameManager.Instance.isSwamp = false;
         }else if(other.tag == "ArcticTile"){
+            Debug.Log("left arctic");
             GameManager.Instance.isArctic = false;
-        }
+        } */
     }
 }
