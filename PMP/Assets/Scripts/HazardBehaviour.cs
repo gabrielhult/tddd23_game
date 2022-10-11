@@ -6,6 +6,8 @@ public class HazardBehaviour : MonoBehaviour
 {
     public float baseMoveSpeed;
     public float slowedDownMoveSpeed;
+    public float swampSpeed;
+    public float arcticSpeed;
     public float upperDistanceBound;
     public float lowerDistanceBound;
     public float fastModeMultiplier;
@@ -36,6 +38,10 @@ public class HazardBehaviour : MonoBehaviour
         if(GameManager.Instance.roundStarted){
             if(GameManager.Instance.chosenPowerUp == "SlowDownHazard" && GameManager.Instance.isPowerUp){
                 hazardRigidbody.velocity = new Vector3(slowedDownMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+            }else if (GameManager.Instance.isSwamp){
+                hazardRigidbody.velocity = new Vector3(swampSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+            }else if (GameManager.Instance.isArctic){
+                hazardRigidbody.velocity = new Vector3(arcticSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
             }else{
                 distanceBetween = player.position.x - transform.position.x;
 

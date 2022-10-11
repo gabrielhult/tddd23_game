@@ -3446,8 +3446,8 @@ MonoBehaviour:
   extraClimbSpeedDuration: 8
   extraPowerUpDuration: 0
   obstacleOpacity: 0.5
-  closePowerUp: 0
-  isPowerUp: 0
+  isSwamp: 0
+  isArctic: 0
   powerUpArray:
   - DoubleBananaScoreCollect
   - SlowDownHazard
@@ -3459,6 +3459,8 @@ MonoBehaviour:
   distanceBonusLimiter: 0
   increaseDistanceTimerDisabled: 0
   bananasForPowerUp: 10
+  closePowerUp: 0
+  isPowerUp: 0
   bananaEndScore: {fileID: 1232378309}
   distanceEndScore: {fileID: 81304215}
 --- !u!114 &1106629701
@@ -3495,6 +3497,14 @@ MonoBehaviour:
   - {fileID: 5994374472165393986, guid: 7b98dd7c80409e142ae73c60a3357678, type: 3}
   - {fileID: 4536477196850473881, guid: 7083a0c2bb39c9e44a0f37d66bd7076c, type: 3}
   - {fileID: 2227801382195176402, guid: 519ff68f26948b549ac6cf92a13e0bde, type: 3}
+  nextTileSwamp:
+  - {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+  - {fileID: 3508898330181484256, guid: 0993e83d700ff0f4fadc32852a945a3d, type: 3}
+  - {fileID: 4171376870847147260, guid: 7ee4cda49f1ad634ea60a866d94f9da4, type: 3}
+  - {fileID: 3648296152962659295, guid: baaae3ab338fba24bba0a842779791ab, type: 3}
+  - {fileID: 3776415792489652254, guid: 97dac87054ccbe34f9d52b7ef3ee457f, type: 3}
+  - {fileID: 7192468820490737818, guid: d0137916a3c6f414b89a9c3688ea4008, type: 3}
+  - {fileID: 8994873383745645686, guid: 8f0e65890a6c70e4dbe35e9934127f4d, type: 3}
   traversableObjects:
   - {fileID: 1865406326976282260, guid: 7da26f11885be6d4faddae415da1ff48, type: 3}
   - {fileID: 1203886958227529608, guid: 3107813fad0f78c4cbfd115980ffec8e, type: 3}
@@ -3528,6 +3538,7 @@ MonoBehaviour:
   - Default
   - Arctic
   - Magma
+  - Swamp
   chosenBiome: 
   holeSpawnRateIndex: 3
 --- !u!1 &1139998569
@@ -7600,6 +7611,63 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1001 &1854995358147216851
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -40.71728
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 532221849799186934, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 962998738063018315, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
+      propertyPath: m_Name
+      value: MainTileSwamp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef46104ccb6c27e4cbc447e9ce813bb0, type: 3}
 --- !u!4 &2957134501136991817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1210437473306530687, guid: de7bfd4561e1d4348bd51cac9b6772f5, type: 3}
@@ -7813,8 +7881,20 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: _climbSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: raycastDistance
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: swampMultiplier
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
+      propertyPath: arcticMultiplier
+      value: 16.5
       objectReference: {fileID: 0}
     - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: climbPowerUpSpeed
@@ -7969,6 +8049,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 543450652399095182}
+    - target: {fileID: 7064057812186297869, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
+      propertyPath: swampSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7064057812186297869, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
+      propertyPath: arcticSpeed
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297869, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: baseMoveSpeed
       value: 9.5

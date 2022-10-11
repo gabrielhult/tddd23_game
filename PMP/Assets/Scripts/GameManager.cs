@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float extraPowerUpDuration;
     public float obstacleOpacity;
-    public bool closePowerUp;
-    public bool isPowerUp; //Helps us decide whether or not to play.
+    public bool isSwamp;
+    public bool isArctic;
 
     //Power up related variables
     public string[] powerUpArray;
@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool increaseDistanceTimerDisabled;
     public int bananasForPowerUp;
+    public bool closePowerUp;
+    public bool isPowerUp; //Helps us decide whether or not to play.
     
     public TextMeshProUGUI bananaEndScore;
     public TextMeshProUGUI distanceEndScore;
@@ -69,6 +71,8 @@ public class GameManager : MonoBehaviour
         roundStarted = false;
         distanceBonusLimiter = true;
         cancelClimbing = false;
+        isSwamp = false;
+        isArctic = false;
         extraPowerUpDuration = 0;
         increaseDistanceTimerDisabled = false; //Makes sure timer doesn't get activated if distance power-up is used.
         gameplayScaleMultiplier = 1f;

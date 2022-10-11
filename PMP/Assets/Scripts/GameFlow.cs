@@ -8,6 +8,7 @@ public class GameFlow : MonoBehaviour
     public Transform[] nextTileDefault;
     public Transform[] nextTileArctic;
     public Transform[] nextTileMagma;
+    public Transform[] nextTileSwamp;
     public Transform[] traversableObjects;
     public Transform[] smallObjects;
     public Transform[] largeObjects;
@@ -67,13 +68,16 @@ public class GameFlow : MonoBehaviour
             Debug.Log(chosenBiome);
             if(chosenBiome == "Default"){
                 tileArray = nextTileDefault;
-                holeSpawnRateIndex = 3; //Här medans magma testas 
-            }else if(chosenBiome == "Arctic"){
+                holeSpawnRateIndex = 3; 
+            }else if(chosenBiome == "Arctic"){ //Vaska??
                 tileArray = nextTileArctic;
-                holeSpawnRateIndex = 3; //Här medans magma testas 
+                holeSpawnRateIndex = 3; 
             }else if(chosenBiome == "Magma"){
                 tileArray = nextTileMagma;
-                holeSpawnRateIndex = 2; //Här medans magma testas 
+                holeSpawnRateIndex = 2; 
+            }else if(chosenBiome == "Swamp"){
+                tileArray = nextTileSwamp;
+                holeSpawnRateIndex = 5; 
             }
         }
         

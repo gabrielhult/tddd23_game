@@ -15,6 +15,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float raycastDistance;
     public Vector3 playerVelocity;
     public int climbPowerUpSpeed;
+    public float swampMultiplier;
+    public float arcticMultiplier;
 
 
     [SerializeField] GameObject currentClimbObject;
@@ -88,17 +90,22 @@ public class PlayerBehaviour : MonoBehaviour
     private void PlayerMove(){
         if(climbing && !GameManager.Instance.cancelClimbing){
             applyMovement(_climbSpeed);
-        }else if(crawling){
+        }/* else if(crawling){
             applyMovement(_crawlSpeed);
             displayMovement("isCrawling");
-        }else{
+        } */else{
             applyMovement(_moveSpeed);
             displayMovement("isMoving");
         }
     }
 
     private void applyMovement(float movementMultiplier){
-        playerVelocity = _movementForce * movementMultiplier * GameManager.Instance.gameplayScaleMultiplier; //Se till att climbing skalas också, gör int det?
+        if(GameManager.Instance.isSwamp){
+            playerVelocity = _movementForce * swampMultiplier * GameManager.Instance.gameplayScaleMultiplier;
+        }else if(GameManager.Instance.isArctic){
+            playerVelocity = _movementForce * arcticMultiplier * GameManager.Instance.gameplayScaleMultiplier;
+        }else playerVelocity = _movementForce * movementMultiplier * GameManager.Instance.gameplayScaleMultiplier;
+
         if(!climbing){ 
             playerVelocity.y = ySpeed;
         }else if(GameManager.Instance.chosenPowerUp == "IncreaseClimbSpeed" && GameManager.Instance.isPowerUp && climbing){
