@@ -49,7 +49,7 @@ public class ObstacleBehaviour : MonoBehaviour
          for (int index = 0; index < childColliders.Length; index++)
          {
             colliderElement = childColliders[index];
-            if(colliderElement.gameObject.name != "Banana"){
+            if(colliderElement.gameObject.name != "Banana" && colliderElement != null){
                 colliderElement.enabled = false;
             }
          }
@@ -74,7 +74,7 @@ public class ObstacleBehaviour : MonoBehaviour
         for (int index = 0; index < childColliders.Length; index++)
          {
             colliderElement = childColliders[index];
-            if(colliderElement.gameObject.name != "Banana"){
+            if(colliderElement.gameObject.name != "Banana" && colliderElement !=null){
                 colliderElement.enabled = true;
             }
          }

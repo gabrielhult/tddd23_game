@@ -3376,7 +3376,7 @@ MonoBehaviour:
   chosenPowerUp: 
   distanceBonusLimiter: 0
   increaseDistanceTimerDisabled: 0
-  bananasForPowerUp: 10
+  bananasForPowerUp: 3
   closePowerUp: 0
   isPowerUp: 0
   bananaEndScore: {fileID: 1232378309}
