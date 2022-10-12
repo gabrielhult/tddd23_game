@@ -11,7 +11,7 @@ public class CameraBehaviour : MonoBehaviour
 
     void Start(){
         transform.position = target.position + offset;
-        AudioManager.Instance.PlaySound("GameMusic");
+        AudioManager.Instance.PlaySound("GameMusicDefault");
         //GetComponent<Rigidbody>().velocity = new Vector3(3,0,0); //Kanske kör på detta istället?
     }
 
@@ -19,12 +19,11 @@ public class CameraBehaviour : MonoBehaviour
         if(!GameManager.Instance.isGameOver){
             ReadCameraInput();
         }else{
-            AudioManager.Instance.StopSound("GameMusic");
+            AudioManager.Instance.StopSound("GameMusicDefault");
         }
         
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         transform.position = target.position + offset;

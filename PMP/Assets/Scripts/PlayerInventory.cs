@@ -9,6 +9,10 @@ public class PlayerInventory : MonoBehaviour
     public float DistanceCounter {get; private set;}
     public UnityEvent<PlayerInventory> onBananaCollected;
     public UnityEvent<PlayerInventory> onDistanceTravelled;
+    [HideInInspector]
+    public bool bananaCelebrate;
+    [HideInInspector]
+    public bool distanceCelebrate;
 
     public void ScoreCollected(){
         //IDEA: x amount of score gives an extra life?
@@ -24,16 +28,18 @@ public class PlayerInventory : MonoBehaviour
     }
 
     public void BananaHighScoreCheck(){
+        //TODO: Counter for end score at GameOverUI: https://www.youtube.com/watch?v=i1KmYHoXx80
         if(ScoreCounter > PlayerPrefs.GetInt("BananaHighScore", 0)){
             PlayerPrefs.SetInt("BananaHighScore", ScoreCounter);
-            //Celebration call?
+            bananaCelebrate = true; //Effects in EndScore
         }
     }
 
     public void DistanceHighScoreCheck(){
+        //TODO: Counter for end score at GameOverUI: https://www.youtube.com/watch?v=i1KmYHoXx80
         if(DistanceCounter > PlayerPrefs.GetFloat("DistanceHighScore", 0)){
             PlayerPrefs.SetFloat("DistanceHighScore", DistanceCounter);
-            //Celebration call?
+            distanceCelebrate = true; //Effects in EndScore
         }
     }
 }

@@ -39,19 +39,4 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Pause();
     }
-
-    public void DefaultPitch(string name){
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.pitch = 1.0f;
-    }
-    public void ArcticPitch(string name){
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.pitch = 1.2f;
-    }
-
-    public void MagmaPitch(string name){
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        s.pitch = 0.8f;
-    }
-    
 }

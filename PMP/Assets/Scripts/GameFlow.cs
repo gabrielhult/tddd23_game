@@ -71,7 +71,7 @@ public class GameFlow : MonoBehaviour
                 tileArray = nextTileDefault;
                 holeSpawnRateIndex = 3; 
                 obstacleSpawnRateIndex = 4;
-            }else if(chosenBiome == "Arctic"){ //Vaska??
+            }else if(chosenBiome == "Arctic"){
                 tileArray = nextTileArctic;
                 holeSpawnRateIndex = 3; 
                 obstacleSpawnRateIndex = 4;
@@ -202,7 +202,7 @@ public class GameFlow : MonoBehaviour
         if(GameManager.Instance.isArctic){
             biomeMultiplier = 2f;
         }else if(GameManager.Instance.isSwamp){
-            biomeMultiplier = 0.5f;
+            biomeMultiplier = 0.8f;
         }else biomeMultiplier = 1;
         yield return new WaitForSeconds(.33f / (GameManager.Instance.gameplayScaleMultiplier * biomeMultiplier)); 
         if(!GameManager.Instance.isGameOver){

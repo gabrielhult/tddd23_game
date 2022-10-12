@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public CameraBehaviour cameraBehaviour;
     public PlayerInventory playerInventory;
     public StartGameUI startGameUI;
+    public EndScore endScore;
     [HideInInspector]
     public bool isGameOver;
     [HideInInspector]
@@ -46,6 +47,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float extraPowerUpDuration;
     public float obstacleOpacity;
+
+    public bool isDefault;
+    public bool isMagma;
     public bool isSwamp;
     public bool isArctic;
 
@@ -84,7 +88,7 @@ public class GameManager : MonoBehaviour
         playerInventory = playerInventory.GetComponent<PlayerInventory>();
         startGameUI = startGameUI.GetComponent<StartGameUI>();
         levelLoader = levelLoader.GetComponent<LevelLoader>();
-
+        endScore = endScore.GetComponent<EndScore>();
     }
 
     void Update(){ //Kan göras om enligt https://www.youtube.com/watch?v=Hn804Wgr3KE vid behov
@@ -153,13 +157,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver(){
-        AudioManager.Instance.PlaySound("GameOver");
         if(!isGameOver){
+            AudioManager.Instance.PlaySound("GameOver");
             AudioManager.Instance.PlaySound("BongeLost");
+            endScore.CountEndScore();
         }
         isGameOver = true;  
-        bananaEndScore.text = playerInventory.ScoreCounter.ToString();
-        distanceEndScore.text = playerInventory.DistanceCounter.ToString();
+        //bananaEndScore.text = playerInventory.ScoreCounter.ToString();
+        //distanceEndScore.text = playerInventory.DistanceCounter.ToString();
     }
 
     public void Resume(){

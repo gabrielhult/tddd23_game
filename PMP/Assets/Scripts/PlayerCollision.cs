@@ -21,24 +21,52 @@ public class PlayerCollision : MonoBehaviour
             GameManager.Instance.GameOver();
         }
         else if(other.tag == "DefaultTile"){ //TODO: Kolla om pitchen kan justeras, annars ha helt olika instanser av samma ljud men olika pitch
+            /* if(!GameManager.Instance.isDefault){
+                AudioManager.Instance.PlaySound("GameMusicDefault");
+                AudioManager.Instance.StopSound("GameMusicArctic");
+                AudioManager.Instance.StopSound("GameMusicMagma");
+                AudioManager.Instance.StopSound("GameMusicSwamp");
+            } */
+            GameManager.Instance.isDefault = true;
             GameManager.Instance.isArctic = false;
             GameManager.Instance.isSwamp = false;
-            AudioManager.Instance.DefaultPitch("GameMusic");
+            GameManager.Instance.isMagma = false;
         }
         else if(other.tag == "ArcticTile"){
+            /* if(!GameManager.Instance.isArctic){
+                AudioManager.Instance.PlaySound("GameMusicArctic");
+                AudioManager.Instance.StopSound("GameMusicDefault");
+                AudioManager.Instance.StopSound("GameMusicMagma");
+                AudioManager.Instance.StopSound("GameMusicSwamp");
+            } */
             GameManager.Instance.isArctic = true;
             GameManager.Instance.isSwamp = false;
-            AudioManager.Instance.ArcticPitch("GameMusic");
+            GameManager.Instance.isMagma = false;
+            GameManager.Instance.isDefault = false;
         }
         else if(other.tag == "MagmaTile"){
+            /* if(!GameManager.Instance.isMagma){
+                AudioManager.Instance.PlaySound("GameMusicMagma");
+                AudioManager.Instance.StopSound("GameMusicArctic");
+                AudioManager.Instance.StopSound("GameMusicDefault");
+                AudioManager.Instance.StopSound("GameMusicSwamp");
+            } */
+            GameManager.Instance.isMagma = true;
             GameManager.Instance.isArctic = false;
             GameManager.Instance.isSwamp = false;
-            AudioManager.Instance.MagmaPitch("GameMusic");
+            GameManager.Instance.isDefault = false;
         }
         else if(other.tag == "SwampTile"){
+            /* if(!GameManager.Instance.isSwamp){
+                AudioManager.Instance.PlaySound("GameMusicSwamp");
+                AudioManager.Instance.StopSound("GameMusicArctic");
+                AudioManager.Instance.StopSound("GameMusicMagma");
+                AudioManager.Instance.StopSound("GameMusicDefault");
+            } */
             GameManager.Instance.isSwamp = true;
             GameManager.Instance.isArctic = false;
-            //AudioManager.Instance.SwampPitch("GameMusic");
+            GameManager.Instance.isMagma = false;
+            GameManager.Instance.isDefault = false;
         }
     }
 
@@ -46,12 +74,6 @@ public class PlayerCollision : MonoBehaviour
         if(other.tag == "Bamboo"){
             GameManager.Instance.isClimbable = false;
             GameManager.Instance.setClimbObject(null);
-        }/* else if(other.tag == "SwampTile"){
-            Debug.Log("left swamp");
-            GameManager.Instance.isSwamp = false;
-        }else if(other.tag == "ArcticTile"){
-            Debug.Log("left arctic");
-            GameManager.Instance.isArctic = false;
-        } */
+        }
     }
 }
