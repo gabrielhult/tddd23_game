@@ -9,8 +9,8 @@ public class EndScore : MonoBehaviour
     public PlayerInventory playerInventory;
     public TextMeshProUGUI bananaText;
     public TextMeshProUGUI distanceText;
-    public TextMeshProUGUI bananaNewRecordText;
-    public TextMeshProUGUI distanceNewRecordText;
+    public GameObject bananaNewRecordText;
+    public GameObject distanceNewRecordText;
     private bool bananaScoreCounted;
     private bool distanceScoreCounted;
 
@@ -47,7 +47,7 @@ public class EndScore : MonoBehaviour
             if(!bananaScoreCounted){ //currentScore matches ScoreCounter
                 if(playerInventory.bananaCelebrate && !bananaScoreCounted){
                     CelebrateBanana();
-                    bananaNewRecordText.gameObject.SetActive(true);
+                    bananaNewRecordText.SetActive(true);
                 }
                 bananaScoreCounted = true;
                 bananaText.text = playerInventory.ScoreCounter.ToString();
@@ -65,7 +65,7 @@ public class EndScore : MonoBehaviour
             if(!distanceScoreCounted){ //currentScore matches DistanceCounter
                 if(playerInventory.distanceCelebrate && !distanceScoreCounted){
                     CelebrateDistance();
-                    distanceNewRecordText.gameObject.SetActive(true);
+                    distanceNewRecordText.SetActive(true);
                 }
                 distanceScoreCounted = true;
                 distanceText.text = playerInventory.DistanceCounter.ToString();
