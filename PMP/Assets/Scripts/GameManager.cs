@@ -136,7 +136,6 @@ public class GameManager : MonoBehaviour
 
             if(playerInventory.ScoreCounter % bananasForPowerUp == 0){
                 closePowerUp = false;
-                //Debug.Log(chosenPowerUp);
                 AudioManager.Instance.PlaySound("TenBananasCollected");
                 StartCoroutine(awardPowerUp(chosenPowerUp));
             }else{

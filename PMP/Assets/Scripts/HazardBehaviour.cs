@@ -42,26 +42,25 @@ public class HazardBehaviour : MonoBehaviour
                 hazardRigidbody.velocity = new Vector3(swampSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
             }else if (GameManager.Instance.isArctic){
                 hazardRigidbody.velocity = new Vector3(arcticSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
-            }else{
-                distanceBetween = player.position.x - transform.position.x;
-
-                if(distanceBetween > upperDistanceBound - hazardXScale){
-                    hazardRigidbody.velocity = new Vector3(baseMoveSpeed * fastModeMultiplier * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
-                    AudioManager.Instance.StopSound("Danger");
-                    isClose = false;
-                }else if(distanceBetween < lowerDistanceBound + hazardXScale){
-                    if(!GameManager.Instance.isGameOver){
-                        AudioManager.Instance.PlaySound("Danger");
-                    }else AudioManager.Instance.StopSound("Danger");
-                    
-                    isClose = true; //Detta skickas till DangerUI som sätter igång User Interface för Danger.
-                }else{
-                    hazardRigidbody.velocity = new Vector3(baseMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
-                    AudioManager.Instance.StopSound("Danger");
-                    isClose = false;
-                }
             }
-            
+
+            distanceBetween = player.position.x - transform.position.x;
+
+            if(distanceBetween > upperDistanceBound - hazardXScale){
+                hazardRigidbody.velocity = new Vector3(baseMoveSpeed * fastModeMultiplier * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                AudioManager.Instance.StopSound("Danger");
+                isClose = false;
+            }else if(distanceBetween < lowerDistanceBound + hazardXScale){
+                if(!GameManager.Instance.isGameOver){
+                    AudioManager.Instance.PlaySound("Danger");
+                }else AudioManager.Instance.StopSound("Danger");
+                
+                isClose = true; //Detta skickas till DangerUI som sätter igång User Interface för Danger.
+            }else{
+                hazardRigidbody.velocity = new Vector3(baseMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                AudioManager.Instance.StopSound("Danger");
+                isClose = false;
+            }
         }
 
         StartCoroutine(distanceBehaviour());

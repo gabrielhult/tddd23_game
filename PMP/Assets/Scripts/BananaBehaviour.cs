@@ -57,6 +57,13 @@ public class BananaBehaviour : MonoBehaviour
         }else climbSpeedUI.SetActive(false);
     }
 
+    private void OnTriggerEnter(Collider other){ //TODO: Fixa detta, funkar ej ännu, vet ej varför dock
+        if(other.tag == "Obstacle"){
+            Debug.Log("banana collide with obstacle");
+            thisBanana.SetActive(false);
+        }
+    }
+
     private void OnTriggerExit(Collider other) {
         if(other.tag == "Hazard"){
             if(!GameManager.Instance.isGameOver){

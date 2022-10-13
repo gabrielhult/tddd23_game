@@ -14,13 +14,16 @@ public class EndScore : MonoBehaviour
     private bool bananaScoreCounted;
     private bool distanceScoreCounted;
 
-    private int currentScore;
+    private int currentScoreBanana;
+    private int currentScoreDistance;
+    private float scoreCountTimeScale;
 
     public int scoreIncrementRate;
     // Start is called before the first frame update
     void Start()
     {
-        currentScore = 0;
+        currentScoreBanana = 0;
+        currentScoreDistance = 0;
         playerInventory = playerInventory.GetComponent<PlayerInventory>();
         bananaScoreCounted = false;
         distanceScoreCounted = false;
@@ -35,13 +38,26 @@ public class EndScore : MonoBehaviour
 
     IEnumerator CountScore(){
 
-        yield return new WaitForSeconds(.005f);
+        if(bananaScoreCounted){
+            if(playerInventory.DistanceCounter < 100){
+                scoreCountTimeScale = 0.5f / playerInventory.DistanceCounter;
+            }else if(playerInventory.DistanceCounter < 1500){
+                scoreCountTimeScale = 1f / playerInventory.DistanceCounter;
+            }else scoreCountTimeScale = 2f / playerInventory.DistanceCounter;
+        }else {
+            if(playerInventory.ScoreCounter < 10){
+                scoreCountTimeScale = 0.5f / playerInventory.ScoreCounter;
+            }else if(playerInventory.ScoreCounter < 50){
+                scoreCountTimeScale = 1f / playerInventory.ScoreCounter;
+            }else scoreCountTimeScale = 2f / playerInventory.ScoreCounter;
+        }
 
+        yield return new WaitForSeconds(scoreCountTimeScale); //TODO: Make it more dynamic
 
         //Banana
-        if(currentScore != playerInventory.ScoreCounter && !bananaScoreCounted){
-            currentScore += scoreIncrementRate;
-            bananaText.text = currentScore.ToString();
+        if(currentScoreBanana != playerInventory.ScoreCounter && !bananaScoreCounted){
+            currentScoreBanana += scoreIncrementRate;
+            bananaText.text = currentScoreBanana.ToString();
             StartCoroutine(CountScore());
         }else{
             if(!bananaScoreCounted){ //currentScore matches ScoreCounter
@@ -51,27 +67,27 @@ public class EndScore : MonoBehaviour
                 }
                 bananaScoreCounted = true;
                 bananaText.text = playerInventory.ScoreCounter.ToString();
-                currentScore = 0;
             }
         }
-
 
         //Distance
-        if(currentScore != playerInventory.DistanceCounter && bananaScoreCounted && !distanceScoreCounted){
-            currentScore += scoreIncrementRate;
-            distanceText.text = currentScore.ToString();
-            StartCoroutine(CountScore());
-        }else{ 
-            if(!distanceScoreCounted){ //currentScore matches DistanceCounter
-                if(playerInventory.distanceCelebrate && !distanceScoreCounted){
-                    CelebrateDistance();
-                    distanceNewRecordText.SetActive(true);
+        if(bananaScoreCounted){ //Only count distance if banana count is complete
+            if(currentScoreDistance != playerInventory.DistanceCounter && !distanceScoreCounted){
+                currentScoreDistance += scoreIncrementRate;
+                distanceText.text = currentScoreDistance.ToString();
+                StartCoroutine(CountScore());
+            }else{ 
+                if(!distanceScoreCounted){ //currentScore matches DistanceCounter
+                    if(playerInventory.distanceCelebrate && !distanceScoreCounted){
+                        CelebrateDistance();
+                        distanceNewRecordText.SetActive(true);
+                    }
+                    distanceScoreCounted = true;
+                    distanceText.text = playerInventory.DistanceCounter.ToString();
                 }
-                distanceScoreCounted = true;
-                distanceText.text = playerInventory.DistanceCounter.ToString();
-                currentScore = 0;
             }
         }
+        
     }
 
     public void CelebrateBanana(){

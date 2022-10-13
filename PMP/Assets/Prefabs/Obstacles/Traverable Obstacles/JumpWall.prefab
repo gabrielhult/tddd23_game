@@ -45,8 +45,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.1, z: 3}
-  m_Center: {x: 1, y: 0, z: 0}
+  m_Size: {x: 3.5183864, y: 2, z: 8.00891}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &-8310992967618904666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0ca750e5807c74db795d247ef521fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisTile: {fileID: 1636017285091119134}
+  thisObstacle: {fileID: 0}
 --- !u!1 &8494512140769043352
 GameObject:
   m_ObjectHideFlags: 0
