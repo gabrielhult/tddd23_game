@@ -88,17 +88,14 @@ public class PlayerBehaviour : MonoBehaviour
     private void PlayerMove(){
         if(climbing && !GameManager.Instance.cancelClimbing){
             applyMovement(_climbSpeed);
-        }/* else if(crawling){
-            applyMovement(_crawlSpeed);
-            displayMovement("isCrawling");
-        } */else{
+        }else{
             applyMovement(_moveSpeed);
             displayMovement("isMoving");
         }
     }
 
     private void applyMovement(float movementMultiplier){
-        if(GameManager.Instance.isSwamp){
+        if(GameManager.Instance.isSwamp){ //Does this make climb speed weird in Swamp and Arctic
             playerVelocity = _movementForce * swampMultiplier * GameManager.Instance.gameplayScaleMultiplier;
         }else if(GameManager.Instance.isArctic){
             playerVelocity = _movementForce * arcticMultiplier * GameManager.Instance.gameplayScaleMultiplier;
@@ -109,7 +106,6 @@ public class PlayerBehaviour : MonoBehaviour
         }else if(GameManager.Instance.chosenPowerUp == "IncreaseClimbSpeed" && GameManager.Instance.isPowerUp && climbing){
             playerVelocity.y = climbPowerUpSpeed; //se till så detta inte appliceras efter power-up tar slut också
         }
-        //Debug.Log(playerVelocity.y);
         characterController.Move(playerVelocity * Time.deltaTime);
     }
 
@@ -129,7 +125,6 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void PlayerJump(){
-        //Lägg KANSKE till dubbelhopp
         if(characterController.isGrounded){ 
             ySpeed = -0.5f;
             characterController.stepOffset = originalOffset;

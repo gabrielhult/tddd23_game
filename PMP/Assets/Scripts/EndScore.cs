@@ -38,6 +38,7 @@ public class EndScore : MonoBehaviour
 
     IEnumerator CountScore(){
 
+        //TODO: Tweak constant values
         if(bananaScoreCounted){
             if(playerInventory.DistanceCounter < 100){
                 scoreCountTimeScale = 0.5f / playerInventory.DistanceCounter;
