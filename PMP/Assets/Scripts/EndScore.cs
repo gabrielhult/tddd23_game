@@ -53,7 +53,13 @@ public class EndScore : MonoBehaviour
             }else scoreCountTimeScale = 2f / playerInventory.ScoreCounter;
         }
 
-        yield return new WaitForSeconds(scoreCountTimeScale); //TODO: Make it more dynamic
+        Debug.Log("Scale: " + scoreCountTimeScale);
+
+        Debug.Log("Before: " + Time.time);
+
+        yield return new WaitForSeconds(scoreCountTimeScale);
+
+        Debug.Log("After: " + Time.time);
 
         //Banana
         if(currentScoreBanana != playerInventory.ScoreCounter && !bananaScoreCounted){
@@ -62,7 +68,7 @@ public class EndScore : MonoBehaviour
             StartCoroutine(CountScore());
         }else{
             if(!bananaScoreCounted){ //currentScore matches ScoreCounter
-                if(playerInventory.bananaCelebrate && !bananaScoreCounted){
+                if(playerInventory.bananaCelebrate){
                     CelebrateBanana();
                     bananaNewRecordText.SetActive(true);
                 }
@@ -79,7 +85,7 @@ public class EndScore : MonoBehaviour
                 StartCoroutine(CountScore());
             }else{ 
                 if(!distanceScoreCounted){ //currentScore matches DistanceCounter
-                    if(playerInventory.distanceCelebrate && !distanceScoreCounted){
+                    if(playerInventory.distanceCelebrate){
                         CelebrateDistance();
                         distanceNewRecordText.SetActive(true);
                     }
