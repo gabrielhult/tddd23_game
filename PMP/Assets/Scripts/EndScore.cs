@@ -36,7 +36,7 @@ public class EndScore : MonoBehaviour
     }
 
 
-    IEnumerator CountScore(){
+    IEnumerator CountScore(){ //Kan ej ha couroutine för detta?
 
         //TODO: Tweak constant values
         if(bananaScoreCounted){
@@ -80,7 +80,11 @@ public class EndScore : MonoBehaviour
         //Distance
         if(bananaScoreCounted){ //Only count distance if banana count is complete
             if(currentScoreDistance != playerInventory.DistanceCounter && !distanceScoreCounted){
-                currentScoreDistance += scoreIncrementRate;
+                //TODO/WIP: Have higher increment if it's a lot left to count!
+                if(playerInventory.DistanceCounter - currentScoreDistance > 20){
+                    currentScoreDistance += scoreIncrementRate;
+                }else currentScoreDistance += scoreIncrementRate*5;
+                
                 distanceText.text = currentScoreDistance.ToString();
                 StartCoroutine(CountScore());
             }else{ 
