@@ -34,9 +34,12 @@ public class BananaBehaviour : MonoBehaviour
 
         if(GameManager.Instance.chosenPowerUp == "DoubleBananaScoreCollect"){
             doubleBananaUI.SetActive(true); //TODO: Add effect to banana when double score is active!
-            //secondBanana.SetActive(true);
+            if(GameManager.Instance.isPowerUp){
+                thisBanana.transform.localScale = new Vector3(2,2,2);
+            }
         }else {
             doubleBananaUI.SetActive(false);
+            thisBanana.transform.localScale = new Vector3(1,1,1);
             //secondBanana.SetActive(false);
         }
 
