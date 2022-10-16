@@ -2818,7 +2818,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1247705441}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &878488472
 BoxCollider:
@@ -4086,10 +4086,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1183518768}
   - {fileID: 1572723594}
   - {fileID: 878488471}
   - {fileID: 1521774194}
+  - {fileID: 1183518768}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4896,7 +4896,7 @@ Transform:
   - {fileID: 1762232617}
   - {fileID: 1477532440}
   m_Father: {fileID: 1247705441}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1530041251 stripped
 Transform:
@@ -4995,7 +4995,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1247705441}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 75, y: -40, z: 0}
 --- !u!114 &1578449825 stripped
 MonoBehaviour:
@@ -8000,7 +8000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: _climbSpeed
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: raycastDistance
@@ -8016,7 +8016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: climbPowerUpSpeed
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5600553832759436350, guid: 7a863019c6d111649bd94d08c08c740b, type: 3}
       propertyPath: climbPowerUpMultiplier
@@ -8197,7 +8197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7064057812186297873, guid: 3955a6ebd7dbc1e4dbd33a3b398796f4, type: 3}
       propertyPath: m_LocalScale.x

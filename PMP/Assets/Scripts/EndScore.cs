@@ -53,13 +53,13 @@ public class EndScore : MonoBehaviour
             }else scoreCountTimeScale = 2f / playerInventory.ScoreCounter;
         }
 
-        Debug.Log("Scale: " + scoreCountTimeScale);
+        //Debug.Log("Scale: " + scoreCountTimeScale);
 
-        Debug.Log("Before: " + Time.time);
+        //Debug.Log("Before: " + Time.time);
 
         yield return new WaitForSeconds(scoreCountTimeScale);
 
-        Debug.Log("After: " + Time.time);
+        //Debug.Log("After: " + Time.time);
 
         //Banana
         if(currentScoreBanana != playerInventory.ScoreCounter && !bananaScoreCounted){

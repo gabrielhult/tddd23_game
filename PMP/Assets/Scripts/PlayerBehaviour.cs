@@ -104,8 +104,8 @@ public class PlayerBehaviour : MonoBehaviour
         if(!climbing){ 
             playerVelocity.y = ySpeed;
         }else if(GameManager.Instance.chosenPowerUp == "IncreaseClimbSpeed" && GameManager.Instance.isPowerUp && climbing){
-            playerVelocity.y = climbPowerUpSpeed; //se till så detta inte appliceras efter power-up tar slut också
-        }
+            playerVelocity.y = climbPowerUpSpeed; 
+        }else playerVelocity.y = _climbSpeed; //Makes sure swamp and arctic don't make Manke climb too fast
         characterController.Move(playerVelocity * Time.deltaTime);
     }
 

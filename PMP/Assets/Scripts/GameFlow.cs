@@ -204,11 +204,16 @@ public class GameFlow : MonoBehaviour
         }else if(GameManager.Instance.isSwamp){
             biomeMultiplier = 0.8f;
         }else biomeMultiplier = 1;
-        yield return new WaitForSeconds(.33f / (GameManager.Instance.gameplayScaleMultiplier * biomeMultiplier)); 
-        if(!GameManager.Instance.isGameOver){
+
+        if(!GameManager.Instance.isGameOver){ //Split this up so banana can detect if it spawns inside obstacle collider
             tileSpawn();
             
             obstacleSpawn();
+        }
+
+        yield return new WaitForSeconds(.33f / (GameManager.Instance.gameplayScaleMultiplier * biomeMultiplier)); 
+
+        if(!GameManager.Instance.isGameOver){ 
 
             bananaSpawn();
 
