@@ -34,7 +34,6 @@ public class HazardBehaviour : MonoBehaviour
     IEnumerator distanceBehaviour(){
 
         yield return new WaitForSeconds(.5f);
-        //Debug.Log(transform.localScale.x);
         if(GameManager.Instance.roundStarted){
             if(GameManager.Instance.chosenPowerUp == "SlowDownHazard" && GameManager.Instance.isPowerUp){
                 hazardRigidbody.velocity = new Vector3(slowedDownMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
@@ -46,6 +45,8 @@ public class HazardBehaviour : MonoBehaviour
 
             distanceBetween = player.position.x - transform.position.x;
 
+
+            //TODO: Fixa så Hazard beter sig rätt, lite konstigt beteende i fart ibland
             if(distanceBetween > upperDistanceBound - hazardXScale){
                 hazardRigidbody.velocity = new Vector3(baseMoveSpeed * fastModeMultiplier * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
                 AudioManager.Instance.StopSound("Danger");

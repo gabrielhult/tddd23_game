@@ -40,13 +40,18 @@ public class EndScore : MonoBehaviour
 
         //TODO: Tweak constant values
         if(bananaScoreCounted){
-            if(playerInventory.DistanceCounter < 100){
+            if(playerInventory.DistanceCounter == 0){
+                scoreCountTimeScale = 0.5f;
+            }else if(playerInventory.DistanceCounter < 100){
                 scoreCountTimeScale = 0.5f / playerInventory.DistanceCounter;
             }else if(playerInventory.DistanceCounter < 1500){
                 scoreCountTimeScale = 1f / playerInventory.DistanceCounter;
             }else scoreCountTimeScale = 2f / playerInventory.DistanceCounter;
         }else {
-            if(playerInventory.ScoreCounter < 10){
+            if(playerInventory.ScoreCounter == 0){
+                scoreCountTimeScale = 0.5f;
+            }
+            else if(playerInventory.ScoreCounter < 10){
                 scoreCountTimeScale = 0.5f / playerInventory.ScoreCounter;
             }else if(playerInventory.ScoreCounter < 50){
                 scoreCountTimeScale = 1f / playerInventory.ScoreCounter;
