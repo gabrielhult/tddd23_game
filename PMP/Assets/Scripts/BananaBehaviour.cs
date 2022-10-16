@@ -5,6 +5,8 @@ using UnityEngine;
 public class BananaBehaviour : MonoBehaviour
 {
     public GameObject thisBanana;
+    public GameObject normalModel;
+    public GameObject poweredUpIcon;
 
     public GameObject powerUpObject;
     public GameObject doubleBananaUI;
@@ -33,14 +35,14 @@ public class BananaBehaviour : MonoBehaviour
         }else increaseDistanceUI.SetActive(false);
 
         if(GameManager.Instance.chosenPowerUp == "DoubleBananaScoreCollect"){
-            doubleBananaUI.SetActive(true); //TODO: Add effect to banana when double score is active!
+            doubleBananaUI.SetActive(true);
             if(GameManager.Instance.isPowerUp){
-                thisBanana.transform.localScale = new Vector3(2,2,2);
+                poweredUpIcon.SetActive(true);
             }
-        }else {
+        }else{
+            //TODO: Fix the switch-back, does't work atm
             doubleBananaUI.SetActive(false);
-            thisBanana.transform.localScale = new Vector3(1,1,1);
-            //secondBanana.SetActive(false);
+            poweredUpIcon.SetActive(false); //This doesn't work, child related problem
         }
 
         if(GameManager.Instance.chosenPowerUp == "NoObstacles"){

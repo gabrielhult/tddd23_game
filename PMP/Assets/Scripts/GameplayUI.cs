@@ -6,6 +6,7 @@ public class GameplayUI : MonoBehaviour
 {
 
     public GameObject gameplayMenu;
+    public GameObject powerUpMenu;
     public GameObject doubleBananaUI;
     public GameObject increaseDistanceUI;
     public GameObject noObstaclesUI;
@@ -19,7 +20,11 @@ public class GameplayUI : MonoBehaviour
     {
         if(GameManager.Instance.isGameOver){
             gameplayMenu.SetActive(false);
-        }else gameplayMenu.SetActive(true);
+            powerUpMenu.SetActive(false);
+        }else {
+            gameplayMenu.SetActive(true);
+            powerUpMenu.SetActive(true);
+        }
 
         if(GameManager.Instance.isPowerUp){
             if(GameManager.Instance.chosenPowerUp == "IncreaseDistanceAward"){ //IEnumerator behövs för att inte logik och UI krockar

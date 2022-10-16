@@ -20,12 +20,14 @@ public class HazardBehaviour : MonoBehaviour
 
     private float distanceBetween;
     private float hazardXScale;
+    private bool speedNerfed;
 
     void Start(){
         //Initial velocity / Base velocity
         hazardRigidbody.GetComponent<Rigidbody>();
         hazardXScale = transform.localScale.x / 2;
         isClose = false;
+        speedNerfed = false;
         StartCoroutine(distanceBehaviour());
     }
 
@@ -33,21 +35,31 @@ public class HazardBehaviour : MonoBehaviour
 
     IEnumerator distanceBehaviour(){
 
+        //TODO: Work on this / balance
+
         yield return new WaitForSeconds(.5f);
-        if(GameManager.Instance.roundStarted){
+
+        if(GameManager.Instance.isGameOver){
+            hazardRigidbody.velocity = new Vector3(5f * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+        }else if(GameManager.Instance.roundStarted){
+            if(GameManager.Instance.chosenPowerUp != "SlowDownHazard"){
+                hazardRigidbody.velocity = new Vector3(baseMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);   
+            }
+
             if(GameManager.Instance.chosenPowerUp == "SlowDownHazard" && GameManager.Instance.isPowerUp){
                 hazardRigidbody.velocity = new Vector3(slowedDownMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                speedNerfed = true;
             }else if (GameManager.Instance.isSwamp){
                 hazardRigidbody.velocity = new Vector3(swampSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                speedNerfed = false;
             }else if (GameManager.Instance.isArctic){
                 hazardRigidbody.velocity = new Vector3(arcticSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                speedNerfed = false;
             }
 
             distanceBetween = player.position.x - transform.position.x;
 
-
-            //TODO: Fixa så Hazard beter sig rätt, lite konstigt beteende i fart ibland
-            if(distanceBetween > upperDistanceBound - hazardXScale){
+            if(distanceBetween > upperDistanceBound - hazardXScale && !speedNerfed){
                 hazardRigidbody.velocity = new Vector3(baseMoveSpeed * fastModeMultiplier * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
                 AudioManager.Instance.StopSound("Danger");
                 isClose = false;
@@ -58,12 +70,11 @@ public class HazardBehaviour : MonoBehaviour
                 
                 isClose = true; //Detta skickas till DangerUI som sätter igång User Interface för Danger.
             }else{
-                hazardRigidbody.velocity = new Vector3(baseMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
                 AudioManager.Instance.StopSound("Danger");
                 isClose = false;
             }
         }
-
+        //Debug.Log("Velocity: " + hazardRigidbody.velocity);
         StartCoroutine(distanceBehaviour());
     }
 
