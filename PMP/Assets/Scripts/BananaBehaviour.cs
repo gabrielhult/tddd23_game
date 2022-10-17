@@ -40,9 +40,8 @@ public class BananaBehaviour : MonoBehaviour
                 poweredUpIcon.SetActive(true);
             }
         }else{
-            //TODO: Fix the switch-back, does't work atm
             doubleBananaUI.SetActive(false);
-            poweredUpIcon.SetActive(false); //This doesn't work, child related problem
+            poweredUpIcon.SetActive(false);
         }
 
         if(GameManager.Instance.chosenPowerUp == "NoObstacles"){

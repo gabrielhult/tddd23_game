@@ -200,7 +200,7 @@ public class GameFlow : MonoBehaviour
     IEnumerator spawnTile(){
         //Logic for how often new tiles spawn
         if(GameManager.Instance.isArctic){
-            biomeMultiplier = 2f;
+            biomeMultiplier = 1.2f;
         }else if(GameManager.Instance.isSwamp){
             biomeMultiplier = 0.8f;
         }else biomeMultiplier = 1;

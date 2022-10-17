@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public float extraPowerUpDuration;
     public float obstacleOpacity;
+    [HideInInspector]
+    public float totalPowerUpDuration;
 
     public bool isDefault;
     public bool isMagma;
@@ -137,13 +139,14 @@ public class GameManager : MonoBehaviour
             if(playerInventory.ScoreCounter % bananasForPowerUp == 0){
                 closePowerUp = false;
                 AudioManager.Instance.PlaySound("TenBananasCollected");
+                if(isPowerUp){ //If a power-up is already active...
+                    Debug.Log("EXTRA");
+                    //extraPowerUpDuration += 3; //extend current power-up with base duration and an additional 3 seconds
+                }
                 StartCoroutine(awardPowerUp(chosenPowerUp));
             }else{
                 if(playerInventory.ScoreCounter % bananasForPowerUp == bananasForPowerUp - 1){ //If we are one away from a power-up
-                    //TEST THIS
-                    /* if(isPowerUp && chosenPowerUp != ""){ //Does this work?
-                        chosenPowerUp = chosenPowerUp; //Keep the same power-up if we reach new power-up before on-going one hasn't expired
-                    }else */ chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)]; //Choose power-up and display it over the banana
+                    chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)]; //Choose power-up and display it over the banana
                     closePowerUp = true;
                 }
                 AudioManager.Instance.PlaySound("BananaCollect");
@@ -199,23 +202,26 @@ public class GameManager : MonoBehaviour
     }
 
 
-    IEnumerator awardPowerUp(string chosenPowerUp){
+    IEnumerator awardPowerUp(string powerUp){
         isPowerUp = true;
-        if(chosenPowerUp == "NoObstacles"){
+        if(powerUp == "NoObstacles"){
             cancelClimbing = true;
-        }else if(chosenPowerUp == "IncreaseDistanceAward"){
+        }else if(powerUp == "IncreaseDistanceAward"){
             increaseDistanceTimerDisabled = true;
-        }else if(chosenPowerUp == "DoubleBananaScoreCollect"){
+        }else if(powerUp == "DoubleBananaScoreCollect"){
             extraPowerUpDuration = extraDoubleBananaScoreDuration;
-        }else if(chosenPowerUp == "IncreaseClimbSpeed"){
+        }else if(powerUp == "IncreaseClimbSpeed"){
             extraPowerUpDuration = extraClimbSpeedDuration;
-        }else if(chosenPowerUp == "FeatherJump"){
+        }else if(powerUp == "FeatherJump"){
             extraPowerUpDuration = extraFeatherJumpDuration;
         }
+
+        totalPowerUpDuration = basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier + extraPowerUpDuration;
+
         //wait x seconds
-        yield return new WaitForSeconds(basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier + extraPowerUpDuration); 
-        //Detta kan verkligen se bättre ut
-        if(chosenPowerUp == "NoObstacles"){
+        yield return new WaitForSeconds(totalPowerUpDuration); 
+
+        if(powerUp == "NoObstacles"){
             cancelClimbing = false;
         }
         

@@ -16,7 +16,8 @@ public class TileBehaviour : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if(other.tag == "Hazard"){
             if(!GameManager.Instance.isGameOver){
-                thisTile.SetActive(false);
+                //thisTile.SetActive(false);
+                Destroy(thisTile);
              }
         }
     }

@@ -45,7 +45,8 @@ public class ObstacleBehaviour : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if(other.tag == "Hazard"){
             if(!GameManager.Instance.isGameOver){
-                thisObstacle.SetActive(false);
+                //thisObstacle.SetActive(false);
+                Destroy(thisObstacle);
              }
         }
     }

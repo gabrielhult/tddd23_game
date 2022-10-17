@@ -20,7 +20,7 @@ public class PowerUpTimerUI : MonoBehaviour
         if(GameManager.Instance.isPowerUp  && !GameManager.Instance.isGameOver && !GameManager.Instance.increaseDistanceTimerDisabled){
             if(!countdownStarted){
                 timerUI.SetActive(true);
-                timeLeft = GameManager.Instance.basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier +  GameManager.Instance.extraPowerUpDuration;
+                timeLeft = GameManager.Instance.totalPowerUpDuration;
                 countdownStarted = true;
             }else{ //countdown started
                 if(!GameManager.Instance.isPaused){
