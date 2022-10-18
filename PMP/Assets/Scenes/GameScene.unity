@@ -306,7 +306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 10, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &24422598
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 618ac95419184e248a559f72e3820880, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 082cf0ec651618042b9028e52e99876d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3995,7 +3995,7 @@ MonoBehaviour:
   activeSidewaysObstacles: []
   activeUpAndDownObstacles: []
   gameplayScaleMultiplier: 0
-  gameplayScaleAdder: 0.02
+  gameplayScaleAdder: 0.015
   gameplayScaleTimer: 10
   basePowerUpDuration: 3
   extraDoubleBananaScoreDuration: 2
@@ -4093,8 +4093,9 @@ MonoBehaviour:
   secondObjChance: 2
   secondMovingObjChance: 10
   maxBananaHeight: 6
-  largeObstacleThreshold: 500
-  movingObstacleThreshold: 1000
+  largeObstacleThreshold: 1000
+  movingObstacleThreshold: 2000
+  secondSmallObstacleThreshold: 250
   biomeArray:
   - Default
   - Arctic

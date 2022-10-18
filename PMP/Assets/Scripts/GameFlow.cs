@@ -25,6 +25,7 @@ public class GameFlow : MonoBehaviour
     public int maxBananaHeight;
     public float largeObstacleThreshold;
     public float movingObstacleThreshold;
+    public float secondSmallObstacleThreshold;
     public string[] biomeArray;
     [HideInInspector]
     public string chosenBiome;
@@ -101,7 +102,7 @@ public class GameFlow : MonoBehaviour
         obstacleSpawnCounter++;
         if(obstacleSpawnCounter % obstacleSpawnRateIndex == 0){
             
-            //For movable obstacles (IDEA: scale movingObjChance so more and more movable spawns once it can)
+            //For movable obstacles
             if(playerInventory.DistanceCounter > movingObstacleThreshold){ //Start spawning when score is over movingObstacleThreshold
                 if(Random.Range(0, movingObjChance) == 0){ //movingObjChance here is just to increase unlikelyhood
                     locationObstacle();
@@ -129,7 +130,7 @@ public class GameFlow : MonoBehaviour
             if(!isLargeObjectSpawned){  //&& !isMovableObjectSpawned..?
                 locationObstacle();
                 traverseableObjectSpawn();
-                if(Random.Range(0, secondObjChance) == 0){ //secondObjChance here is just to increase unlikelyhood
+                if(Random.Range(0, secondObjChance) == 0 && playerInventory.DistanceCounter > secondSmallObstacleThreshold){ //secondObjChance here is just to increase unlikelyhood
                     //Makes sure two obstacles don't spawn at the same location
                     do{ 
                         tempRandZPos = randZPos;
