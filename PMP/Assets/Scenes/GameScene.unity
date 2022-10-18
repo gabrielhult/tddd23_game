@@ -3998,8 +3998,8 @@ MonoBehaviour:
   gameplayScaleAdder: 0.02
   gameplayScaleTimer: 10
   basePowerUpDuration: 3
-  extraDoubleBananaScoreDuration: 3
-  extraFeatherJumpDuration: 2
+  extraDoubleBananaScoreDuration: 2
+  extraFeatherJumpDuration: 5
   extraClimbSpeedDuration: 8
   extraPowerUpDuration: 0
   obstacleOpacity: 0.5
@@ -4021,6 +4021,7 @@ MonoBehaviour:
   bananasForPowerUp: 10
   closePowerUp: 0
   isPowerUp: 0
+  isDoublePowerUp: 0
   bananaEndScore: {fileID: 1232378309}
   distanceEndScore: {fileID: 81304215}
 --- !u!114 &1106629701

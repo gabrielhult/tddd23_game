@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     public int bananasForPowerUp;
     public bool closePowerUp;
     public bool isPowerUp; //Helps us decide whether or not to play.
+    public bool isDoublePowerUp;
     
     public TextMeshProUGUI bananaEndScore;
     public TextMeshProUGUI distanceEndScore;
@@ -139,15 +140,19 @@ public class GameManager : MonoBehaviour
             if(playerInventory.ScoreCounter % bananasForPowerUp == 0){
                 closePowerUp = false;
                 AudioManager.Instance.PlaySound("TenBananasCollected");
-                if(isPowerUp){ //If a power-up is already active...
-                    Debug.Log("EXTRA");
-                    //extraPowerUpDuration += 3; //extend current power-up with base duration and an additional 3 seconds
-                }
+                /* if(isPowerUp){ //If a power-up is already active...
+                    Debug.Log("EXTRA"); //We get here, good!
+                    isDoublePowerUp = true;
+                    StopCoroutine(awardPowerUp(chosenPowerUp));
+                    StartCoroutine(awardPowerUp(chosenPowerUp));
+                } */
                 StartCoroutine(awardPowerUp(chosenPowerUp));
             }else{
                 if(playerInventory.ScoreCounter % bananasForPowerUp == bananasForPowerUp - 1){ //If we are one away from a power-up
-                    chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)]; //Choose power-up and display it over the banana
-                    closePowerUp = true;
+                    //if(!isPowerUp){ //Don't choose a new if double power-up is achieved, we want to refresh and extend
+                        chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)]; //Choose power-up and display it over the banana
+                        closePowerUp = true;
+                    //}
                 }
                 AudioManager.Instance.PlaySound("BananaCollect");
             }
@@ -215,9 +220,14 @@ public class GameManager : MonoBehaviour
         }else if(powerUp == "FeatherJump"){
             extraPowerUpDuration = extraFeatherJumpDuration;
         }
+        if(isDoublePowerUp){
+            Debug.Log("more time added");
+            extraPowerUpDuration += 3;
+            isDoublePowerUp = false;
+        }
 
         totalPowerUpDuration = basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier + extraPowerUpDuration;
-
+        Debug.Log(chosenPowerUp + " " + totalPowerUpDuration);
         //wait x seconds
         yield return new WaitForSeconds(totalPowerUpDuration); 
 
