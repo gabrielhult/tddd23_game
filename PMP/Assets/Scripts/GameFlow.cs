@@ -25,6 +25,7 @@ public class GameFlow : MonoBehaviour
     public int maxBananaHeight;
     public float largeObstacleThreshold;
     public float movingObstacleThreshold;
+    public float secondMovingObstacleThreshold;
     public float secondSmallObstacleThreshold;
     public string[] biomeArray;
     [HideInInspector]
@@ -107,7 +108,7 @@ public class GameFlow : MonoBehaviour
                 if(Random.Range(0, movingObjChance) == 0){ //movingObjChance here is just to increase unlikelyhood
                     locationObstacle();
                     movingObjectSpawn();
-                    if(Random.Range(0, secondMovingObjChance) == 0){ //secondMovingObjChance here is just to increase unlikelyhood
+                    if(Random.Range(0, secondMovingObjChance) == 0 && playerInventory.DistanceCounter > secondMovingObstacleThreshold){ //secondMovingObjChance here is just to increase unlikelyhood
                         //Makes sure two obstacles don't spawn at the same location
                         do{ 
                             tempRandZPos = randZPos;
@@ -119,7 +120,6 @@ public class GameFlow : MonoBehaviour
                 }else isMovableObjectSpawned = false;
             }
             
-
             //For large obstacles
             if(Random.Range(0, largeObjChance) == 0 && playerInventory.DistanceCounter > largeObstacleThreshold && !isMovableObjectSpawned){ //largeObjChance here is just to increase unlikelyhood
                 largeObjectSpawn();
@@ -173,33 +173,28 @@ public class GameFlow : MonoBehaviour
     }
 
     void movingObjectSpawn(){
-        //nextObstacleSpawn.z = -4;
-        //Randomly chooses an obstacle type from largeObjects array
+        //Randomly chooses an obstacle type from movingObjects array
         randObstacleIndex = Random.Range(0, movingObjects.Length);
-        //Spawns an object from the "Large Objects"-array.
+        //Spawns an object from the "Moving Objects"-array.
         Instantiate(movingObjects[randObstacleIndex], nextObstacleSpawn, movingObjects[randObstacleIndex].rotation);
     } 
 
-    /* TODO: Fix so banana don't spawn inside a wall */
     void bananaSpawn(){ 
         bananaSpawnCounter++;
         if(bananaSpawnCounter % bananaSpawnRateIndex == 0){
             randYPos = Random.Range(2, maxBananaHeight);
             nextObstacleSpawn.y = randYPos;
-            //Improve where these can spawn, right now only at empty, not taken lanes
             do{ 
                 tempRandZPos = randZPos;
                 locationObstacle();
             }while(randZPos == tempRandZPos);
             //Spawns a banana
             Instantiate(bananaInstance, nextObstacleSpawn, bananaInstance.rotation);
-            //Resets y position so obstacles don't spawn weirdly
-            //nextObstacleSpawn
         }
     }
 
     IEnumerator spawnTile(){
-        //Logic for how often new tiles spawn
+        //Logic for how often new tiles spawn depending on biome
         if(GameManager.Instance.isArctic){
             biomeMultiplier = 1.2f;
         }else if(GameManager.Instance.isSwamp){

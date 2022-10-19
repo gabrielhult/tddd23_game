@@ -4021,7 +4021,7 @@ MonoBehaviour:
   bananasForPowerUp: 10
   closePowerUp: 0
   isPowerUp: 0
-  isDoublePowerUp: 0
+  isRepeatedPowerUp: 0
   bananaEndScore: {fileID: 1232378309}
   distanceEndScore: {fileID: 81304215}
 --- !u!114 &1106629701
@@ -4095,6 +4095,7 @@ MonoBehaviour:
   maxBananaHeight: 6
   largeObstacleThreshold: 1000
   movingObstacleThreshold: 2000
+  secondMovingObstacleThreshold: 4000
   secondSmallObstacleThreshold: 250
   biomeArray:
   - Default

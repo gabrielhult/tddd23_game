@@ -65,12 +65,13 @@ public class GameManager : MonoBehaviour
     public int bananasForPowerUp;
     public bool closePowerUp;
     public bool isPowerUp; //Helps us decide whether or not to play.
-    public bool isDoublePowerUp;
+    public bool isRepeatedPowerUp;
     
     public TextMeshProUGUI bananaEndScore;
     public TextMeshProUGUI distanceEndScore;
 
     private float tempObstacleMaterial;
+    private string repeatedChosenPowerUp;
 
     private void Awake() {
         Instance = this;
@@ -140,19 +141,23 @@ public class GameManager : MonoBehaviour
             if(playerInventory.ScoreCounter % bananasForPowerUp == 0){
                 closePowerUp = false;
                 AudioManager.Instance.PlaySound("TenBananasCollected");
-                /* if(isPowerUp){ //If a power-up is already active...
-                    Debug.Log("EXTRA"); //We get here, good!
-                    isDoublePowerUp = true;
+                if(isPowerUp){ //If a power-up is already active...
+                    Debug.Log("EXTRA"); //Don't get in here at the moment
+                    repeatedChosenPowerUp = chosenPowerUp;
+                    isRepeatedPowerUp = true;
                     StopCoroutine(awardPowerUp(chosenPowerUp));
-                    StartCoroutine(awardPowerUp(chosenPowerUp));
-                } */
+                    StartCoroutine(awardPowerUp(repeatedChosenPowerUp));
+                }
                 StartCoroutine(awardPowerUp(chosenPowerUp));
             }else{
                 if(playerInventory.ScoreCounter % bananasForPowerUp == bananasForPowerUp - 1){ //If we are one away from a power-up
-                    //if(!isPowerUp){ //Don't choose a new if double power-up is achieved, we want to refresh and extend
+                    if(!isPowerUp){ //Don't choose a new if double power-up is achieved, we want to refresh and extend
                         chosenPowerUp = powerUpArray[Random.Range(0, powerUpArray.Length)]; //Choose power-up and display it over the banana
-                        closePowerUp = true;
-                    //}
+                        repeatedChosenPowerUp = chosenPowerUp; //Save the chosen power-up in case we reset it
+                    }else{
+                        chosenPowerUp = repeatedChosenPowerUp;
+                    }
+                    closePowerUp = true;    
                 }
                 AudioManager.Instance.PlaySound("BananaCollect");
             }
@@ -208,7 +213,13 @@ public class GameManager : MonoBehaviour
 
 
     IEnumerator awardPowerUp(string powerUp){
+
+        Debug.Log("Before: " + isPowerUp + " " + isRepeatedPowerUp);
+
         isPowerUp = true;
+        isRepeatedPowerUp = false;
+
+        Debug.Log("After: " + isPowerUp + " " + isRepeatedPowerUp);
         if(powerUp == "NoObstacles"){
             cancelClimbing = true;
         }else if(powerUp == "IncreaseDistanceAward"){
@@ -219,11 +230,6 @@ public class GameManager : MonoBehaviour
             extraPowerUpDuration = extraClimbSpeedDuration;
         }else if(powerUp == "FeatherJump"){
             extraPowerUpDuration = extraFeatherJumpDuration;
-        }
-        if(isDoublePowerUp){
-            Debug.Log("more time added");
-            extraPowerUpDuration += 3;
-            isDoublePowerUp = false;
         }
 
         totalPowerUpDuration = basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier + extraPowerUpDuration;
@@ -237,6 +243,7 @@ public class GameManager : MonoBehaviour
         
         //turn it off
         chosenPowerUp = "";
+        repeatedChosenPowerUp = "";
         extraPowerUpDuration = 0;
         increaseDistanceTimerDisabled = false;
         isPowerUp = false;

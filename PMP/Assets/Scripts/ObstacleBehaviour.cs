@@ -80,16 +80,18 @@ public class ObstacleBehaviour : MonoBehaviour
     public void ResetMode(){
         for (int index = 0; index < childColliders.Length; index++)
          {
-            colliderElement = childColliders[index];
-            if(colliderElement.gameObject.name != "Banana" && colliderElement !=null){
-                colliderElement.enabled = true;
-            }
+            if(childColliders[index] != null){
+                colliderElement = childColliders[index];
+                if(colliderElement.gameObject.name != "Banana"){
+                    colliderElement.enabled = true;
+                }
+            } 
          }
 
          for (int index = 0; index < childRenderers.Length; index++)
          {
-            rendererElement = childRenderers[index];
             if(rendererElement != null){
+                rendererElement = childRenderers[index];
                 if(rendererElement.gameObject.name != "BananaModel"){
                     elementColor = rendererElement.material.color;
                     elementColor.a = 1;

@@ -18,17 +18,17 @@ public class PowerUpTimerUI : MonoBehaviour
     // Update is called once per frame
     void Update(){
 
-        /* if(GameManager.Instance.isDoublePowerUp){
-                timerUI.gameObject.SetActive(false);
+        if(GameManager.Instance.isRepeatedPowerUp){
+                //timerUI.gameObject.SetActive(false);
                 countdownStarted = false;
-        } */
+        }
 
         if(GameManager.Instance.isPowerUp  && !GameManager.Instance.isGameOver && !GameManager.Instance.increaseDistanceTimerDisabled){
             if(!countdownStarted){
                 timerUI.SetActive(true);
                 timeLeft = GameManager.Instance.totalPowerUpDuration;
                 countdownStarted = true;
-            }else{ //countdown started
+            }else{ //countdown already started
                 if(!GameManager.Instance.isPaused){
                     timeLeft -= Time.deltaTime;
                 }

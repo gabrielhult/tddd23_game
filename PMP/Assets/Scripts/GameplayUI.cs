@@ -19,11 +19,8 @@ public class GameplayUI : MonoBehaviour
     void Update()
     {
         if(GameManager.Instance.isGameOver){
-            gameplayMenu.SetActive(false);
             powerUpMenu.SetActive(false);
-        }else {
-            gameplayMenu.SetActive(true);
-            powerUpMenu.SetActive(true);
+            gameplayMenu.SetActive(false);
         }
 
         if(GameManager.Instance.isPowerUp){
