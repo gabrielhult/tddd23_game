@@ -21,9 +21,12 @@ public class GameplayUI : MonoBehaviour
         if(GameManager.Instance.isGameOver){
             powerUpMenu.SetActive(false);
             gameplayMenu.SetActive(false);
+        }else if(GameManager.Instance.isRepeatedPowerUp){
+            powerUpMenu.SetActive(false);
         }
 
         if(GameManager.Instance.isPowerUp){
+            powerUpMenu.SetActive(true);
             if(GameManager.Instance.chosenPowerUp == "IncreaseDistanceAward"){ //IEnumerator behövs för att inte logik och UI krockar
                 increaseDistanceUI.SetActive(true);     
                 StartCoroutine(showDistanceAward());

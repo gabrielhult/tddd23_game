@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     private float tempObstacleMaterial;
     private string repeatedChosenPowerUp;
+    private Coroutine powerUpRoutine;
 
     private void Awake() {
         Instance = this;
@@ -142,13 +143,11 @@ public class GameManager : MonoBehaviour
                 closePowerUp = false;
                 AudioManager.Instance.PlaySound("TenBananasCollected");
                 if(isPowerUp){ //If a power-up is already active...
-                    Debug.Log("EXTRA"); //Don't get in here at the moment
                     repeatedChosenPowerUp = chosenPowerUp;
                     isRepeatedPowerUp = true;
-                    StopCoroutine(awardPowerUp(chosenPowerUp));
-                    StartCoroutine(awardPowerUp(repeatedChosenPowerUp));
-                }
-                StartCoroutine(awardPowerUp(chosenPowerUp));
+                    StopCoroutine(powerUpRoutine);
+                    powerUpRoutine = StartCoroutine(awardPowerUp(repeatedChosenPowerUp));
+                }else powerUpRoutine = StartCoroutine(awardPowerUp(chosenPowerUp));
             }else{
                 if(playerInventory.ScoreCounter % bananasForPowerUp == bananasForPowerUp - 1){ //If we are one away from a power-up
                     if(!isPowerUp){ //Don't choose a new if double power-up is achieved, we want to refresh and extend
@@ -214,12 +213,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator awardPowerUp(string powerUp){
 
-        Debug.Log("Before: " + isPowerUp + " " + isRepeatedPowerUp);
-
         isPowerUp = true;
-        isRepeatedPowerUp = false;
 
-        Debug.Log("After: " + isPowerUp + " " + isRepeatedPowerUp);
         if(powerUp == "NoObstacles"){
             cancelClimbing = true;
         }else if(powerUp == "IncreaseDistanceAward"){
@@ -231,9 +226,13 @@ public class GameManager : MonoBehaviour
         }else if(powerUp == "FeatherJump"){
             extraPowerUpDuration = extraFeatherJumpDuration;
         }
-
+        
         totalPowerUpDuration = basePowerUpDuration * GameManager.Instance.gameplayScaleMultiplier + extraPowerUpDuration;
-        Debug.Log(chosenPowerUp + " " + totalPowerUpDuration);
+        if(isRepeatedPowerUp){
+            yield return new WaitForSeconds(0.01f);
+            isRepeatedPowerUp = false;
+        }
+        //Debug.Log(chosenPowerUp + " " + totalPowerUpDuration);
         //wait x seconds
         yield return new WaitForSeconds(totalPowerUpDuration); 
 
@@ -242,8 +241,10 @@ public class GameManager : MonoBehaviour
         }
         
         //turn it off
-        chosenPowerUp = "";
-        repeatedChosenPowerUp = "";
+        if(!closePowerUp){
+            chosenPowerUp = "";
+            repeatedChosenPowerUp = "";
+        }
         extraPowerUpDuration = 0;
         increaseDistanceTimerDisabled = false;
         isPowerUp = false;
