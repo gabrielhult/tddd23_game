@@ -691,7 +691,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Playful Monkey Parkour
+  m_text: Monkey escape
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 273ee9142e8533241956aa2613d2f77b, type: 2}
   m_sharedMaterial: {fileID: -1439114374097332771, guid: 273ee9142e8533241956aa2613d2f77b, type: 2}
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.15
+  m_fontSize: 72
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
