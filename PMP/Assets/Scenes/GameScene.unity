@@ -4066,6 +4066,8 @@ MonoBehaviour:
   - {fileID: 3776415792489652254, guid: 97dac87054ccbe34f9d52b7ef3ee457f, type: 3}
   - {fileID: 7192468820490737818, guid: d0137916a3c6f414b89a9c3688ea4008, type: 3}
   - {fileID: 8994873383745645686, guid: 8f0e65890a6c70e4dbe35e9934127f4d, type: 3}
+  - {fileID: 2358367853250400372, guid: 468caa7ddb29f4f40a8ddf3715f4a8b2, type: 3}
+  - {fileID: 3084993679978066942, guid: d9a65275ba0f06b468d650c6fb31e4b0, type: 3}
   traversableObjects:
   - {fileID: 1865406326976282260, guid: 7da26f11885be6d4faddae415da1ff48, type: 3}
   - {fileID: 1203886958227529608, guid: 3107813fad0f78c4cbfd115980ffec8e, type: 3}
