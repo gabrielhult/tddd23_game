@@ -42,9 +42,9 @@ public class HazardBehaviour : MonoBehaviour
         if(GameManager.Instance.isGameOver){
             hazardRigidbody.velocity = new Vector3(5f * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
         }else if(GameManager.Instance.roundStarted){
-            if(GameManager.Instance.chosenPowerUp != "SlowDownHazard"){
+            /* if(GameManager.Instance.chosenPowerUp != "SlowDownHazard"){
                 hazardRigidbody.velocity = new Vector3(baseMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);   
-            }
+            } */
 
             if(GameManager.Instance.chosenPowerUp == "SlowDownHazard" && GameManager.Instance.isPowerUp){
                 hazardRigidbody.velocity = new Vector3(slowedDownMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
@@ -54,6 +54,9 @@ public class HazardBehaviour : MonoBehaviour
                 speedNerfed = false;
             }else if (GameManager.Instance.isArctic){
                 hazardRigidbody.velocity = new Vector3(arcticSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
+                speedNerfed = false;
+            }else{
+                hazardRigidbody.velocity = new Vector3(baseMoveSpeed * GameManager.Instance.gameplayScaleMultiplier, 0, 0);
                 speedNerfed = false;
             }
 
