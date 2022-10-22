@@ -4096,7 +4096,7 @@ MonoBehaviour:
   secondObjChance: 2
   secondMovingObjChance: 10
   maxBananaHeight: 6
-  largeObstacleThreshold: 1
+  largeObstacleThreshold: 1000
   movingObstacleThreshold: 2000
   secondMovingObstacleThreshold: 4000
   secondSmallObstacleThreshold: 250
