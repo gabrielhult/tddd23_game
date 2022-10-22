@@ -4083,6 +4083,7 @@ MonoBehaviour:
   largeObjects:
   - {fileID: 2703726957875542147, guid: 2dced8b1fb71b0949a56fd57cf754844, type: 3}
   - {fileID: 6575323414234624468, guid: 0dbfa5bf24a3f9c4c8e84a8dea405ce6, type: 3}
+  - {fileID: 6331295304787217013, guid: 1ccca91dfd4ef3f4884ffd4732f58730, type: 3}
   movingObjects:
   - {fileID: 5755830104153734342, guid: 66ff158e03ffe674f8dc1f8a39ce4e98, type: 3}
   - {fileID: 5755830104153734342, guid: e27a0230a33fc1a449b5101e12cc6fa1, type: 3}
@@ -4106,7 +4107,7 @@ MonoBehaviour:
   - Magma
   - Swamp
   chosenBiome: 
-  biomeMultiplier: 0
+  biomeRepeatLimit: 3
   holeSpawnRateIndex: 3
 --- !u!1 &1139998569
 GameObject:

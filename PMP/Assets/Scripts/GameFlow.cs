@@ -17,7 +17,7 @@ public class GameFlow : MonoBehaviour
     public PlayerInventory playerInventory;
     public int bananaSpawnRateIndex;
     public int obstacleSpawnRateIndex;
-    public float biomeChangeRateIndex;
+    public int biomeChangeRateIndex;
     public int largeObjChance;
     public int movingObjChance;
     public int secondObjChance;
@@ -30,15 +30,13 @@ public class GameFlow : MonoBehaviour
     public string[] biomeArray;
     [HideInInspector]
     public string chosenBiome;
-    public float biomeMultiplier;
+    public int biomeRepeatLimit;
 
     
     private Transform[] tileArray;
     private int randObstacleIndex;
     private Vector3 nextMainTileSpawn;
     private Vector3 nextObstacleSpawn;
-    private int obstacleBiomeLength;
-    private float currentVelocityX;
     private int tempRandZPos;
     private int randZPos;
     private int randYPos;
@@ -46,10 +44,16 @@ public class GameFlow : MonoBehaviour
     private int bananaSpawnCounter;
     private bool isLargeObjectSpawned;
     private bool isMovableObjectSpawned;
+    private int biomeRepeatCounter;
+    private string compareBiome;
+    private float biomeMultiplier;
+    private float biomeChangeRateArctic;
+    private float biomeChangeRateSwamp;
+    private float biomeChangeRate;
+
 
 
     private int tileRand;
-    //private int biomeRand;
     private int holeSpawnCounter;
     public int holeSpawnRateIndex;
   
@@ -60,31 +64,55 @@ public class GameFlow : MonoBehaviour
     void Start()
     {
         playerInventory = playerInventory.GetComponent<PlayerInventory>();
+        biomeChangeRateArctic = biomeChangeRateIndex + 25;
+        biomeChangeRateSwamp = biomeChangeRateIndex - 25;
         nextMainTileSpawn.x = 44;
         tileArray = nextTileDefault;
         StartCoroutine(spawnTile());
     }
 
     void tileSpawn(){
-        if(playerInventory.DistanceCounter % biomeChangeRateIndex == 0 && playerInventory.DistanceCounter > 3f){ //Kan säkert fortfarande bli bättre men är okej
+        if(GameManager.Instance.isArctic){
+            biomeChangeRate = biomeChangeRateArctic;
+        }else if(GameManager.Instance.isSwamp){
+            biomeChangeRate = biomeChangeRateSwamp;
+        }else biomeChangeRate = biomeChangeRateIndex;
+
+        if(playerInventory.DistanceCounter % biomeChangeRate < 3 && playerInventory.DistanceCounter > 3f){ //Kan säkert fortfarande bli bättre men är okej
             chosenBiome = biomeArray[Random.Range(0, biomeArray.Length)];
-            Debug.Log("New biome: " + chosenBiome);
+            //If the same biome has been randomized too many times, force change it!!
+            if(biomeRepeatCounter >= biomeRepeatLimit){
+                do{ 
+                    chosenBiome = biomeArray[Random.Range(0, biomeArray.Length)];
+                }while(chosenBiome == compareBiome);
+                //Debug.Log("Limit reached, force changing biome to: " + chosenBiome);
+                biomeRepeatCounter = 0;
+            }else if(chosenBiome == compareBiome){
+                biomeRepeatCounter++;
+            }else biomeRepeatCounter = 0;
+
+            Debug.Log("New biome: " + chosenBiome + ", current streak: " + biomeRepeatCounter);
+
             if(chosenBiome == "Default"){
                 tileArray = nextTileDefault;
                 holeSpawnRateIndex = 3; 
                 obstacleSpawnRateIndex = 4;
+                compareBiome = "Default";
             }else if(chosenBiome == "Arctic"){
                 tileArray = nextTileArctic;
                 holeSpawnRateIndex = 3; 
                 obstacleSpawnRateIndex = 4;
+                compareBiome = "Arctic";
             }else if(chosenBiome == "Magma"){
                 tileArray = nextTileMagma;
                 holeSpawnRateIndex = 2; 
                 obstacleSpawnRateIndex = 4;
+                compareBiome = "Magma";
             }else if(chosenBiome == "Swamp"){
                 tileArray = nextTileSwamp;
                 holeSpawnRateIndex = 4; 
                 obstacleSpawnRateIndex = 3;
+                compareBiome = "Swamp";
             }
         }
         
@@ -93,8 +121,7 @@ public class GameFlow : MonoBehaviour
             tileRand = Random.Range(0, tileArray.Length);
         }else tileRand = 0;
 
-        Instantiate(tileArray[tileRand], nextMainTileSpawn, tileArray[tileRand].rotation);
-        
+        Instantiate(tileArray[tileRand], nextMainTileSpawn, tileArray[tileRand].rotation);   
         nextObstacleSpawn = nextMainTileSpawn;
     }
 
