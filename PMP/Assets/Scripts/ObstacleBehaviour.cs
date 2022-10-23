@@ -55,16 +55,18 @@ public class ObstacleBehaviour : MonoBehaviour
         reset = true;
          for (int index = 0; index < childColliders.Length; index++)
          {
-            colliderElement = childColliders[index];
-            if(colliderElement.gameObject.name != "Banana" && colliderElement != null){
-                colliderElement.enabled = false;
+            if(childColliders[index] != null){
+                colliderElement = childColliders[index];
+                if(colliderElement.gameObject.name != "Banana"){
+                    colliderElement.enabled = false;
+                }
             }
          }
 
          for (int index = 0; index < childRenderers.Length; index++)
          {
-            rendererElement = childRenderers[index];
-            if(rendererElement != null){
+            if(childRenderers[index] != null){
+                rendererElement = childRenderers[index];
                 if(rendererElement.gameObject.name != "BananaModel"){
                     elementColor = rendererElement.material.color;
                     elementColor.a = 0.5f;
@@ -90,7 +92,7 @@ public class ObstacleBehaviour : MonoBehaviour
 
          for (int index = 0; index < childRenderers.Length; index++)
          {
-            if(rendererElement != null){
+            if(childRenderers[index] != null){
                 rendererElement = childRenderers[index];
                 if(rendererElement.gameObject.name != "BananaModel"){
                     elementColor = rendererElement.material.color;
