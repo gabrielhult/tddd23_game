@@ -22,7 +22,6 @@ public class MuteManager : MonoBehaviour
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.M)){
-            Debug.Log("mute or unmute");
             isMuted = !isMuted;
             if(isMuted){
                 AudioListener.volume = 0f;
