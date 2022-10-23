@@ -3938,11 +3938,11 @@ MonoBehaviour:
   activeSidewaysObstacles: []
   activeUpAndDownObstacles: []
   gameplayScaleMultiplier: 0
-  gameplayScaleAdder: 0.015
+  gameplayScaleAdder: 0.018
   gameplayScaleTimer: 10
-  basePowerUpDuration: 3
+  basePowerUpDuration: 4
   extraDoubleBananaScoreDuration: 2
-  extraFeatherJumpDuration: 5
+  extraFeatherJumpDuration: 4
   extraClimbSpeedDuration: 8
   extraPowerUpDuration: 0
   obstacleOpacity: 0.5

@@ -64,8 +64,8 @@ public class GameFlow : MonoBehaviour
     void Start()
     {
         playerInventory = playerInventory.GetComponent<PlayerInventory>();
-        biomeChangeRateArctic = biomeChangeRateIndex + 25;
-        biomeChangeRateSwamp = biomeChangeRateIndex - 25;
+        biomeChangeRateArctic = biomeChangeRateIndex + 20;
+        biomeChangeRateSwamp = biomeChangeRateIndex - 20;
         nextMainTileSpawn.x = 44;
         tileArray = nextTileDefault;
         StartCoroutine(spawnTile());

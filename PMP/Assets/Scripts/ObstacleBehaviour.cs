@@ -36,7 +36,7 @@ public class ObstacleBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other){ //TODO: Fixa detta, funkar ej ännu, vet ej varför dock
+    private void OnTriggerEnter(Collider other){ 
         if(other.tag == "Banana"){
             other.gameObject.SetActive(false);
         }
@@ -45,7 +45,6 @@ public class ObstacleBehaviour : MonoBehaviour
     private void OnTriggerExit(Collider other) {
         if(other.tag == "Hazard"){
             if(!GameManager.Instance.isGameOver){
-                //thisObstacle.SetActive(false);
                 Destroy(thisObstacle);
              }
         }
