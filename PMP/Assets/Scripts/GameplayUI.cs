@@ -7,6 +7,7 @@ public class GameplayUI : MonoBehaviour
 
     public GameObject gameplayMenu;
     public GameObject powerUpMenu;
+    public GameObject muteUI;
     public GameObject doubleBananaUI;
     public GameObject increaseDistanceUI;
     public GameObject noObstaclesUI;
@@ -18,6 +19,11 @@ public class GameplayUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(MuteManager.Instance.isMuted){
+            muteUI.SetActive(true);
+        }else muteUI.SetActive(false);
+
         if(GameManager.Instance.isGameOver){
             powerUpMenu.SetActive(false);
             gameplayMenu.SetActive(false);
