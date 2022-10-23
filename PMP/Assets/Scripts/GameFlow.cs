@@ -78,7 +78,7 @@ public class GameFlow : MonoBehaviour
             biomeChangeRate = biomeChangeRateSwamp;
         }else biomeChangeRate = biomeChangeRateIndex;
 
-        if(playerInventory.DistanceCounter % biomeChangeRate < 3 && playerInventory.DistanceCounter > 3f){ //Kan säkert fortfarande bli bättre men är okej
+        if(playerInventory.DistanceCounter % biomeChangeRate < 2 && playerInventory.DistanceCounter > 3f){ //Kan säkert fortfarande bli bättre men är okej
             chosenBiome = biomeArray[Random.Range(0, biomeArray.Length)];
             //If the same biome has been randomized too many times, force change it!!
             if(biomeRepeatCounter >= biomeRepeatLimit){
