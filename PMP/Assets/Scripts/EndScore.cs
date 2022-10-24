@@ -17,6 +17,7 @@ public class EndScore : MonoBehaviour
     private int currentScoreBanana;
     private int currentScoreDistance;
     private float scoreCountTimeScale;
+    private int scoreAddTen = 10;
 
     public int scoreIncrementRate;
     // Start is called before the first frame update
@@ -41,21 +42,21 @@ public class EndScore : MonoBehaviour
         //TODO: Tweak constant values
         if(bananaScoreCounted){
             if(playerInventory.DistanceCounter == 0){
-                scoreCountTimeScale = 0.5f;
+                scoreCountTimeScale = 2f;
             }else if(playerInventory.DistanceCounter < 100){
-                scoreCountTimeScale = 0.5f / playerInventory.DistanceCounter;
+                scoreCountTimeScale = 2f / playerInventory.DistanceCounter;
             }else if(playerInventory.DistanceCounter < 1500){
                 scoreCountTimeScale = 1f / playerInventory.DistanceCounter;
-            }else scoreCountTimeScale = 2f / playerInventory.DistanceCounter;
+            }else scoreCountTimeScale = 0.5f / playerInventory.DistanceCounter;
         }else {
             if(playerInventory.ScoreCounter == 0){
                 scoreCountTimeScale = 0.5f;
             }
             else if(playerInventory.ScoreCounter < 10){
-                scoreCountTimeScale = 0.5f / playerInventory.ScoreCounter;
+                scoreCountTimeScale = 2f / playerInventory.ScoreCounter;
             }else if(playerInventory.ScoreCounter < 50){
                 scoreCountTimeScale = 1f / playerInventory.ScoreCounter;
-            }else scoreCountTimeScale = 2f / playerInventory.ScoreCounter;
+            }else scoreCountTimeScale = 0.5f / playerInventory.ScoreCounter;
         }
 
         //Debug.Log("Scale: " + scoreCountTimeScale);
@@ -68,7 +69,10 @@ public class EndScore : MonoBehaviour
 
         //Banana
         if(currentScoreBanana != playerInventory.ScoreCounter && !bananaScoreCounted){
-            currentScoreBanana += scoreIncrementRate;
+            if(playerInventory.ScoreCounter - currentScoreBanana  < scoreAddTen){
+                currentScoreBanana += scoreIncrementRate;
+            }else currentScoreBanana += scoreAddTen;
+            
             bananaText.text = currentScoreBanana.ToString();
             StartCoroutine(CountScore());
         }else{
@@ -85,10 +89,9 @@ public class EndScore : MonoBehaviour
         //Distance
         if(bananaScoreCounted){ //Only count distance if banana count is complete
             if(currentScoreDistance != playerInventory.DistanceCounter && !distanceScoreCounted){
-                //TODO/WIP: Have higher increment if it's a lot left to count!
-                if(playerInventory.DistanceCounter - currentScoreDistance > 20){
+                if(playerInventory.DistanceCounter - currentScoreDistance < 30){
                     currentScoreDistance += scoreIncrementRate;
-                }else currentScoreDistance += scoreIncrementRate*5;
+                }else currentScoreDistance += scoreAddTen*3;
                 
                 distanceText.text = currentScoreDistance.ToString();
                 StartCoroutine(CountScore());

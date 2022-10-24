@@ -91,7 +91,7 @@ public class GameFlow : MonoBehaviour
                 biomeRepeatCounter++;
             }else biomeRepeatCounter = 0;
 
-            Debug.Log("New biome: " + chosenBiome + ", current streak: " + biomeRepeatCounter);
+            //Debug.Log("New biome: " + chosenBiome + ", current streak: " + biomeRepeatCounter);
 
             if(chosenBiome == "Default"){
                 tileArray = nextTileDefault;
