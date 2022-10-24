@@ -4033,7 +4033,7 @@ MonoBehaviour:
   - {fileID: 5755830104153734342, guid: e27a0230a33fc1a449b5101e12cc6fa1, type: 3}
   bananaInstance: {fileID: 2244289476223272836, guid: ea88320ee83d884468fc253bf1017d3b, type: 3}
   playerInventory: {fileID: 543450652399095183}
-  bananaSpawnRateIndex: 23
+  bananaSpawnRateIndex: 22
   obstacleSpawnRateIndex: 4
   biomeChangeRateIndex: 100
   largeObjChance: 5

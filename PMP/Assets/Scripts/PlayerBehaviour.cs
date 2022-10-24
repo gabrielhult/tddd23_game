@@ -60,8 +60,16 @@ public class PlayerBehaviour : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(!GameManager.Instance.isGameOver && GameManager.Instance.roundStarted){
-            ReadInput();
+        
+        if(!GameManager.Instance.isGameOver){
+            //Checks whether auto-run is turned on
+            if(Input.GetKeyDown(KeyCode.LeftShift)){
+                autorun = !autorun;
+            }
+            if(GameManager.Instance.roundStarted){
+                ReadInput();
+            }
+            
         }
     }
 
@@ -166,10 +174,6 @@ public class PlayerBehaviour : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        //Checks whether auto-run is turned on
-        if(Input.GetKeyDown(KeyCode.LeftShift)){
-            autorun = !autorun;
-        }
         if(autorun){
             if(_climb){
                 _movementForce = new Vector3(0f, 1f, 0f);

@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance;
 
     public GameObject[] MankeStyles;
+    public GameObject muteUI;
     private int randomModelIndex;
     private GameObject chosenManke;
     public LevelLoader levelLoader;
@@ -26,6 +27,11 @@ public class MenuManager : MonoBehaviour
     }
 
     void Update(){ //Kan göras om enligt https://www.youtube.com/watch?v=Hn804Wgr3KE
+
+        if(MuteManager.Instance.isMuted){
+            muteUI.SetActive(true);
+        }else muteUI.SetActive(false);
+
         if(Input.GetKeyDown(KeyCode.P)){
             AudioManager.Instance.PlaySound("ButtonClick");
             LoadGameScene("GameScene");
